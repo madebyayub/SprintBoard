@@ -1,0 +1,48 @@
+html, body{
+  height: 100%;
+}
+#sidebar {
+  max-height: 100%;
+  height: 100%;
+  width: 300px;
+  top:0px;
+  left: -310px;
+  z-index: 99;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, fontello, montserrat;
+  position: fixed;
+  color: rgb(68, 68, 218);
+  box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+  background-color: whitesmoke;
+  height: 100%;
+  transition: all 0.4s ease-in-out;
+}
+#sidebar.toggled {
+  left: 0;
+}
+.hide-sidebar{
+  margin-left: 230px;  
+  color: rgb(12, 48, 101);
+  background-color: transparent;
+  border: none;
+  border-radius: 3px;
+  transition: all 0.2 ease-in-out;
+}
+.hide-sidebar:hover {
+  background-color: rgb(12, 48, 101);
+  color:whitesmoke!important;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
+}
+.nav-button {
+  color:aliceblue;
+  border:none;
+  background: rgba(12,48,101,0.6);
+  width:100%;
+  transition: all 0.3s ease-out;
+}
+.nav-button.toggled {
+  background: rgba(12,48,101,0.9);
+  box-shadow: 0px 1px 5px rgba(12,48,101,0.9);
+}
+.nav-button:hover {
+  background: rgba(12,48,101,0.9);
+}
