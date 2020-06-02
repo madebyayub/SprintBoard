@@ -6,7 +6,7 @@ import "../stylesheets/sidebar.css";
 
 class Sidebar extends React.Component {
   componentDidMount() {
-    this.props.showSidebar();
+    this.props.hideSidebar();
   }
   render() {
     if (this.props.sidebar) {
