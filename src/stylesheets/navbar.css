@@ -24,12 +24,7 @@ span.badge {
     width:30%; 
     position:relative;
 }
-.inputSearchBar {
-    background-color: rgba(118, 130, 143, 0.3);
-    color: whitesmoke;
-    box-shadow: 0 0 4px;
-    border: 0;
-}
+
 #dropdownnoti {
     outline: none;
 }
