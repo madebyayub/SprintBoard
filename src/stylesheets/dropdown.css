@@ -1,0 +1,27 @@
+.hide-dropdown{
+    position: absolute;
+    padding: 0.7rem;
+    top:51px;
+    width: 268px;
+    transform: translateX(-79%);
+    background-color: black;
+    visibility: hidden;
+    overflow: hidden;
+    border-radius: 4%;
+}
+.menu-items{
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.show-dropdown {
+    position: absolute;
+    padding: 0.7rem;
+    top:51px;
+    width: 268px;
+    transform: translateX(-79%);
+    background-color: black;
+    overflow: hidden;
+    border-radius: 4%;
+}
