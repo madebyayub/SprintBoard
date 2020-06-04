@@ -46,7 +46,7 @@ html, body{
   list-style: none;
 }
 .hide-sidebar{
-  margin-left: 136px;  
+  margin-left: 225px;
   color: aliceblue;
   background-color: transparent;
   border: none;
@@ -61,6 +61,7 @@ html, body{
   outline: none;
 }
 .nav-button {
+  display: inline-block;
   font-size: medium;
   color: rgba(118, 130, 143, 0.9);
   width:100%;
@@ -71,6 +72,7 @@ html, body{
   color: whitesmoke;
 }
 .nav-button:hover{
+  text-decoration: none;
   cursor: pointer;
   background-color:rgba(118, 130, 143, 0.3);
   color: whitesmoke;
@@ -97,6 +99,7 @@ html, body{
   font-size: x-large;
 }
 .show-sidebar{
+  float: none;
   width: 100%;
   font-size: x-large;
   border-radius: 5px;
@@ -107,9 +110,7 @@ html, body{
   border-radius: 3px;
   transition: all 0.2 ease-in-out;
 }
-.show-sidebar:hover {
-  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
-}
+
 .show-sidebar:focus {
   outline: 0;
 }

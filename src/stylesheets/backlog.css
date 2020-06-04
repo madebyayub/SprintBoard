@@ -1,0 +1,59 @@
+.container-fluid{
+  background-color:white;
+  overflow: hidden;
+  width: auto;
+  height: 100vh;
+  margin-top: 0px;
+  margin-left: 65px;
+}
+
+.main-container{
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.5);
+  border: 1px solid lightgray;
+  background: lightgrey;
+  width: 99%;
+  margin: auto;
+  height: 85%;
+  margin-top: 75px;
+}
+
+.tab-container{
+  height: 50px;
+  max-height: 50px;
+}
+.backlog-container{
+
+  height: 85%;
+}
+.backlog-tab{
+  font-size: small;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: transparent;
+  color:rgb(188, 188, 192);
+  border:none;
+  height: 100%;
+  transition: all 0.2s ease-in;
+}
+.backlog-tab:hover{
+  color: rgb(19, 36, 53);
+  
+}
+.backlog-tab.active{
+  border-bottom: solid 3px rgb(19, 36, 53);;
+  color: rgb(19, 36, 53);
+}
+#create-story{
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: small;
+  font-weight: 400;
+  background-color: rgba(32, 156, 7, 0.8);
+  transition: all 0.2s ease-in-out;
+  color: white;
+}
+#create-story:hover{
+  background-color: rgba(32, 156, 7, 1);
+  box-shadow: 0 3px 5px rgba(45, 204, 13, 0.9);
+  color: white;
+}
