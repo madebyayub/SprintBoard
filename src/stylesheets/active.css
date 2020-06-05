@@ -1,0 +1,29 @@
+.active-container{
+  background: transparent;
+  width: 99%;
+  margin: auto;
+  height: 90%;
+  margin-top: 60px;
+}
+.status-container{
+  height: 100%;
+}
+.status-label{
+  font-size: small;
+  color: grey;
+  font-weight: 400;
+}
+.status{
+  display: inline-block;
+  background-color: rgba(75, 75, 75, 0.1);
+  width: 32%;
+  min-width: 225px;
+  height: 98%;
+  border: solid 1px rgba(75, 75, 75, 0.2);
+  border-radius: 8px;
+}
+.user-assigned{
+  font-size: large;
+  width: 100%;
+  display: block;
+}

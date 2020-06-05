@@ -42,3 +42,10 @@ span.badge {
     left:300px;
     width:auto;
 }
+#main-page{
+  color: white;
+  font-size: small;
+}
+#active-tab-page{
+  font-size: x-large;
+}

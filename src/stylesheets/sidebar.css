@@ -1,82 +1,6 @@
 html, body{
   height: 100%;
 }
-#sidebar {
-  max-height: 100%;
-  height: 100%;
-  width: 300px;
-  top:0px;
-  left: -310px;
-  z-index: 99;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, fontello, montserrat;
-  color: aliceblue;
-  position: fixed;
-  box-shadow: 5px 0 15px rgba(0,0,0,0.2);
-  background-color: rgb(19, 36, 53);
-  height: 100%;
-  transition: all 0.4s ease-in-out;
-}
-#sidebar.toggled {
-  left: 0;
-}
-#group-header {
-  text-align: center;
-  font-size: medium;
-  border-radius: 4px;
-  background-color: rgba(118, 130, 143, 0.3);
-  transition: all 0.2s ease-in-out;
-}
-#group-header:hover {
-  background-color: rgba(118, 130, 143, 0.5);
-  box-shadow: 0 3px 5px rgba(0,0,0,0.3);
-}
-#group-header-dropdown{
-  cursor: pointer;
-  border-radius: 50%;
-  background-color: transparent;
-  transition: all 0.2s ease-in-out;
-}
-#group-header-dropdown:hover{
-  background-color: rgb(19, 36, 53);
-}
-#sidebar-nav {
-  font-size: small;
-}
-#mainsidebar-list {
-  list-style: none;
-}
-.hide-sidebar{
-  margin-left: 225px;
-  color: aliceblue;
-  background-color: transparent;
-  border: none;
-  border-radius: 3px;
-  transition: all 0.2 ease-in-out;
-}
-.hide-sidebar:hover {
-  background-color: aliceblue;
-  color: rgb(15, 26, 37);
-}
-.hide-sidebar:focus {
-  outline: none;
-}
-.nav-button {
-  display: inline-block;
-  font-size: medium;
-  color: rgba(118, 130, 143, 0.9);
-  width:100%;
-  transition: all 0.2s ease-out;
-}
-.nav-button.active {
-  background-color:rgba(118, 130, 143, 0.3);
-  color: whitesmoke;
-}
-.nav-button:hover{
-  text-decoration: none;
-  cursor: pointer;
-  background-color:rgba(118, 130, 143, 0.3);
-  color: whitesmoke;
-}
 
 /* ABOVE IS FOR THE SIDEBAR THAT IS TOGGLED */
 
@@ -97,6 +21,23 @@ html, body{
 }
 #sidebar-short .nav-button{
   font-size: x-large;
+}
+.nav-button {
+  display: inline-block;
+  font-size: medium;
+  color: rgba(118, 130, 143, 0.9);
+  width:100%;
+  transition: all 0.2s ease-out;
+}
+.nav-button.active {
+  background-color:rgba(118, 130, 143, 0.3);
+  color: whitesmoke;
+}
+.nav-button:hover{
+  text-decoration: none;
+  cursor: pointer;
+  background-color:rgba(118, 130, 143, 0.3);
+  color: whitesmoke;
 }
 .show-sidebar{
   float: none;
