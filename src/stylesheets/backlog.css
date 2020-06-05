@@ -22,26 +22,29 @@
   max-height: 50px;
 }
 .backlog-container{
-
   height: 85%;
 }
 .backlog-tab{
   font-size: small;
   font-weight: 600;
+  background-color: rgba(19,36,53,0.3);
   text-transform: uppercase;
-  background-color: transparent;
   color:rgb(188, 188, 192);
   border:none;
+  border-radius: 10px 10px 0 0;
   height: 100%;
   transition: all 0.2s ease-in;
 }
 .backlog-tab:hover{
-  color: rgb(19, 36, 53);
+  color:white;
+  background-color: rgba(19,36,53,0.5);
+  border-radius: 10px 10px 0 0 ;
   
 }
 .backlog-tab.active{
-  border-bottom: solid 3px rgb(19, 36, 53);;
-  color: rgb(19, 36, 53);
+  border-bottom:none;
+  background-color: rgba(19,36,53);
+  color: white;
 }
 #create-story{
   cursor: pointer;
@@ -56,4 +59,10 @@
   background-color: rgba(32, 156, 7, 1);
   box-shadow: 0 3px 5px rgba(45, 204, 13, 0.9);
   color: white;
+}
+.breakLine {
+  margin-bottom: 1rem;
+  margin-left: 2px;
+  margin-right: 2px;
+  border-top: 1px solid rgba(19,36,53,0.3);; 
 }
