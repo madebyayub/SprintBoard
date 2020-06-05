@@ -4,7 +4,21 @@ import Dropdown from "./dropdown";
 import "../stylesheets/navbar.css";
 
 class Navbar extends React.Component {
-  state = { showNotification: false };
+    container = React.createRef();
+    state = { showNotification: false };
+
+    componentDidMount() {
+        document.addEventListener("mousedown",this.handleClickOutside);
+    }
+    componentWillUnmount() {
+        document.addEventListener("mousedown",this.handleClickOutside);
+    }
+
+    handleClickOutside = (event) => {
+        if (this.container.current && !this.container.current.contains(event.target)){
+            this.setState({showNotification: false});
+        }
+    }
 
   toggleDropdown = () => {
     this.setState((prevState) => ({
@@ -15,7 +29,7 @@ class Navbar extends React.Component {
   render() {
     if (this.props.sidebar) {
       return (
-        <div className="navbar fixed-top toggled">
+        <div className="navbar fixed-top toggled" ref={this.container}>
           <label>user page name</label>
           <form className="form nav searchBar">
             <input
@@ -29,8 +43,7 @@ class Navbar extends React.Component {
               id="dropdownnoti"
               type="button"
               className="navBarbutton"
-              onClick={this.toggleDropdown}
-            >
+              onClick={this.toggleDropdown}>
               <i className="fa fa-bell-o navbarIcon"></i>
               <span id="notfication" className="badge">
                 3
@@ -54,7 +67,7 @@ class Navbar extends React.Component {
               placeholder="Search"
             ></input>
           </form>
-          <div>
+          <div ref={this.container}>
             <button
               id="dropdownnoti"
               type="button"
