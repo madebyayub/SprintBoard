@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import Dropdown from "./dropdown";
+import Dropdown from "./Dropdown.js";
 import "../stylesheets/navbar.css";
 
 class Navbar extends React.Component {
