@@ -1,0 +1,62 @@
+.title{
+    width: 92%;
+    font-weight: 600;
+    border: none;
+} 
+.editButtonContainer{
+    text-align: right;
+}
+
+.editIcon{
+    background-color: transparent;
+    border: none;
+}
+.editIcon:hover{
+    background-color: rgba(184, 181, 181, 0.3);
+    border-radius: 4px;
+}
+.cancelBtn{
+    height:98%;
+    border:1px solid;
+    float: right;
+    background-color:rgba(251,248,248);
+    border-radius:5px;
+}
+.saveBtn{
+    height:98%;
+    border:1px solid rgb(0,0,0);
+    float: right;
+    background-color:rgba(48,72,103);
+    color: white;
+    border-radius:5px;
+    box-shadow: rgba(0,0,0,0.5);
+}
+.saveBtn:hover{
+    background-color: rgba(48,72,103,0.9);;
+}
+.cancelBtn:hover{
+    background-color: rgba(206, 201, 201, 0.89);
+}
+.line{
+    color: rgba(0, 0, 0, 0.3);
+    border-bottom: solid 1px;
+    height: 13px;
+    line-height: 22px;
+    text-align: center;
+}
+.lineDetail {
+    font-weight: 500;
+    display: inline;
+    color: black;
+    background-color: white;
+    padding: 0 5px;
+}
+.detailSection{
+    display: flex;
+}
+.detailInput {
+    text-align: center;
+}
+.PointLabel{
+    margin-left: 42px;
+}

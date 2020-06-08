@@ -1,10 +1,13 @@
 import React from "react";
+import "../../../stylesheets/dashboard.css";
 
 const UserStory = (props) => {
   return (
     <div className="story-container mx-2 mb-1 px-2 py-2">
-      <div className="story-title ml-1">First Story</div>
-      <div className="story-description ml-1">Story Description</div>
+      <div className="story-title ml-1" onClick={()=> console.log("this div was clicked")}>
+        <i className="fa fa-bookmark mr-2 userStoryIcon" aria-hidden="true"></i>
+        {props.title}
+      </div>
     </div>
   );
 };

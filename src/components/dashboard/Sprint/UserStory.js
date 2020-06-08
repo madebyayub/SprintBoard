@@ -7,7 +7,7 @@ const UserStory = (props) => {
       <div className="row ml-1">
         <div className="col-8 story-description pl-0">Story Description</div>
         <div className="col-4 user-assigned">
-          <i class="fas fa-user-circle float-right"></i>
+          <i className="fas fa-user-circle float-right"></i>
         </div>
       </div>
     </div>
