@@ -4,8 +4,8 @@ import "../../../stylesheets/sprintstory.css";
 const SprintStory = () => {
     return (
         <div>
-            <div className="dropdown ml-2">
-                <button className="SprintDropdown dropdown-toggle m-2"> Sprint</button>
+            <div className="dropdown sprintContainer m-2">
+                <button className="sprintDropdown dropdown-toggle"> Sprint</button>
             </div>
 
         </div>

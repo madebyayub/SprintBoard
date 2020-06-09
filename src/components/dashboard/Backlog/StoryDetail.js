@@ -18,42 +18,32 @@ class StoryDetail extends React.Component {
             <i className="fa fa-pencil" aria-hidden="true"></i>
           </button>
         </div>
-        <div className="detail-title mb-2">
-          <input className="title ml-2" value="Title of the user story" readOnly={this.state.editStory}/>
+        <div className="detail-title mb-2 mt-1">
+          <input className="title" value="Title of the user story" readOnly={this.state.editStory}/>
         </div>
         <div className="detailInformation">
-        <div className="detailSection">
           </div>
           <div className="line ml-2 mr-2">
             <div className="lineDetail">Detail</div>
           </div>
           <div className="mt-3">
-            <div className= "detailSection mt-2 mb-2">
-              <label className="ml-2 mr-2">State:</label>
-              <div className="ml-5">
-                <input id="stateid"className="detailInput" value="New" readOnly={this.state.editStory}/>
-              </div>
+            <div className={`detailSection ${this.state.editStory ? "noEdit" : "edit"} mb-2 ml-2`} >
+              <label className="labelSection">State:</label>
+                <input id="stateid"className="detailInput" readOnly={this.state.editStory}/>
             </div>
-            <div className= "detailSection mt-2 mb-2">
-              <label className="ml-2 mr-2">Assigned:</label>
-              <div className="ml-1">
-                <input className="detailInput ml-3" value="N/A"readOnly={this.state.editStory}/>
-              </div>
+            <div className={`detailSection ${this.state.editStory ? "noEdit" : "edit"} mb-2 ml-2`}>
+              <label className="labelSection">Assigned:</label>
+                <input className="detailInput" value="N/A"readOnly={this.state.editStory}/>
             </div>
-            <div className= "detailSection mt-2 mb-2">
-              <label className="ml-2 mr-2">Points:</label>
-              <div className="PointLabel">
+            <div className={`detailSection ${this.state.editStory ? "noEdit" : "edit"} mb-2 ml-2`}>
+              <label className="labelSection">Points:</label>
                 <input className="detailInput" value="2" readOnly={this.state.editStory}/>
-              </div>
             </div>
-            <div className= "detailSection mt-2 mb-2">
-              <label className="ml-2 mr-2">Reported:</label>
-              <div className="ml-1">
-                <input className="detailInput ml-3" value="John Doe" readOnly={this.state.editStory}/>
-              </div>
+            <div className={`detailSection ${this.state.editStory ? "noEdit" : "edit"} mb-2 ml-2`}>
+              <label className="labelSection">Reported:</label>
+                <input className="detailInput" value="John Doe" readOnly={this.state.editStory}/>
             </div>
           </div>
-        </div>
         <div className="line ml-2 mr-2 mt-3">
           <div className="lineDetail">Description</div>
         </div>
