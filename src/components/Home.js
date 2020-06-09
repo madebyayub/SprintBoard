@@ -70,7 +70,7 @@ class Home extends React.Component {
           <div class="search-result">
             <button
               className="btn btn-success btn-sm"
-              onClick={this.props.joinTeam()}
+              onClick={() => this.props.joinTeam()}
             >
               Join
             </button>
