@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import GoogleAuth from "./GoogleAuth";
-import { searchTeamName } from "../actions";
+import { searchTeamName, resetResults } from "../actions";
 
 import "../stylesheets/home.css";
 class Home extends React.Component {
@@ -9,6 +9,9 @@ class Home extends React.Component {
 
   setDisplay(display) {
     this.setState({ display });
+    if (display === "main") {
+      this.props.resetResults();
+    }
   }
   searchTeam(e) {
     e.preventDefault();
@@ -65,7 +68,12 @@ class Home extends React.Component {
       return this.props.joinTeamResults.map((team) => {
         return (
           <div class="search-result">
-            <button className="btn btn-success btn-sm">Join</button>
+            <button
+              className="btn btn-success btn-sm"
+              onClick={this.props.joinTeam()}
+            >
+              Join
+            </button>
             <div id="result-name">{team.name}</div>
             <div id="result-members">{team.members.length} members</div>
           </div>
@@ -175,6 +183,7 @@ class Home extends React.Component {
     }
   }
   render() {
+    console.log(this.props);
     return (
       <>
         <div id="home" className="container-fluid">
@@ -192,9 +201,13 @@ class Home extends React.Component {
 const mapStateToProps = (state) => {
   return {
     isSignedIn: state.auth.isSignedIn,
-    currentUserId: state.auth.currentUserId,
+    currentUser: {
+      userId: state.auth.user.userId,
+      userName: state.auth.user.name,
+      userPicture: state.auth.user.profilePicture,
+    },
     joinTeamResults: state.home.joinTeam.searchResults,
   };
 };
 
-export default connect(mapStateToProps, { searchTeamName })(Home);
+export default connect(mapStateToProps, { searchTeamName, resetResults })(Home);

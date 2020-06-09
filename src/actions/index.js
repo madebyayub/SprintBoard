@@ -21,3 +21,8 @@ export const searchTeamName = (teamname) => {
     dispatch({ type: "JOIN_SEARCH_TEAMNAME", payload: response.data });
   };
 };
+export const resetResults = () => {
+  return {
+    type: "RESET_RESULTS",
+  };
+};

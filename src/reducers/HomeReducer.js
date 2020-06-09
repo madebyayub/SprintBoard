@@ -17,6 +17,12 @@ export default (state = INITIAL_STATE, action) => {
           searchResults: action.payload,
         },
       };
+    case "RESET_RESULTS":
+      return {
+        ...state,
+        joinTeam: { searchResults: [] },
+        makeTeam: { searchResults: [], status: "" },
+      };
     default:
       return state;
   }
