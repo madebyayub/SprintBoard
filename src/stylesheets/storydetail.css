@@ -1,0 +1,83 @@
+.title{
+    width: 92%;
+    font-size: 21px;
+    font-weight: 600;
+    border: none;
+} 
+.edit{
+    border-bottom: 1px solid;
+}
+.noEdit{
+    border-bottom: none;
+}
+.editButtonContainer{
+    text-align: right;
+}
+
+.editIcon{
+    background-color: transparent;
+    border: none;
+}
+.editIcon:hover{
+    background-color: rgba(184, 181, 181, 0.3);
+    border-radius: 4px;
+}
+.cancelBtn{
+    height:98%;
+    border:1px solid;
+    float: right;
+    background-color:rgba(251,248,248);
+    border-radius:5px;
+}
+.saveBtn{
+    height:98%;
+    border:1px solid rgb(0,0,0);
+    float: right;
+    background-color:rgba(48,72,103);
+    color: white;
+    border-radius:5px;
+    box-shadow: rgba(0,0,0,0.5);
+}
+.saveBtn:hover{
+    background-color: rgba(48,72,103,0.9);;
+}
+.cancelBtn:hover{
+    background-color: rgba(206, 201, 201, 0.89);
+}
+.line{
+    color: rgba(0, 0, 0, 0.3);
+    border-bottom: solid 1px;
+    height: 13px;
+    line-height: 22px;
+    text-align: center;
+}
+.lineDetail {
+    font-weight: 500;
+    display: inline;
+    color: black;
+    background-color: white;
+    padding: 0 5px;
+}
+.detailSection{
+    width: 75%;
+    display: inline-block;
+    padding: 3px;
+    background-color: white;
+}
+.labelSection{
+    display: block;
+    margin: 0;
+    font-size: 10px;
+}
+.detailInput {
+    width: 75%;
+    outline: none;
+    border: none;
+    display: block;
+    line-height: 1.2rem;
+    font-size: 10pt;
+    background-color: white;
+}
+.PointLabel{
+    margin-left: 42px;
+}

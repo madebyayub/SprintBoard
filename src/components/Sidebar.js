@@ -9,14 +9,14 @@ class Sidebar extends React.Component {
       <div id="sidebar-short">
         <div className="actions">
           <button className="show-sidebar ml-0 px-3 py-2 mt-1">
-            <i class="fas fa-door-open"></i>
+            <i className="fas fa-door-open"></i>
           </button>
           <ul id="mainsidebar-list" className="pl-0 mt-5">
             <Link
               to="/backlog"
               className={`nav-button py-3 ${
                 this.props.activeTab === "Backlog" ? "active" : ""
-              } pl-4`}
+              } pl-4`} title="Backlog"
             >
               <i className="fas fa-th-list mr-3"></i>
             </Link>
@@ -24,7 +24,7 @@ class Sidebar extends React.Component {
               to="/active"
               className={`nav-button py-3 ${
                 this.props.activeTab === "Active" ? "active" : ""
-              } pl-4`}
+              } pl-4`} title="Active Sprint"
             >
               <i className="fas fa-running mr-3"></i>
             </Link>
@@ -32,7 +32,7 @@ class Sidebar extends React.Component {
               to="/board"
               className={`nav-button py-3 ${
                 this.props.activeTab === "Board" ? "active" : ""
-              } pl-4`}
+              } pl-4`} title="Message Board"
             >
               <i className="fas fa-comment-dots mr-3"></i>
             </Link>

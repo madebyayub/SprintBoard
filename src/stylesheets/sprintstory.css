@@ -1,0 +1,14 @@
+.sprintDropdown{
+    width: 20%;
+    height: 92%;
+    border-radius: 3px;
+    border: 0.5px solid black;
+    background-color: whitesmoke;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.7);
+}
+.sprintDropdown:hover{
+    background-color: rgba(218, 214, 214, 0.7);
+}
+.sprintContainer{
+    height: 40px;
+}
