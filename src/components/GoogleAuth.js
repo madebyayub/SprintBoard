@@ -20,7 +20,12 @@ class GoogleAuth extends React.Component {
   }
   onAuthChange = (isSignedIn) => {
     if (isSignedIn) {
-      this.props.signIn(this.auth.currentUser.get().getId());
+      const currentUser = this.auth.currentUser.get();
+      this.props.signIn(
+        currentUser.getId(),
+        currentUser.getBasicProfile().getImageUrl(),
+        currentUser.getBasicProfile().getName()
+      );
     } else {
       this.props.signOut();
     }
@@ -35,7 +40,7 @@ class GoogleAuth extends React.Component {
     if (this.props.isSignedIn === null) {
       return null;
     } else if (this.props.isSignedIn) {
-      const img = this.auth.currentUser.get().getBasicProfile().getImageUrl();
+      const img = this.props.currentUserPicture;
       return (
         <div id="profile-pic-container" className="row">
           <button
@@ -73,7 +78,9 @@ class GoogleAuth extends React.Component {
 const mapStateToProps = (state) => {
   return {
     isSignedIn: state.auth.isSignedIn,
-    currentUserId: state.auth.currentUserId,
+    currentUserId: state.auth.user.userId,
+    currentUserPicture: state.auth.user.profilePicture,
+    currentUserName: state.auth.user.name,
   };
 };
 export default connect(mapStateToProps, {
