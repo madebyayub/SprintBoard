@@ -1,6 +1,8 @@
 const INITIAL_STATE = {
   isSignedIn: null,
+  hasTeam: null,
   user: {
+    team: null,
     userId: null,
     profilePicture: null,
     name: null,
@@ -23,7 +25,22 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isSignedIn: false,
+        hasTeam: false,
         user: { userId: null, profilePicture: null, name: null },
+      };
+    case "FETCH_TEAM":
+      return {
+        ...state,
+        hasTeam: action.payload.teamStatus,
+        user: {
+          ...state.user,
+          team: action.payload.team,
+        },
+      };
+    case "LEAVE_TEAM":
+      return {
+        ...state,
+        hasTeam: false,
       };
     default:
       return state;

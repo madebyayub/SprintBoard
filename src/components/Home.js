@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import GoogleAuth from "./GoogleAuth";
-import { searchTeamName, resetResults } from "../actions";
+import { searchTeamName, resetResults, createTeam, joinTeam } from "../actions";
 
 import "../stylesheets/home.css";
 class Home extends React.Component {
@@ -12,6 +12,22 @@ class Home extends React.Component {
     if (display === "main") {
       this.props.resetResults();
     }
+  }
+  makeTeam(e) {
+    e.preventDefault();
+    this.props.createTeam(
+      this.props.currentUser.userId,
+      this.props.currentUser.name,
+      this.makeInput.value
+    );
+  }
+  joinATeam(e, teamname) {
+    e.preventDefault();
+    this.props.joinTeam(
+      this.props.currentUser.userId,
+      this.props.currentUser.name,
+      teamname
+    );
   }
   searchTeam(e) {
     e.preventDefault();
@@ -67,10 +83,10 @@ class Home extends React.Component {
     if (this.props.joinTeamResults.length > 0) {
       return this.props.joinTeamResults.map((team) => {
         return (
-          <div class="search-result">
+          <div className="search-result" key={team.name}>
             <button
               className="btn btn-success btn-sm"
-              onClick={() => this.props.joinTeam()}
+              onClick={(e) => this.joinATeam(e, team.name)}
             >
               Join
             </button>
@@ -81,7 +97,7 @@ class Home extends React.Component {
       });
     } else {
       return (
-        <div class="search-result none mt-5">
+        <div className="search-result none mt-5">
           <i className="fas fa-clipboard"></i>
           <div id="no-result-label">There are no teams with that name</div>
         </div>
@@ -97,26 +113,28 @@ class Home extends React.Component {
             className="py-3 px-4"
             onClick={() => this.setDisplay("main")}
           >
-            <i class="fas fa-arrow-left"></i>
+            <i className="fas fa-arrow-left"></i>
           </div>
           <div id="team-option-header" className="row mt-5">
             Make A Team
           </div>
           <form className="mt-3">
-            <div class="form-group">
-              <label id="team-name-label" for="teamname">
+            <div className="form-group">
+              <label id="team-name-label" htmlFor="teamname">
                 Enter A Team Name
               </label>
               <input
                 autoComplete="off"
-                class="form-control form-control-lg"
+                className="form-control form-control-lg"
                 id="team-name-input"
                 placeholder="Team #432"
+                ref={(input) => (this.makeInput = input)}
               />
             </div>
+            <label id="status-label">{this.props.status}</label>
             <button
               type="submit"
-              class="btn btn-primary mt-4"
+              className="btn btn-primary mt-4"
               id="create-team"
               onClick={(e) => this.makeTeam(e)}
             >
@@ -173,7 +191,7 @@ class Home extends React.Component {
           </div>
           {this.renderCorrectStatus()}
           <div id="google-auth" className="row mt-3">
-            <GoogleAuth />
+            <GoogleAuth page="home" />
           </div>
           <div id="team-choices" className="mt-4">
             {this.renderTeamOptions()}
@@ -183,7 +201,6 @@ class Home extends React.Component {
     }
   }
   render() {
-    console.log(this.props);
     return (
       <>
         <div id="home" className="container-fluid">
@@ -201,13 +218,20 @@ class Home extends React.Component {
 const mapStateToProps = (state) => {
   return {
     isSignedIn: state.auth.isSignedIn,
+    hasTeam: state.auth.hasTeam,
     currentUser: {
       userId: state.auth.user.userId,
       userName: state.auth.user.name,
       userPicture: state.auth.user.profilePicture,
     },
     joinTeamResults: state.home.joinTeam.searchResults,
+    status: state.home.makeTeam.status,
   };
 };
 
-export default connect(mapStateToProps, { searchTeamName, resetResults })(Home);
+export default connect(mapStateToProps, {
+  searchTeamName,
+  resetResults,
+  createTeam,
+  joinTeam,
+})(Home);

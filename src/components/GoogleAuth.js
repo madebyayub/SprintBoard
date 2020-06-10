@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { signIn, signOut } from "../actions";
+import { signIn, signOut, fetchTeam } from "../actions";
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
@@ -26,6 +26,7 @@ class GoogleAuth extends React.Component {
         currentUser.getBasicProfile().getImageUrl(),
         currentUser.getBasicProfile().getName()
       );
+      this.props.fetchTeam(currentUser.getId());
     } else {
       this.props.signOut();
     }
@@ -72,7 +73,11 @@ class GoogleAuth extends React.Component {
     }
   }
   render() {
-    return <div>{this.renderAuthButton()}</div>;
+    if (this.props.page === "home") {
+      return <div>{this.renderAuthButton()}</div>;
+    } else {
+      return <div>{this.renderAuthIcon()}</div>;
+    }
   }
 }
 const mapStateToProps = (state) => {
@@ -86,4 +91,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   signIn,
   signOut,
+  fetchTeam,
 })(GoogleAuth);
