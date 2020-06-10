@@ -6,6 +6,7 @@ const SprintStory = () => {
         <div>
             <div className="dropdown sprintContainer m-2">
                 <button className="sprintDropdown dropdown-toggle"> Sprint</button>
+                <button className="createSprint"> Create</button>
             </div>
 
         </div>

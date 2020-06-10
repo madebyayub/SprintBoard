@@ -109,7 +109,7 @@ class Home extends React.Component {
               </label>
               <input
                 autoComplete="off"
-                class="form-control form-control-lg"
+                className="form-control form-control-lg"
                 id="team-name-input"
                 placeholder="Team #432"
               />

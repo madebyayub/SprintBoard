@@ -4,6 +4,7 @@ import MessageBoard from "./MessageBoard";
 import Navbar from "../Navbar";
 import Backlog from "./Backlog";
 import Sidebar from "../Sidebar";
+import StoryModal from '../StoryModal';
 
 class Dashboard extends React.Component {
   render() {
@@ -15,6 +16,7 @@ class Dashboard extends React.Component {
             <Navbar activeTab="Backlog" />
             <Sidebar activeTab="Backlog" />
             <Backlog />
+            <StoryModal/>
           </>
         );
       case "active":

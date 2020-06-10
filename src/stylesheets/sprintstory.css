@@ -2,13 +2,26 @@
     width: 20%;
     height: 92%;
     border-radius: 3px;
-    border: 0.5px solid black;
-    background-color: whitesmoke;
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.7);
+    border: 0.5px solid rgba(218, 214, 214, 0.5);
+    background-color: rgba(218, 214, 214, 1);
 }
 .sprintDropdown:hover{
     background-color: rgba(218, 214, 214, 0.7);
 }
 .sprintContainer{
     height: 40px;
+}
+.createSprint{
+    float: right;
+    width: 20%;
+    height: 92%;
+    border-radius: 3px;
+    border: 0.5px solid rgba(30, 72, 107,0.5);
+    background-color: rgba(30, 72, 107,0.8);
+    transition: all 0.2s ease-in-out;
+    color: white;
+}
+.createSprint:hover{
+    background-color: rgba(30, 72, 107,1);
+    box-shadow: 0 3px 5px rgba(30,72,107);
 }

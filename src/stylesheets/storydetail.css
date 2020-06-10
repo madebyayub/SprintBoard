@@ -4,7 +4,7 @@
     font-weight: 600;
     border: none;
 } 
-.edit{
+.edit:hover{
     border-bottom: 1px solid;
 }
 .noEdit{
@@ -78,6 +78,15 @@
     font-size: 10pt;
     background-color: white;
 }
-.PointLabel{
-    margin-left: 42px;
+.textEditButton{
+    width:100%;
+     height:30px;
+     border:1px solid lightgrey;
+    border-radius: 0 0 4px 4px;
+}
+.text-edithide{
+    visibility: hidden;
+}
+.text-editshow{
+    visibility: show;
 }
