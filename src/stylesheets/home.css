@@ -191,5 +191,10 @@
   width: auto;}
   #no-result-label{
     font-weight: 600;
-    font-size: medium;
+    font-size: medium;}
+  #status-label{
+    margin: 0;
+    font-size: x-small;
+    color: red;
+    font-weight: 600;
   }
