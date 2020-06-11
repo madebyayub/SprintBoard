@@ -1,8 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import Dropdown from "./Dropdown.js";
-
-import history from "../history";
 import { signOut } from "../actions";
 import "../stylesheets/navbar.css";
 
@@ -38,7 +36,6 @@ class Navbar extends React.Component {
   };
   onSignOutClick = () => {
     this.auth.signOut();
-    history.push("/");
   };
   handleClickOutside = (event) => {
     if (

@@ -9,19 +9,6 @@ const UserStoryList = (props) => {
             <UserStory title="backlog story one" />
             <UserStory title="backlog story two"/>
             <UserStory title="backlog story three"/>
-            <UserStory title="backlog story three"/>
-            <UserStory title="backlog story three"/>
-            <UserStory title="backlog story three"/>
-            <UserStory title="backlog story three"/>
-            <UserStory title="backlog story three"/>
-            <UserStory title="backlog story three"/>
-            <UserStory title="backlog story three"/>
-            <UserStory title="backlog story three"/>
-            <UserStory title="backlog story three"/>
-            <UserStory title="backlog story three"/>
-            <UserStory title="backlog story three"/>
-            <UserStory title="backlog story three"/>
-            <UserStory title="backlog story three"/>
             </div>
         );
     }  

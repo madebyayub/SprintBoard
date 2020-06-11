@@ -11,6 +11,7 @@ export const signIn = (userId, profilePicture, name) => {
   };
 };
 export const signOut = () => {
+  history.push("/");
   return {
     type: "SIGN_OUT",
   };
@@ -90,3 +91,16 @@ export const leaveTeam = (userID, username, teamname) => {
     dispatch({ type: "LEAVE_TEAM", payload: response.data });
   };
 };
+
+export const createStory = (storyData,team) => {
+  return async (dispatch) => {
+    const response = await ServerAPI({
+        method: "post",
+        url: '/story',
+        data: {
+         team: team,
+         story: storyData
+        },
+    });
+  }
+}

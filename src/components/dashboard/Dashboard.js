@@ -5,8 +5,10 @@ import MessageBoard from "./MessageBoard";
 import Navbar from "../Navbar";
 import Backlog from "./Backlog";
 import Sidebar from "../Sidebar";
+import StoryModal from '../StoryModal';
 import { fetchTeam, signIn } from "../../actions";
 import history from "../../history";
+
 class Dashboard extends React.Component {
   componentDidMount() {
     window.gapi.load("client:auth2", () => {
@@ -45,6 +47,7 @@ class Dashboard extends React.Component {
               <Navbar activeTab="Backlog" />
               <Sidebar activeTab="Backlog" />
               <Backlog />
+              <StoryModal />
             </>
           );
         case "active":

@@ -49,9 +49,9 @@ class StoryDetail extends React.Component {
         </div>
         <div className="mt-3 ml-3 mr-3 mb-5">
           <textarea className="form-control"style={{width:"100%", height:"125px", borderRadius:"4px 4px 0 0"}} row="10" readOnly={this.state.editStory}></textarea>
-          <div className={`textEditButton ${this.state.editStory ? "text-edithide" : "text-editshow"}`} >
-            <button className="cancelBtn ml-1 mr-1">Cancel</button>
-            <button className="saveBtn">Save</button>
+          <div className={`textEditButton ${this.state.editStory ? "text-edithide" : "text-editshow"} mt-2`} >
+            <button className="btn btn-success btn-sm">Save</button>
+            <button className="btn btn-danger btn-sm ml-1 mr-1">Cancel</button>
           </div>
         </div>
       </div>
