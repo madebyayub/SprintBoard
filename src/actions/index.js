@@ -10,6 +10,7 @@ export const signIn = (userId, profilePicture, name) => {
     },
   };
 };
+
 export const signOut = () => {
   history.push("/");
   return {
