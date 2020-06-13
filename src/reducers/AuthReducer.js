@@ -42,6 +42,16 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         hasTeam: false,
       };
+    case "GET_STORIES":
+      return {...state, 
+            user:{
+              ...state.user,
+                team: {
+                  ...state.user.team, 
+                  stories: action.payload.stories,
+                }
+            },
+      };
     default:
       return state;
   }

@@ -94,7 +94,7 @@ export const leaveTeam = (userID, username, teamname) => {
 
 export const createStory = (storyData,team) => {
   return async (dispatch) => {
-    const response = await ServerAPI({
+  await ServerAPI({
         method: "post",
         url: '/story',
         data: {
@@ -104,3 +104,14 @@ export const createStory = (storyData,team) => {
     });
   }
 }
+
+export const getStories = (teamId) => {
+  return async (dispatch) => {
+    const response = await ServerAPI({
+      method:"get",
+      url:`/stories/${teamId}`
+    })
+    console.log(response.data);
+    dispatch({type: "GET_STORIES", payload: response.data });
+  };
+};

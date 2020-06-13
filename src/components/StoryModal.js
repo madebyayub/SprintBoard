@@ -17,6 +17,7 @@ class StoryModal extends React.Component {
             point: this.storyPoint.value
         }
         this.props.createStory(storyData,this.props.team);
+        this.props.toggleModal();
     }
 
 
