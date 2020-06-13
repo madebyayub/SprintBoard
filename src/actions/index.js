@@ -92,26 +92,25 @@ export const leaveTeam = (userID, username, teamname) => {
   };
 };
 
-export const createStory = (storyData,team) => {
+export const createStory = (storyData, team) => {
   return async (dispatch) => {
-  await ServerAPI({
-        method: "post",
-        url: '/story',
-        data: {
-         team: team,
-         story: storyData
-        },
+    await ServerAPI({
+      method: "post",
+      url: "/story",
+      data: {
+        team: team,
+        story: storyData,
+      },
     });
-  }
-}
+  };
+};
 
 export const getStories = (teamId) => {
   return async (dispatch) => {
     const response = await ServerAPI({
-      method:"get",
-      url:`/stories/${teamId}`
-    })
-    console.log(response.data);
-    dispatch({type: "GET_STORIES", payload: response.data });
+      method: "get",
+      url: `/stories/${teamId}`,
+    });
+    dispatch({ type: "GET_STORIES", payload: response.data });
   };
 };
