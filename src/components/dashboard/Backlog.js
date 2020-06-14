@@ -7,9 +7,11 @@ import "../../stylesheets/dashboard.css";
 import "../../stylesheets/backlog.css";
 import { connect } from "react-redux";
 import { getStories } from "../../actions";
+import SprintStory from "./Backlog/SprintStory";
 
 class Backlog extends React.Component {
   state = { activeTab: "Backlog", showModal: false };
+
   componentDidMount() {
     this.props.getStories(this.props.currentUser.team._id);
   }
@@ -26,21 +28,30 @@ class Backlog extends React.Component {
   componentDidUpdate() {
     this.props.getStories(this.props.currentUser.team._id);
   }
+
   renderUserStories() {
-    if (typeof this.props.currentUser.team.stories[0] !== "string") {
-      return this.props.currentUser.team.stories.map((story) => {
-        return (
-          <div className="story-container mx-2 mb-1 px-2 py-2" key={story._id}>
-            <UserStory title={story.title} assignedKey={story._id} />
-          </div>
-        );
-      });
+    if (this.state.activeTab === "Backlog" ){
+      if (typeof this.props.currentUser.team.stories[0] !== "string") {
+        return this.props.currentUser.team.stories.map((story) => {
+          return (
+            <div className="story-container mx-2 mb-1 px-2 py-2" key={story._id}>
+              <UserStory title={story.title} assignedKey={story._id} />
+            </div>
+          );
+        });
+      }
+      else{
+        return <></>; 
+      }
     }
-    return <></>;
-  }
+     else {
+    return <div>
+      <SprintStory />
+    </div>;
+    }
+}
 
   render() {
-    console.log("Backlog rendered");
     return (
       <>
         <div className="container-fluid">
