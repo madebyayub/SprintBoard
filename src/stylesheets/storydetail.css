@@ -84,7 +84,12 @@
   .empty-message.icon{
     font-size: 50px}
 
-.detail-container{}
+.detail-container{
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);}
+  .detail-container.empty{
+    border: none;
+    background: transparent;}
   .textEditButton{
     width: 100%;
     text-align: center;}
@@ -98,16 +103,26 @@
     font-weight: 800;
     width: 90%;
     margin: 0;}
+  #unselectIcon{
+    background-color: transparent;
+    border:none;
+    color: rgba(0, 0, 0, 0.3);}
+    #unselectIcon:focus{
+      outline:0;}
+    #unselectIcon:hover{
+      color: rgba(0,0,0,0.8);}
   #editIcon{
+    display: block;
+    margin-left: auto;
     background-color: transparent;
     border: none;
     border-radius: 5px;
     color: rgba(0, 0, 0, 0.3);}
-  #editIcon:focus{
-    outline:0;}
-  #editIcon:hover{
-    color: whitesmoke;
-    background-color: rgba(0, 0, 0, 0.2);}
+    #editIcon:focus{
+      outline:0;}
+    #editIcon:hover{
+      color: whitesmoke;
+      background-color: rgba(0, 0, 0, 0.1);}
   .detailInput{
     font-size: medium;
     display: block;

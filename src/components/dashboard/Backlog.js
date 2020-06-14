@@ -91,7 +91,10 @@ class Backlog extends React.Component {
                   {this.renderUserStories()}
                 </div>
                 <div id="story-preview" className="ml-3 mb-1">
-                  <StoryDetail story={this.state.activeStory} />
+                  <StoryDetail
+                    changeStory={this.changeStory}
+                    story={this.state.activeStory}
+                  />
                 </div>
               </div>
             </div>

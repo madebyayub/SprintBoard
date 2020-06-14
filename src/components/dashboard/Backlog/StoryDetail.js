@@ -9,16 +9,20 @@ class StoryDetail extends React.Component {
       editStory: !prevState.editStory,
     }));
   };
+  unselectStory = () => {
+    this.setState({ editStory: false });
+    this.props.changeStory(null);
+  };
   renderEmptyDetail() {
     return (
       <div className="detail-container empty">
-        <div class="empty-message icon">
-          <i class="far fa-edit"></i>
+        <div className="empty-message icon">
+          <i className="far fa-edit"></i>
         </div>
-        <div class="empty-message">
+        <div className="empty-message">
           <div>Looks like there isn't a story selected</div>
         </div>
-        <div class="empty-message mt-1">
+        <div className="empty-message mt-1">
           <div>Click on a story to show or edit it's details here</div>
         </div>
       </div>
@@ -26,12 +30,15 @@ class StoryDetail extends React.Component {
   }
   renderContentDetail() {
     return (
-      <div className="detail-container">
+      <div className="detail-container pt-1 px-3">
         <button
-          id="editIcon"
-          className="py-2 px-3 float-right"
-          onClick={this.allowEdits}
+          id="unselectIcon"
+          className="float-left"
+          onClick={this.unselectStory}
         >
+          <i className="fas fa-chevron-left"></i>
+        </button>
+        <button id="editIcon" className="py-1 px-2" onClick={this.allowEdits}>
           <i
             className={`${
               this.state.editStory ? "fas fa-times" : "fa fa-pen"
@@ -91,7 +98,7 @@ class StoryDetail extends React.Component {
           />
         </div>
         <button
-          className={`btn btn-success btn-sm float-right textEditButton ${
+          className={`btn btn-success btn-sm mb-2 textEditButton ${
             this.state.editStory ? "text-editshow" : "text-edithide"
           }`}
         >
