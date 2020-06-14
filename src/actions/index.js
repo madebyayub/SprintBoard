@@ -95,7 +95,7 @@ export const leaveTeam = (userID, username, teamname) => {
 
 export const createStory = (storyData, team) => {
   return async (dispatch) => {
-    await ServerAPI({
+    const response = await ServerAPI({
       method: "post",
       url: "/story",
       data: {
@@ -103,15 +103,19 @@ export const createStory = (storyData, team) => {
         story: storyData,
       },
     });
+    dispatch({ type: "CREATE_STORY", payload: response.data });
   };
 };
 
-export const getStories = (teamId) => {
+export const getStories = (teamId, prevStories) => {
   return async (dispatch) => {
     const response = await ServerAPI({
       method: "get",
       url: `/stories/${teamId}`,
     });
-    dispatch({ type: "GET_STORIES", payload: response.data });
+    if (!prevStories || typeof prevStories[0] === "string") {
+      console.log(prevStories ? typeof prevStories[0] : "null");
+      dispatch({ type: "GET_STORIES", payload: response.data });
+    }
   };
 };

@@ -6,11 +6,10 @@ const UserStory = (props) => {
     <>
       <div
         className="story-title ml-1"
-        key={props.key}
-        onClick={() => console.log("this div was clicked")}
+        onClick={() => props.changeStory(props.story)}
       >
         <i className="fa fa-bookmark mr-2 userStoryIcon" aria-hidden="true"></i>
-        {props.title}
+        {props.story.title}
       </div>
     </>
   );

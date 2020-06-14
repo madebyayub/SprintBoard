@@ -9,29 +9,39 @@ import { connect } from "react-redux";
 import { getStories } from "../../actions";
 
 class Backlog extends React.Component {
-  state = { activeTab: "Backlog", showModal: false };
+  state = { activeTab: "Backlog", showModal: false, activeStory: null };
   componentDidMount() {
-    this.props.getStories(this.props.currentUser.team._id);
+    this.props.getStories(
+      this.props.currentUser.team._id,
+      this.props.currentUser.team.stories
+    );
   }
-
+  componentDidUpdate() {
+    this.props.getStories(
+      this.props.currentUser.team._id,
+      this.props.currentUser.team.stories
+    );
+  }
   switchTab = (tab) => {
     this.setState({ activeTab: tab });
   };
-
+  changeStory = (story) => {
+    this.setState({ activeStory: story });
+  };
   toggleModal = () => {
     this.setState((prevState) => ({
       showModal: !prevState.showModal,
     }));
   };
-  componentDidUpdate() {
-    this.props.getStories(this.props.currentUser.team._id);
-  }
   renderUserStories() {
     if (typeof this.props.currentUser.team.stories[0] !== "string") {
       return this.props.currentUser.team.stories.map((story) => {
         return (
-          <div className="story-container mx-2 mb-1 px-2 py-2" key={story._id}>
-            <UserStory title={story.title} assignedKey={story._id} />
+          <div
+            className="story-container-backlog ml-2 mr-0 px-2 py-2"
+            key={story._id}
+          >
+            <UserStory story={story} changeStory={this.changeStory} />
           </div>
         );
       });
@@ -40,7 +50,6 @@ class Backlog extends React.Component {
   }
 
   render() {
-    console.log("Backlog rendered");
     return (
       <>
         <div className="container-fluid">
@@ -71,12 +80,18 @@ class Backlog extends React.Component {
               </div>
             </div>
             <div className="backlog-container pt-2">
-              <div id="backlog-container-row" className="row">
-                <div className="mb-2 ml-3" id="backlog-list-container">
+              <div id="backlog-container-row">
+                <div className="mb-2" id="backlog-list-container">
+                  <label id="numStories" className="mr-3">
+                    {this.props.currentUser
+                      ? this.props.currentUser.team.stories.length
+                      : ""}{" "}
+                    User Stories
+                  </label>
                   {this.renderUserStories()}
                 </div>
-                <div className="ml-4" id="story-preview">
-                  <StoryDetail />
+                <div id="story-preview" className="ml-3 mb-1">
+                  <StoryDetail story={this.state.activeStory} />
                 </div>
               </div>
             </div>

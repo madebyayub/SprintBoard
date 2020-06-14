@@ -3,6 +3,8 @@ import Modal from "react-modal";
 import { connect } from "react-redux";
 import { createStory, getStories } from "../actions";
 
+import "../stylesheets/storymodal.css";
+
 Modal.setAppElement("#root");
 class StoryModal extends React.Component {
   createUserStory(e) {
@@ -16,7 +18,6 @@ class StoryModal extends React.Component {
       point: this.storyPoint.value,
     };
     this.props.createStory(storyData, this.props.team);
-    //this.props.getStories(this.props.team._id);
     this.props.toggleModal();
   }
 
@@ -28,6 +29,7 @@ class StoryModal extends React.Component {
         style={{
           overlay: {
             backgroundColor: "rgba(0,0,0,0.3)",
+            zIndex: 1031,
           },
           content: {
             border: "none",
@@ -35,109 +37,64 @@ class StoryModal extends React.Component {
             boxShadow: "0 0 15px rgba(0,0,0,0.5)",
             backgroundColor: " rgba(255,255,255,0.9)",
             width: "40%",
-            height: "80vh",
+            minWidth: "300px",
+            height: "83vh",
             margin: "auto",
           },
         }}
       >
-        <div className="ModalContainer mt-2">
-          <div className="closeModal">
-            <label style={{ fontSize: "20px", fontWeight: "700" }}>
-              Create
-            </label>
+        <div className="ModalContainer">
+          <div id="ModalHeader">
+            <label id="ModalTitle">Add a New User Story</label>
             <button
+              id="closeModal"
+              className="px-3 py-2"
               onClick={this.props.toggleModal}
-              style={{
-                float: "right",
-                backgroundColor: "transparent",
-                border: "none",
-                outline: "none",
-              }}
             >
               <i className="fa fa-times" aria-hidden="true"></i>
             </button>
           </div>
-          <div className="modalTitle">
-            <label>Summary:</label>
+          <select
+            class="modalSelect form-control form-control-lg mt-3"
+            ref={(select) => (this.storyAssigned = select)}
+          >
+            <option disabled selected>
+              Assigned to
+            </option>
+            <option>Default select</option>
+          </select>
+          <div className="modalTitle mt-2">
             <input
               ref={(input) => (this.storyTitle = input)}
-              className="ml-1"
-              style={{ width: "70%" }}
+              className="modalInput py-4 form-control"
+              placeholder="Title"
             />
           </div>
-          <div className="line mt-1"></div>
-          <div className="modalDetailContainer mt-3">
-            <div className="modalDetail">
-              <label className="mr-2 col-2">State:</label>
-              <input
-                ref={(input) => (this.storyState = input)}
-                className="col-5"
-                style={{ left: "30px" }}
-              />
-            </div>
-            <div className="modalDetail mt-2">
-              <div style={{ display: "flex" }}>
-                <label className="mr-2 col-2">Assigned:</label>
-                <div
-                  style={{
-                    border: "0.5px solid rgb(117, 117, 117)",
-                    borderRadius: "2px",
-                    left: "30px",
-                    position: "relative",
-                    backgroundColor: "white",
-                  }}
-                >
-                  <input
-                    ref={(input) => (this.storyAssigned = input)}
-                    style={{ border: "none", outline: "none" }}
-                  />
-                  <button
-                    type="button"
-                    className="dropdown-toggle"
-                    style={{
-                      border: "none",
-                      outline: "none",
-                      verticalAlign: "middle",
-                      backgroundColor: "white",
-                    }}
-                  ></button>
-                </div>
-              </div>
-            </div>
-            <div className="modalDetail" style={{ marginTop: "13px" }}>
-              <label className="mr-2 col-2">Points:</label>
-              <input
-                ref={(input) => (this.storyPoint = input)}
-                className="col-5"
-                style={{ left: "30px" }}
-              />
-            </div>
-            <div className="modalDetail" style={{ marginTop: "8px" }}>
-              <label className="mr-2 col-2">Reporter:</label>
-              <input className="col-5" style={{ left: "30px" }} />
-            </div>
-          </div>
-          <div className="line"></div>
+          <input
+            className="modalInput form-control py-4 mt-2"
+            placeholder="State"
+            ref={(input) => (this.storyState = input)}
+          />
+          <input
+            className="form-control modalInput py-4 mt-2"
+            placeholder="Points"
+            ref={(input) => (this.storyPoint = input)}
+          />
           <div className="ModalDescription mt-3">
             <textarea
               ref={(input) => (this.storyDescription = input)}
-              className="form-control"
-              style={{
-                width: "100%",
-                height: "200px",
-                borderRadius: "4px 4px 0 0",
-              }}
-              row="10"
+              placeholder="Description"
+              className="form-control modalTextArea"
+              rows="5"
             ></textarea>
           </div>
-          <div className="mt-2 mb-4" style={{ textAlign: "right" }}>
+          <div className="modalActions mt-4 mb-1">
             <button
               className="btn btn-success"
               onClick={(e) => this.createUserStory(e)}
             >
-              Save
+              Create New Story
             </button>
-            <button className="btn btn-danger ml-2">Cancel</button>
           </div>
         </div>
       </Modal>

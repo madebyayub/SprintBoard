@@ -60,8 +60,11 @@ class Navbar extends React.Component {
           <span id="active-tab-page">{this.props.activeTab}</span>
         </div>
         <div id="team-label">
-          <span>TEAM </span>
-          <span>{this.props.currentUser.team.name.toUpperCase()}</span>
+          <span>
+            {this.props.currentUser.team.name
+              ? this.props.currentUser.team.name.toUpperCase()
+              : ""}
+          </span>
         </div>
         <div ref={this.container}>
           <button

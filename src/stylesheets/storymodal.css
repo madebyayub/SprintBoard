@@ -1,0 +1,52 @@
+.ModalContainer{}
+  #ModalTitle{
+    font-size: large;
+    font-family: 'Montserrat', sans-serif;}
+  #closeModal{
+    float:right;
+    margin-left:right;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    color: rgba(0,0,0,0.4);
+    transition: all 0.2s ease-in-out;}
+    #closeModal:hover{
+      background-color: rgba(0,0,0,0.2);
+      color: whitesmoke;}
+  .modalInput{
+    font-size: small;
+    display: block;
+    margin: auto;
+    width: 90%;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid rgba(0,0,0,0.1);}
+    .modalInput:focus{
+      background-color: transparent;
+      box-shadow: none;}
+  .modalTextArea{
+    font-size: small;
+    width: 90%;
+    margin: auto;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid rgba(0,0,0,0.1);}
+    .modalTextArea:focus{
+      box-shadow: none;
+      background-color: transparent;}
+  .modalSelect{
+    background: transparent;
+    font-size: small;
+    width: 90%;
+    margin: auto;
+    border: none;
+    border-radius:0;
+    border-bottom: 2px solid rgba(0,0,0,0.1);}
+  .modalActions button{
+    margin: auto;
+    width: 80%;
+    display: block;}
+
+  
