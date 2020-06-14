@@ -1,7 +1,6 @@
 import React from "react";
 
 import UserStory from "./Sprint/UserStory";
-import "../../stylesheets/dashboard.css";
 import "../../stylesheets/active.css";
 
 class ActiveSprint extends React.Component {

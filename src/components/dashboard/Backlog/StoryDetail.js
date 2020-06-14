@@ -1,62 +1,119 @@
 import React from "react";
-import '../../../stylesheets/storydetail.css';
+import "../../../stylesheets/storydetail.css";
 
 class StoryDetail extends React.Component {
-  state={editStory: true};
+  state = { editStory: false };
 
   allowEdits = () => {
     this.setState((prevState) => ({
       editStory: !prevState.editStory,
     }));
-  }
-
-  render(){
+  };
+  unselectStory = () => {
+    this.setState({ editStory: false });
+    this.props.changeStory(null);
+  };
+  renderEmptyDetail() {
     return (
-      <div className="detail-container">
-        <div className="editButtonContainer mr-3 mt-1">
-          <button className="editIcon" onClick={this.allowEdits}>
-            <i className={`${this.state.editStory ? "fa fa-pencil" : "fa fa-times"} mt-1`} aria-hidden="true"></i>
-          </button>
+      <div className="detail-container empty">
+        <div className="empty-message icon">
+          <i className="far fa-edit"></i>
         </div>
-        <div className="detail-title ml-1 mb-2 mt-1">
-          <input className="title" value="Title of the user story" readOnly={this.state.editStory}/>
+        <div className="empty-message">
+          <div>Looks like there isn't a story selected</div>
         </div>
-        <div className="detailInformation">
-          </div>
-          <div className="line ml-2 mr-2">
-            <div className="lineDetail">Detail</div>
-          </div>
-          <div className="mt-3">
-            <div className={`detailSection ${this.state.editStory ? "noEdit" : "edit"} ml-2`} >
-              <label className="labelSection">State:</label>
-                <input id="stateid"className="detailInput" readOnly={this.state.editStory}/>
-            </div>
-            <div className={`detailSection ${this.state.editStory ? "noEdit" : "edit"} ml-2`}>
-              <label className="labelSection">Assigned:</label>
-                <input className="detailInput" value="N/A"readOnly={this.state.editStory}/>
-            </div>
-            <div className={`detailSection ${this.state.editStory ? "noEdit" : "edit"} ml-2`}>
-              <label className="labelSection">Points:</label>
-                <input className="detailInput" value="2" readOnly={this.state.editStory}/>
-            </div>
-            <div className={`detailSection ${this.state.editStory ? "noEdit" : "edit"} ml-2`}>
-              <label className="labelSection">Reported:</label>
-                <input className="detailInput" value="John Doe" readOnly={this.state.editStory}/>
-            </div>
-          </div>
-        <div className="line ml-2 mr-2 mt-3">
-          <div className="lineDetail">Description</div>
-        </div>
-        <div className="mt-3 ml-3 mr-3 mb-5">
-          <textarea className="form-control"style={{width:"100%", height:"125px", borderRadius:"4px 4px 0 0"}} row="10" readOnly={this.state.editStory}></textarea>
-          <div className={`textEditButton ${this.state.editStory ? "text-edithide" : "text-editshow"} mt-2`} >
-            <button className="btn btn-success btn-sm">Save</button>
-            <button className="btn btn-danger btn-sm ml-1 mr-1"onClick={this.allowEdits} >Cancel</button>
-          </div>
+        <div className="empty-message mt-1">
+          <div>Click on a story to show or edit it's details here</div>
         </div>
       </div>
     );
   }
-};
+  renderContentDetail() {
+    return (
+      <div className="detail-container pt-1 px-3">
+        <button
+          id="unselectIcon"
+          className="float-left"
+          onClick={this.unselectStory}
+        >
+          <i className="fas fa-chevron-left"></i>
+        </button>
+        <button id="editIcon" className="py-1 px-2" onClick={this.allowEdits}>
+          <i
+            className={`${
+              this.state.editStory ? "fas fa-times" : "fa fa-pen"
+            } mt-1`}
+            aria-hidden="true"
+          ></i>
+        </button>
+        <div id="titleDetail">
+          <label>Title</label>
+          <input
+            className={`detailInput mt-0 pl-2 py-2 ${
+              this.state.editStory ? "editState" : ""
+            }`}
+            placeholder={this.props.story.title}
+            readOnly={!this.state.editStory}
+          />
+        </div>
+        <div id="assignedDetail" className="mt-2">
+          <label>Assigned To</label>
+          <input
+            className={`detailInput mt-0 pl-2 py-2 ${
+              this.state.editStory ? "editState" : ""
+            }`}
+            placeholder={this.props.story.assigned}
+            readOnly={!this.state.editStory}
+          />
+        </div>
+        <div id="stateDetail" className="mt-2">
+          <label>State</label>
+          <input
+            className={`detailInput mt-0 pl-2 py-2 ${
+              this.state.editStory ? "editState" : ""
+            }`}
+            placeholder={this.props.story.status}
+            readOnly={!this.state.editStory}
+          />
+        </div>
+        <div id="pointsDetail" className="mt-2">
+          <label>Points</label>
+          <input
+            className={`detailInput mt-0 pl-2 py-2 ${
+              this.state.editStory ? "editState" : ""
+            }`}
+            placeholder={this.props.story.points}
+            readOnly={!this.state.editStory}
+          />
+        </div>
+        <div id="descriptionDetail" className="my-2">
+          <label>Description</label>
+          <textarea
+            className={`detailInput mt-0 pl-2 py-2 ${
+              this.state.editStory ? "editState" : ""
+            }`}
+            placeholder={this.props.story.description}
+            readOnly={!this.state.editStory}
+            rows="3"
+          />
+        </div>
+        <button
+          className={`btn btn-success btn-sm mb-2 textEditButton ${
+            this.state.editStory ? "text-editshow" : "text-edithide"
+          }`}
+        >
+          Save
+        </button>
+      </div>
+    );
+  }
+  render() {
+    if (this.props.story) {
+      return <>{this.renderContentDetail()}</>;
+    } else {
+      return <>{this.renderEmptyDetail()}</>;
+    }
+  }
+}
 
 export default StoryDetail;
