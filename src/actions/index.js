@@ -107,6 +107,20 @@ export const createStory = (storyData, team) => {
   };
 };
 
+export const deleteStory = (story, team) => {
+  return async (dispatch) => {
+    const response = await ServerAPI({
+      method: "delete",
+      url: "/story",
+      data: {
+        team,
+        story,
+      },
+    });
+    dispatch({ type: "DELETE_STORY", payload: response.data });
+  };
+};
+
 export const getStories = (teamId, prevStories) => {
   return async (dispatch) => {
     const response = await ServerAPI({

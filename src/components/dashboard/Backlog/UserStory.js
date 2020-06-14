@@ -11,6 +11,12 @@ const UserStory = (props) => {
         <i className="fa fa-bookmark mr-2 userStoryIcon" aria-hidden="true"></i>
         {props.story.title}
       </div>
+      <button
+        className="remove-story"
+        onClick={() => props.deleteStory(props.story)}
+      >
+        <i class="fas fa-trash"></i>
+      </button>
     </>
   );
 };

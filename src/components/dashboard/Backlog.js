@@ -3,10 +3,9 @@ import UserStoryList from "./Backlog/UserStoryList";
 import UserStory from "./Backlog/UserStory";
 import StoryDetail from "./Backlog/StoryDetail";
 import StoryModal from "../StoryModal";
-import "../../stylesheets/dashboard.css";
 import "../../stylesheets/backlog.css";
 import { connect } from "react-redux";
-import { getStories } from "../../actions";
+import { getStories, deleteStory } from "../../actions";
 
 class Backlog extends React.Component {
   state = { activeTab: "Backlog", showModal: false, activeStory: null };
@@ -28,6 +27,9 @@ class Backlog extends React.Component {
   changeStory = (story) => {
     this.setState({ activeStory: story });
   };
+  deleteStory = (story) => {
+    this.props.deleteStory(story);
+  };
   toggleModal = () => {
     this.setState((prevState) => ({
       showModal: !prevState.showModal,
@@ -41,7 +43,11 @@ class Backlog extends React.Component {
             className="story-container-backlog ml-2 mr-0 px-2 py-2"
             key={story._id}
           >
-            <UserStory story={story} changeStory={this.changeStory} />
+            <UserStory
+              story={story}
+              deleteStory={this.deleteStory}
+              changeStory={this.changeStory}
+            />
           </div>
         );
       });
@@ -119,4 +125,4 @@ const mapStateToProps = (state) => {
     },
   };
 };
-export default connect(mapStateToProps, { getStories })(Backlog);
+export default connect(mapStateToProps, { getStories, deleteStory })(Backlog);
