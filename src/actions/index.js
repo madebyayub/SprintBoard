@@ -128,7 +128,6 @@ export const getStories = (teamId, prevStories) => {
       url: `/stories/${teamId}`,
     });
     if (!prevStories || typeof prevStories[0] === "string") {
-      console.log(prevStories ? typeof prevStories[0] : "null");
       dispatch({ type: "GET_STORIES", payload: response.data });
     }
   };

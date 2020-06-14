@@ -1,5 +1,4 @@
 import React from "react";
-import UserStoryList from "./Backlog/UserStoryList";
 import UserStory from "./Backlog/UserStory";
 import StoryDetail from "./Backlog/StoryDetail";
 import StoryModal from "../StoryModal";
@@ -39,10 +38,7 @@ class Backlog extends React.Component {
     if (typeof this.props.currentUser.team.stories[0] !== "string") {
       return this.props.currentUser.team.stories.map((story) => {
         return (
-          <div
-            className="story-container-backlog ml-2 mr-0 px-2 py-2"
-            key={story._id}
-          >
+          <div key={story._id}>
             <UserStory
               story={story}
               deleteStory={this.deleteStory}

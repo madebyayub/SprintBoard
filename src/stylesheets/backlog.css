@@ -81,6 +81,7 @@
                 cursor: pointer;
                 background-color: rgba(255, 255, 255, 0.1);}
               .story-title{
+                display: inline-block;
                 color:rgb(12, 48, 101);
                 font-weight: 800;
                 font-size: medium;}
@@ -90,7 +91,8 @@
                 font-weight: 700;
                 color: grey;}
               .remove-story{
-                display:inline-block;
+                float:right;                
+                margin-left:auto;
                 background-color: transparent;
                 border: none;
                 color:rgba(202, 60, 60, 0.5);}
