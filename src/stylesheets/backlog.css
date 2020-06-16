@@ -82,6 +82,7 @@
                 background-color: rgba(255, 255, 255, 0.1);}
               .story-title{
                 display: inline-block;
+                cursor: pointer;
                 color:rgb(12, 48, 101);
                 font-weight: 800;
                 font-size: medium;}

@@ -15,7 +15,7 @@ class StoryModal extends React.Component {
       description: this.storyDescription.value,
       status: this.storyState.value,
       assigned: this.storyAssigned.value,
-      point: this.storyPoint.value,
+      points: this.storyPoint.value,
     };
     this.props.createStory(storyData, this.props.team);
     this.props.toggleModal();
@@ -54,8 +54,15 @@ class StoryModal extends React.Component {
               <i className="fa fa-times" aria-hidden="true"></i>
             </button>
           </div>
+          <div className="modalTitle mt-2 ml-2">
+            <input
+              ref={(input) => (this.storyTitle = input)}
+              className="modalInput py-4 form-control"
+              placeholder="Title"
+            />
+          </div>
           <select
-            class="modalSelect form-control form-control-lg mt-3"
+            className="modalSelect form-control form-control-lg mt-3"
             ref={(select) => (this.storyAssigned = select)}
           >
             <option disabled selected>
@@ -63,18 +70,20 @@ class StoryModal extends React.Component {
             </option>
             <option>Default select</option>
           </select>
-          <div className="modalTitle mt-2">
-            <input
-              ref={(input) => (this.storyTitle = input)}
-              className="modalInput py-4 form-control"
-              placeholder="Title"
-            />
-          </div>
           <input
             className="modalInput form-control py-4 mt-2"
             placeholder="State"
             ref={(input) => (this.storyState = input)}
           />
+           <select
+            className="modalSelect form-control form-control-lg mt-3"
+            ref={(select) => (this.storyAssigned = select)}
+          >
+            <option disabled selected>
+              Sprint
+            </option>
+            <option>Default select</option>
+          </select>
           <input
             className="form-control modalInput py-4 mt-2"
             placeholder="Points"
@@ -108,6 +117,4 @@ const mapStateToProps = (state) => {
     team: state.auth.user.team,
   };
 };
-export default connect(mapStateToProps, { createStory, getStories })(
-  StoryModal
-);
+export default connect(mapStateToProps, { createStory, getStories })(StoryModal);

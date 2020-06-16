@@ -64,6 +64,18 @@ export default (state = INITIAL_STATE, action) => {
           },
         },
       };
+    case "EDIT_STORY":
+      return {
+        ...state,
+        user:{
+          ...state.user,
+          team:{
+            ...state.user.team,
+            stories: action.payload.stories,
+          },
+        },
+      };
+
     case "DELETE_STORY":
       return {
         ...state,

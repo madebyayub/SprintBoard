@@ -2,6 +2,7 @@ import React from "react";
 import UserStory from "./Backlog/UserStory";
 import StoryDetail from "./Backlog/StoryDetail";
 import StoryModal from "../StoryModal";
+import SprintStory from "./Backlog/SprintStory";
 import "../../stylesheets/backlog.css";
 import { connect } from "react-redux";
 import { getStories, deleteStory } from "../../actions";
@@ -9,12 +10,6 @@ import { getStories, deleteStory } from "../../actions";
 class Backlog extends React.Component {
   state = { activeTab: "Backlog", showModal: false, activeStory: null };
   componentDidMount() {
-    this.props.getStories(
-      this.props.currentUser.team._id,
-      this.props.currentUser.team.stories
-    );
-  }
-  componentDidUpdate() {
     this.props.getStories(
       this.props.currentUser.team._id,
       this.props.currentUser.team.stories
@@ -35,12 +30,15 @@ class Backlog extends React.Component {
     }));
   };
   componentDidUpdate() {
-    this.props.getStories(this.props.currentUser.team._id);
+    this.props.getStories(
+      this.props.currentUser.team._id,
+      this.props.currentUser.team.stories
+    );
   }
 
   renderUserStories() {
     if (this.state.activeTab === "Backlog" ){
-      if (typeof this.props.currentUser.team.stories[0] !== "string") {
+      if ( this.props.currentUser.team.stories !== undefined) {
         return this.props.currentUser.team.stories.map((story) => {
           return (
             <div key={story._id}>
@@ -56,6 +54,9 @@ class Backlog extends React.Component {
       else{
         return <></>; 
       }
+    }
+    else {
+      return <SprintStory />
     }
   }
   render() {
@@ -92,7 +93,7 @@ class Backlog extends React.Component {
               <div id="backlog-container-row">
                 <div className="mb-2" id="backlog-list-container">
                   <label id="numStories" className="mr-3">
-                    {this.props.currentUser
+                  {this.props.currentUser
                       ? this.props.currentUser.team.stories.length
                       : ""}{" "}
                     User Stories
