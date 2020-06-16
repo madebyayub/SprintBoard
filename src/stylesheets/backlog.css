@@ -23,7 +23,7 @@
         color: white;}
         #create-story:hover{
           background-color: rgba(32, 156, 7, 1);
-          box-shadow: 0 3px 5px rgba(45, 204, 13, 0.9);
+          box-shadow: 0 0px 10px rgba(45, 204, 13, 0.3);
           color: white;}
       .backlog-tab{
         font-size: small;
