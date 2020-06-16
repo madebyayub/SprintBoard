@@ -33,15 +33,15 @@ class StoryDetail extends React.Component {
       <div className="detail-container pt-1 px-3">
         <button
           id="unselectIcon"
-          className="float-left"
+          className="float-right px-2"
           onClick={this.unselectStory}
         >
-          <i className="fas fa-chevron-left"></i>
+          <i className="fas fa-times"></i>
         </button>
         <button id="editIcon" className="py-1 px-2" onClick={this.allowEdits}>
           <i
             className={`${
-              this.state.editStory ? "fas fa-times" : "fa fa-pen"
+              this.state.editStory ? "fas fa-chevron-left" : "fa fa-pen"
             } mt-1`}
             aria-hidden="true"
           ></i>
@@ -94,7 +94,7 @@ class StoryDetail extends React.Component {
             }`}
             placeholder={this.props.story.description}
             readOnly={!this.state.editStory}
-            rows="3"
+            rows="8"
           />
         </div>
         <button
