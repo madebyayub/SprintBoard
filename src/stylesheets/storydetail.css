@@ -85,6 +85,8 @@
     font-size: 50px}
 
 .detail-container{
+  height: 100%;
+  overflow-y: auto;
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.2);}
   .detail-container.empty{
@@ -104,6 +106,7 @@
     width: 90%;
     margin: 0;}
   #unselectIcon{
+    font-size: x-large;
     background-color: transparent;
     border:none;
     color: rgba(0, 0, 0, 0.3);}
@@ -112,6 +115,7 @@
     #unselectIcon:hover{
       color: rgba(0,0,0,0.8);}
   #editIcon{
+    font-size: large;
     display: block;
     margin-left: auto;
     background-color: transparent;
@@ -121,17 +125,16 @@
     #editIcon:focus{
       outline:0;}
     #editIcon:hover{
-      color: whitesmoke;
-      background-color: rgba(0, 0, 0, 0.1);}
+      color: rgba(0,0,0,0.8);}
   .detailInput{
     font-size: medium;
     display: block;
     margin: auto;
     width: 100%;
     background-color: transparent;
-    border: none;
+    border: 1px solid rgba(0,0,0,0);
     border-radius: 0;
-    border-bottom: 2px solid rgba(0,0,0,0.1);}
+    border-bottom: 1px solid rgba(0,0,0,0.1);}
     .detailInput.editState{
       background-color: white;
       border: 1px solid rgba(0,0,0,0.2);
