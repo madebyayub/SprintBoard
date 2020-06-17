@@ -21,7 +21,11 @@ class Backlog extends React.Component {
   changeStory = (story) => {
     this.setState({ activeStory: story });
   };
-  deleteStory = (story) => {
+  deleteStory = (e, story) => {
+    if (this.state.activeStory && story._id === this.state.activeStory._id) {
+      this.changeStory(null);
+    }
+    e.stopPropagation();
     this.props.deleteStory(story);
   };
   toggleModal = () => {
@@ -37,8 +41,8 @@ class Backlog extends React.Component {
   }
 
   renderUserStories() {
-    if (this.state.activeTab === "Backlog" ){
-      if ( this.props.currentUser.team.stories !== undefined) {
+    if (this.state.activeTab === "Backlog") {
+      if (this.props.currentUser.team.stories !== undefined) {
         return this.props.currentUser.team.stories.map((story) => {
           return (
             <div key={story._id}>
@@ -50,13 +54,11 @@ class Backlog extends React.Component {
             </div>
           );
         });
+      } else {
+        return <></>;
       }
-      else{
-        return <></>; 
-      }
-    }
-    else {
-      return <SprintStory />
+    } else {
+      return <SprintStory />;
     }
   }
   render() {
@@ -90,22 +92,20 @@ class Backlog extends React.Component {
               </div>
             </div>
             <div className="backlog-container pt-2">
-              <div id="backlog-container-row">
-                <div className="mb-2" id="backlog-list-container">
-                  <label id="numStories" className="mr-3">
+              <div className="mb-2" id="backlog-list-container">
+                <label id="numStories" className="mr-3">
                   {this.props.currentUser
-                      ? this.props.currentUser.team.stories.length
-                      : ""}{" "}
-                    User Stories
-                  </label>
-                  {this.renderUserStories()}
-                </div>
-                <div id="story-preview" className="ml-3 mb-1">
-                  <StoryDetail
-                    changeStory={this.changeStory}
-                    story={this.state.activeStory}
-                  />
-                </div>
+                    ? this.props.currentUser.team.stories.length
+                    : ""}{" "}
+                  User Stories
+                </label>
+                {this.renderUserStories()}
+              </div>
+              <div id="story-preview" className="ml-3 mb-1">
+                <StoryDetail
+                  changeStory={this.changeStory}
+                  story={this.state.activeStory}
+                />
               </div>
             </div>
           </div>

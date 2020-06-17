@@ -109,15 +109,16 @@ export const createStory = (storyData, team) => {
 export const editUserStory = (storyData, team, storyId) => {
   return async (dispatch) => {
     const response = await ServerAPI({
-      method:"put",
-      "url":`/story/${storyId}`,
+      method: "put",
+      url: `/story/${storyId}`,
       data: {
         team: team,
         story: storyData,
       },
     });
-    dispatch ({type: "EDIT_STORY", payload: response.data});
-  }
+    console.log(response.data);
+    dispatch({ type: "EDIT_STORY", payload: response.data });
+  };
 };
 
 export const deleteStory = (story, team) => {
@@ -140,7 +141,7 @@ export const getStories = (teamId, prevStories) => {
       method: "get",
       url: `/stories/${teamId}`,
     });
-    if (!prevStories || typeof prevStories[0] === "string" ) {
+    if (!prevStories || typeof prevStories[0] === "string") {
       dispatch({ type: "GET_STORIES", payload: response.data });
     }
   };

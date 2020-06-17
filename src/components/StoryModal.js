@@ -38,7 +38,7 @@ class StoryModal extends React.Component {
             backgroundColor: " rgba(255,255,255,0.9)",
             width: "40%",
             minWidth: "300px",
-            height: "83vh",
+            height: "90vh",
             margin: "auto",
           },
         }}
@@ -54,7 +54,7 @@ class StoryModal extends React.Component {
               <i className="fa fa-times" aria-hidden="true"></i>
             </button>
           </div>
-          <div className="modalTitle mt-2 ml-2">
+          <div className="modalTitle mt-2">
             <input
               ref={(input) => (this.storyTitle = input)}
               className="modalInput py-4 form-control"
@@ -75,7 +75,7 @@ class StoryModal extends React.Component {
             placeholder="State"
             ref={(input) => (this.storyState = input)}
           />
-           <select
+          <select
             className="modalSelect form-control form-control-lg mt-3"
             ref={(select) => (this.storyAssigned = select)}
           >
@@ -117,4 +117,6 @@ const mapStateToProps = (state) => {
     team: state.auth.user.team,
   };
 };
-export default connect(mapStateToProps, { createStory, getStories })(StoryModal);
+export default connect(mapStateToProps, { createStory, getStories })(
+  StoryModal
+);

@@ -67,11 +67,11 @@ export default (state = INITIAL_STATE, action) => {
     case "EDIT_STORY":
       return {
         ...state,
-        user:{
+        user: {
           ...state.user,
-          team:{
+          team: {
             ...state.user.team,
-            stories: action.payload.stories,
+            stories: action.payload,
           },
         },
       };

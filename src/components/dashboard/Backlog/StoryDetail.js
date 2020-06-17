@@ -4,23 +4,29 @@ import { editUserStory, getStories } from "../../../actions";
 import "../../../stylesheets/storydetail.css";
 
 class StoryDetail extends React.Component {
-  state = { editStory: false, title: '', status:'', point:''};
+  state = {
+    editStory: false,
+    title: null,
+    status: null,
+    point: null,
+    description: null,
+  };
 
   allowEdits = () => {
     this.setState((prevState) => ({
       editStory: !prevState.editStory,
     }));
-    this.setState({title: this.props.story.title});
-    this.setState({status: this.props.story.status});
-    this.setState({point: this.props.story.points});
-    this.setState({description: this.props.story.description});
+    this.setState({ title: this.props.story.title });
+    this.setState({ status: this.props.story.status });
+    this.setState({ point: this.props.story.points });
+    this.setState({ description: this.props.story.description });
   };
   unselectStory = () => {
     this.setState({ editStory: false });
     this.props.changeStory(null);
   };
 
-  renderEditStory (e,storyId) {
+  renderEditStory(e, storyId) {
     e.preventDefault();
     const storyData = {
       title: this.state.title,
@@ -30,17 +36,17 @@ class StoryDetail extends React.Component {
       assigned: null,
       point: this.state.point,
     };
-    this.props.editUserStory(storyData,this.props.team, storyId);
+    this.props.editUserStory(storyData, this.props.team, storyId);
     this.unselectStory();
   }
 
-  componentDidUpdate (prevStory) {
-    if(this.props.story && prevStory.story !== null ){
-      if (this.props.story._id !== prevStory.story._id ) {
-        this.setState({title: this.props.story.title});
-        this.setState({status: this.props.story.status});
-        this.setState({point: this.props.story.points});
-        this.setState({description: this.props.story.description});
+  componentDidUpdate(prevStory) {
+    if (this.props.story && prevStory.story !== null) {
+      if (this.props.story._id !== prevStory.story._id) {
+        this.setState({ title: this.props.story.title });
+        this.setState({ status: this.props.story.status });
+        this.setState({ point: this.props.story.points });
+        this.setState({ description: this.props.story.description });
       }
     }
   }
@@ -84,15 +90,15 @@ class StoryDetail extends React.Component {
             className={`detailInput mt-0 pl-2 py-2 ${
               this.state.editStory ? "editState" : ""
             }`}
-            value={this.state.title}
+            value={this.state.title ? this.state.title : this.props.story.title}
             readOnly={!this.state.editStory}
-            onChange= {(e) => this.setState({title: e.target.value})}
-            />
+            onChange={(e) => this.setState({ title: e.target.value })}
+          />
         </div>
         <div id="assignedDetail" className="mt-2">
           <label>Assigned To</label>
           <input
-            className={`detailInput mt-0 pl-2 py-2 ${
+            className={`detailInput mt-0 pl-2 py-1 ${
               this.state.editStory ? "editState" : ""
             }`}
             readOnly={!this.state.editStory}
@@ -101,41 +107,50 @@ class StoryDetail extends React.Component {
         <div id="stateDetail" className="mt-2">
           <label>State</label>
           <input
-            className={`detailInput mt-0 pl-2 py-2 ${
+            className={`detailInput mt-0 pl-2 py-1 ${
               this.state.editStory ? "editState" : ""
             }`}
-            value={this.state.status}
+            value={
+              this.state.status ? this.state.status : this.props.story.status
+            }
             readOnly={!this.state.editStory}
-            onChange= {(e) => this.setState({status: e.target.value})}
+            onChange={(e) => this.setState({ status: e.target.value })}
           />
         </div>
         <div id="pointsDetail" className="mt-2">
           <label>Points</label>
           <input
-            className={`detailInput mt-0 pl-2 py-2 ${
+            className={`detailInput mt-0 pl-2 py-1 ${
               this.state.editStory ? "editState" : ""
             }`}
-            value={this.state.point}
+            value={
+              this.state.point ? this.state.point : this.props.story.points
+            }
             readOnly={!this.state.editStory}
-            onChange= {(e) => this.setState({point: e.target.value})}
+            onChange={(e) => this.setState({ point: e.target.value })}
           />
         </div>
         <div id="descriptionDetail" className="my-2">
           <label>Description</label>
           <textarea
-            className={`detailInput mt-0 pl-2 py-2 ${
+            className={`detailInput mt-0 pl-2 py-1 ${
               this.state.editStory ? "editState" : ""
             }`}
-            value={this.state.description}
+            value={
+              this.state.description
+                ? this.state.description
+                : this.props.story.description
+            }
             readOnly={!this.state.editStory}
-            rows="8"
+            onChange={(e) => this.setState({ description: e.target.value })}
+            rows="4"
           />
         </div>
         <button
           className={`btn btn-success btn-sm mb-2 textEditButton ${
             this.state.editStory ? "text-editshow" : "text-edithide"
           }`}
-          onClick={(e) => this.renderEditStory(e,this.props.story._id)}
+          onClick={(e) => this.renderEditStory(e, this.props.story._id)}
         >
           Save
         </button>
@@ -145,7 +160,6 @@ class StoryDetail extends React.Component {
 
   render() {
     if (this.props.story) {
-      console.log(this.props.story);
       return <>{this.renderContentDetail()}</>;
     } else {
       return <>{this.renderEmptyDetail()}</>;
@@ -159,4 +173,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect((mapStateToProps), { editUserStory, getStories }) (StoryDetail);
+export default connect(mapStateToProps, { editUserStory, getStories })(
+  StoryDetail
+);
