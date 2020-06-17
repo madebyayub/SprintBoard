@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import { connect } from "react-redux";
-import { createStory, getStories } from "../actions";
+import { createStory, getSprints } from "../actions";
 
 import "../stylesheets/storymodal.css";
 
@@ -19,6 +19,22 @@ class StoryModal extends React.Component {
     };
     this.props.createStory(storyData, this.props.team);
     this.props.toggleModal();
+  }
+  componentDidMount () {
+    this.props.getSprints(this.props.team._id);
+  }
+  componentDidUpdate (prevSprint) {
+    console.log(prevSprint);
+    if (this.props.team.sprints.length !== prevSprint.team.sprints.length && this.props.openModal ){
+      this.props.getSprints(this.props.team._id);
+    }
+  }
+  renderSprints () {
+      if (this.props.openModal){
+      return this.props.team.sprints.map((sprint)=> {
+        return <option>{sprint.number}</option>
+      });
+    }
   }
 
   render() {
@@ -82,7 +98,7 @@ class StoryModal extends React.Component {
             <option disabled selected>
               Sprint
             </option>
-            <option>Default select</option>
+            {this.renderSprints()}
           </select>
           <input
             className="form-control modalInput py-4 mt-2"
@@ -117,6 +133,6 @@ const mapStateToProps = (state) => {
     team: state.auth.user.team,
   };
 };
-export default connect(mapStateToProps, { createStory, getStories })(
+export default connect(mapStateToProps, { createStory, getSprints })(
   StoryModal
 );

@@ -87,6 +87,17 @@ export default (state = INITIAL_STATE, action) => {
           },
         },
       };
+    case "GET_SPRINTS":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          team: {
+            ...state.user.team,
+            sprints: action.payload,
+          },
+        },
+      };
     default:
       return state;
   }

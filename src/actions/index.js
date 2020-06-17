@@ -146,3 +146,13 @@ export const getStories = (teamId, prevStories) => {
     }
   };
 };
+
+export const getSprints = (teamId) => {
+  return async (dispatch) => {
+    const response = await ServerAPI({
+        method: "get",
+        url: `/sprint/${teamId}`,
+    });
+    dispatch ({type: "GET_SPRINTS", payload: response.data});
+  };
+};
