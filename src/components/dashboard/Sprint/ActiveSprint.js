@@ -1,7 +1,7 @@
 import React from "react";
 
-import UserStory from "./Sprint/UserStory";
-import "../../stylesheets/active.css";
+import UserStory from "./UserStory";
+import "../../../stylesheets/active.css";
 
 class ActiveSprint extends React.Component {
   render() {

@@ -3,21 +3,28 @@ import "../../../stylesheets/backlog.css";
 
 const UserStory = (props) => {
   return (
-    <div
-      className="story-container-backlog ml-2 mr-0 px-2 py-2"
-      onClick={() => props.changeStory(props.story)}
-    >
-      <div className="story-title ml-1">
-        <i className="fa fa-bookmark mr-2 userStoryIcon" aria-hidden="true"></i>
-        {props.story.title}
-      </div>
-      <button
-        className="remove-story"
-        onClick={(e) => props.deleteStory(e, props.story)}
-      >
-        <i className="fas fa-trash"></i>
-      </button>
-    </div>
+    <tr className="story-row" onClick={() => props.changeStory(props.story)}>
+      <td className="title-col">{props.story.title}</td>
+      <td>
+        <img
+          className="story-row-profile mr-2"
+          src={props.story.author.profilePic}
+          alt="author-profile"
+        ></img>
+        {props.story.author.name}
+      </td>
+      <td>{props.story.status}</td>
+      <td>{props.story.points}</td>
+      <td>{props.story.assigned}</td>
+      <td>
+        <button
+          className="remove-story px-2"
+          onClick={(e) => props.deleteStory(e, props.story)}
+        >
+          <i className="fas fa-trash"></i>
+        </button>
+      </td>
+    </tr>
   );
 };
 

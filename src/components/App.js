@@ -7,14 +7,12 @@ import history from "../history";
 class App extends React.Component {
   render() {
     return (
-      <div>
-        <Router history={history}>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/:dashboard" exact component={Dashboard} />
-          </Switch>
-        </Router>
-      </div>
+      <Router history={history}>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/:dashboard" exact component={Dashboard} />
+        </Switch>
+      </Router>
     );
   }
 }

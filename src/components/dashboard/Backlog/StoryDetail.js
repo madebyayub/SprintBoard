@@ -5,28 +5,36 @@ import "../../../stylesheets/storydetail.css";
 
 class StoryDetail extends React.Component {
   state = {
-    editStory: false,
-    title: null,
-    status: null,
-    point: null,
-    description: null,
+    title: "",
+    status: "",
+    point: "",
+    description: "",
   };
+  componentDidMount() {
+    if (this.props.story) {
+      this.setState({ title: this.props.story.title });
+      this.setState({ status: this.props.story.status });
+      this.setState({ point: this.props.story.points });
+      this.setState({ description: this.props.story.description });
+    }
+  }
+  componentDidUpdate(prevState) {
+    if (
+      (!prevState.story && this.props.story) ||
+      (this.props.story && this.props.story._id !== prevState.story._id)
+    ) {
+      this.setState({ title: this.props.story.title });
+      this.setState({ status: this.props.story.status });
+      this.setState({ point: this.props.story.points });
+      this.setState({ description: this.props.story.description });
+    }
+  }
 
-  allowEdits = () => {
-    this.setState((prevState) => ({
-      editStory: !prevState.editStory,
-    }));
-    this.setState({ title: this.props.story.title });
-    this.setState({ status: this.props.story.status });
-    this.setState({ point: this.props.story.points });
-    this.setState({ description: this.props.story.description });
-  };
   unselectStory = () => {
-    this.setState({ editStory: false });
     this.props.changeStory(null);
   };
 
-  renderEditStory(e, storyId) {
+  editStory(e, storyId) {
     e.preventDefault();
     const storyData = {
       title: this.state.title,
@@ -39,130 +47,98 @@ class StoryDetail extends React.Component {
     this.props.editUserStory(storyData, this.props.team, storyId);
     this.unselectStory();
   }
-
-  componentDidUpdate(prevStory) {
-    if (this.props.story && prevStory.story !== null) {
-      if (this.props.story._id !== prevStory.story._id) {
-        this.setState({ title: this.props.story.title });
-        this.setState({ status: this.props.story.status });
-        this.setState({ point: this.props.story.points });
-        this.setState({ description: this.props.story.description });
-      }
+  renderSaveButton() {
+    if (this.props.story) {
+      return (
+        <button
+          className={"btn btn-success btn-sm mb-2 textEditButton"}
+          onClick={(e) => this.editStory(e, this.props.story._id)}
+        >
+          Save
+        </button>
+      );
+    } else {
+      return <></>;
     }
   }
-
-  renderEmptyDetail() {
-    return (
-      <div className="detail-container empty">
-        <div className="empty-message icon">
-          <i className="far fa-edit"></i>
-        </div>
-        <div className="empty-message">
-          <div>Looks like there isn't a story selected</div>
-        </div>
-        <div className="empty-message mt-1">
-          <div>Click on a story to show or edit it's details here</div>
-        </div>
-      </div>
-    );
-  }
   renderContentDetail() {
+    const info = {
+      title: this.props.story.title,
+      status: this.props.story.status,
+      points: this.props.story.points,
+      description: this.props.story.description,
+    };
     return (
       <div className="detail-container pt-1 px-3">
-        <button
-          id="unselectIcon"
-          className="float-right px-2"
-          onClick={this.unselectStory}
-        >
-          <i className="fas fa-times"></i>
-        </button>
-        <button id="editIcon" className="py-1 px-2" onClick={this.allowEdits}>
-          <i
-            className={`${
-              this.state.editStory ? "fas fa-chevron-left" : "fa fa-pen"
-            } mt-1`}
-            aria-hidden="true"
-          ></i>
-        </button>
-        <div id="titleDetail">
+        <div id="detail-header">
+          <button
+            id="unselectIcon"
+            className="float-right px-2"
+            onClick={this.unselectStory}
+          >
+            <i className="fas fa-times"></i>
+          </button>
+          <label className="mt-2" id="edit-header-label">
+            Edit User Story
+          </label>
+        </div>
+        <div id="titleDetail" className="mt-2">
           <label>Title</label>
           <input
-            className={`detailInput mt-0 pl-2 py-2 ${
-              this.state.editStory ? "editState" : ""
-            }`}
-            value={this.state.title ? this.state.title : this.props.story.title}
-            readOnly={!this.state.editStory}
+            className={"detailInput mt-0 pl-2 py-2"}
+            value={this.state.title ? this.state.title : info.title}
             onChange={(e) => this.setState({ title: e.target.value })}
           />
         </div>
         <div id="assignedDetail" className="mt-2">
           <label>Assigned To</label>
-          <input
-            className={`detailInput mt-0 pl-2 py-1 ${
-              this.state.editStory ? "editState" : ""
-            }`}
-            readOnly={!this.state.editStory}
-          />
+          <input className={"detailInput mt-0 pl-2 py-2"} />
         </div>
         <div id="stateDetail" className="mt-2">
           <label>State</label>
           <input
-            className={`detailInput mt-0 pl-2 py-1 ${
-              this.state.editStory ? "editState" : ""
-            }`}
-            value={
-              this.state.status ? this.state.status : this.props.story.status
-            }
-            readOnly={!this.state.editStory}
+            className={"detailInput mt-0 pl-2 py-2"}
+            value={this.state.status ? this.state.status : info.status}
             onChange={(e) => this.setState({ status: e.target.value })}
           />
         </div>
         <div id="pointsDetail" className="mt-2">
           <label>Points</label>
           <input
-            className={`detailInput mt-0 pl-2 py-1 ${
-              this.state.editStory ? "editState" : ""
-            }`}
-            value={
-              this.state.point ? this.state.point : this.props.story.points
-            }
-            readOnly={!this.state.editStory}
+            className={"detailInput mt-0 pl-2 py-2"}
+            value={this.state.point ? this.state.point : info.points}
             onChange={(e) => this.setState({ point: e.target.value })}
           />
         </div>
         <div id="descriptionDetail" className="my-2">
           <label>Description</label>
           <textarea
-            className={`detailInput mt-0 pl-2 py-1 ${
-              this.state.editStory ? "editState" : ""
-            }`}
+            className={"detailInput mt-0 pl-2 py-2"}
             value={
-              this.state.description
-                ? this.state.description
-                : this.props.story.description
+              this.state.description ? this.state.description : info.description
             }
-            readOnly={!this.state.editStory}
             onChange={(e) => this.setState({ description: e.target.value })}
             rows="4"
           />
         </div>
-        <button
-          className={`btn btn-success btn-sm mb-2 textEditButton ${
-            this.state.editStory ? "text-editshow" : "text-edithide"
-          }`}
-          onClick={(e) => this.renderEditStory(e, this.props.story._id)}
-        >
-          Save
-        </button>
+        {this.renderSaveButton()}
       </div>
     );
   }
 
   render() {
     if (this.props.story) {
-      return <>{this.renderContentDetail()}</>;
+      return (
+        <div id="story-preview" className="ml-3 mb-1 show">
+          {this.renderContentDetail()}
+        </div>
+      );
     } else {
-      return <>{this.renderEmptyDetail()}</>;
+      return (
+        <div id="story-preview" className="ml-3 mb-1">
+          {" "}
+        </div>
+      );
     }
   }
 }

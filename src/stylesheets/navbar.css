@@ -31,8 +31,10 @@ span.badge {
 }
 .navbar{
     position: fixed;
-    left:65px;
-    background-color: rgb(19, 36, 53) !important;
+    left:0px;
+    z-index: 99;
+    background-color: #1a73e8 !important;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
     color: whitesmoke;
     width: auto;
     right: 0;
@@ -44,11 +46,10 @@ span.badge {
 }
 #main-page{
   color: white;
-  font-size: small;
+  font-size: large;
+  font-family: 'Merriweather', serif;
 }
-#active-tab-page{
-  font-size: x-large;
-}
+
 #team-label{
   font-family: 'Montserrat', sans-serif;
   font-weight: 200;

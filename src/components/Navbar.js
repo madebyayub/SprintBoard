@@ -55,30 +55,10 @@ class Navbar extends React.Component {
     const img = this.props.currentUser.userPicture;
     return (
       <div className="navbar fixed-top">
-        <div className="page-label">
-          <span id="main-page">SprintBoard / </span>
-          <span id="active-tab-page">{this.props.activeTab}</span>
-        </div>
-        <div id="team-label">
-          <span>
-            {this.props.currentUser.team.name
-              ? this.props.currentUser.team.name.toUpperCase()
-              : ""}
-          </span>
+        <div className="page-label ml-2">
+          <span id="main-page">SprintBoard</span>
         </div>
         <div ref={this.container}>
-          <button
-            id="dropdownnoti"
-            type="button"
-            className="navBarbutton"
-            onClick={this.toggleDropdown}
-          >
-            <i className="fa fa-bell-o navbarIcon"></i>
-            <span id="notfication" className="badge">
-              3
-            </span>
-          </button>
-          <Dropdown dropdownState={this.state.showNotification} />
           <div id="profileIcon">
             <button
               id="profileIconBtn"

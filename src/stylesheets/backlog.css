@@ -1,4 +1,5 @@
 .container-fluid{
+  padding:0;
   background-color:white;
   overflow: hidden;
   width: auto;
@@ -9,114 +10,114 @@
     width: 100%;
     margin: auto;
     height: 88%;
-    margin-top: 65px;}
+    margin-top: 60px;}
     .tab-container{
+      background-color: #fafafa;
       height: 50px;
-      max-height: 50px;}
+      max-height: 50px;
+      border-bottom: 1.1px solid rgba(0,0,0,.12);}
       #create-story{
+        float: right;
         cursor: pointer;
         border-radius: 5px;
         font-size: small;
-        font-weight: 400;
-        background-color: rgba(32, 156, 7, 0.8);
+        font-weight: 600;
+        background-color: transparent;
         transition: all 0.2s ease-in-out;
-        color: white;}
+        color: #1a73e8 !important;}
         #create-story:hover{
-          background-color: rgba(32, 156, 7, 1);
-          box-shadow: 0 0px 10px rgba(45, 204, 13, 0.3);
+          background-color: #dedede;
           color: white;}
-      .backlog-tab{
+      #create-sprint{
+        float: right;
+        cursor: pointer;
+        border-radius: 5px;
         font-size: small;
         font-weight: 600;
-        background-color: rgba(19,36,53,1);
-        text-transform: uppercase;
-        color:white;
+        background-color: rgba(12, 48, 101, 0.8);
+        transition: all 0.2s ease-in-out;
+        color: white;}
+        #create-sprint:hover{
+          background-color: rgba(12, 48, 101, 1);
+          color: white;}
+      .backlog-tab{
+        width:86px;
+        min-width: 86px;
+        font-size: small;
+        font-weight: 500;
+        background-color: transparent;
+        color:rgba(75, 75, 75, 0.8);
         border:none;
-        border-radius: 10px 10px 0 0;
         height: 100%;
         transition: all 0.1s ease-in;}
         .backlog-tab:hover{
-          color:white;
-          background-color: rgba(19,36,53,0.7);}
+          color: #1a73e8;}
         .backlog-tab:focus{
           outline: 0;}
         .backlog-tab.active{
-          text-decoration: solid;
           font-weight: 800;
-          color: rgb(12, 48, 101)!important;
-          border: 1px solid rgba(75, 75, 75, 0.1);
-          border-bottom: none;
-          background-color: rgba(75, 75, 75, 0.1);
-          color: white;}
-    .backlog-container{
-      height: 90%;
-      border: solid 1px rgba(75, 75, 75, 0.2);
-      border-top: none;
-      border-radius: 8px;
-      background-color: rgba(75, 75, 75, 0.1);}
-      #backlog-container-row{
-        overflow-y: hidden;
-        width: 100%;
-        height: 100%;}
-        #backlog-list-container{
-          display: inline-block;
-          width: 65%;
-          overflow-y: auto;
-          height: 98%;}
-          .story-container-backlog{
-            cursor: pointer;
-            border: solid 1px rgba(75, 75, 75, 0.1);
-            border-bottom: none;
-            font-size: small;
-            border-radius: 1px;
-            background-color: white;
-            transition: background-color 0.2s ease-out;}
-          .story-container-backlog:hover{
-            background-color: rgba(255, 255, 255, 0.5);
-            border: solid 1px rgba(75, 75, 75, 0.1);
-            border-bottom:none;}
-            .story-container{
-              border: solid 1px rgba(75, 75, 75, 0.1);
-              box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
-              font-size: small;
-              border-radius: 7px;
-              background-color: white;
-              transition: background-color 0.2s ease-out;}
-              .story-container:hover{
-                cursor: pointer;
-                background-color: rgba(255, 255, 255, 0.1);}
-              .story-title{
-                display: inline-block;
-                cursor: pointer;
-                color:rgb(12, 48, 101);
-                font-weight: 800;
-                font-size: small;}
-              .story-description{
-                display: inline-block;
-                font-size: x-small;
-                font-weight: 700;
-                color: grey;}
-              .remove-story{
-                font-size: small;
-                float:right;                
-                margin-left:auto;
-                background-color: transparent;
-                border: none;
-                color:rgba(202, 60, 60, 0.5);}
-                .remove-story:hover{
-                  color:rgba(202, 60, 60, 0.9);}
-              .userStoryIcon {
-                color: rgba(32, 156, 7, 0.8);}
-          #numStories{
-            display: block;
-            text-align: right;
-            font-weight: 600;
-            font-size: small;
-            color: rgba(0, 0, 0, 0.4);}
-      #story-preview{
-        display: inline-block;
-        width: 33%;
-        background-color: transparent;
-        height: 99%;
-        border-radius: 2px;}
+          border-bottom: 3px solid #1a73e8;
+          color: #1a73e8 !important;
+          background-color: transparent;}
+    #backlog-list-container{
+      margin: auto;
+      display: block;
+      width: 93%;
+      height: 85%;}
+      .table{
+        height: 100%;
+        display: block;
+        overflow-y: scroll;
+        width: 100%;}
+      .table th{
+        width: 20%;
+        max-width: 50px;
+        color: rgba(0, 0, 0, 0.7);
+        padding: 5px;}
+      .table td{
+        color: rgba(75, 75, 75, 0.8);
+        cursor: pointer;
+        padding: 3px;}
+      #backlog-list-header{
+        font-size: 12px;
+        text-align: center;
+        background-color: rgba(75, 75, 75, 0.09);}
+      .empty-row{
+        font-weight: 600;
+        font-size: 11px;
+        text-align:center;
+        border-top: 1px solid rgba(75, 75, 75, 0.2);
+        border-bottom: 1px solid rgba(75, 75, 75, 0.2);}
+      .story-row{
+        border-top: 1px solid rgba(75, 75, 75, 0.2);
+        border-bottom: 1px solid rgba(75, 75, 75, 0.2);
+        font-weight: 500;
+        font-size: 12px;
+        text-align: center;}
+        .story-row:hover{
+          background-color: rgba(75, 75, 75, 0.05);}
+        .title-col{
+          font-weight: 800;}
+        .story-row-profile{
+          border-radius: 50%;
+          width: 20px;}
+        .remove-story{
+          float:right;
+          border-radius:5px;
+          border: none;
+          background-color: transparent;
+          color: rgba(75,75,75,0.8);
+          transition: all 0.2s ease-out;}
+          .remove-story:hover{
+            color: rgba(240, 33, 33, 0.85);
+            background-color: rgba(75,75,75,0.1);}
+          .remove-story:focus{
+            outline:0;}
+    #numStories{
+      border-top: 1px solid rgba(75, 75, 75, 0.09);
+      display: block;
+      text-align: right;
+      font-weight: 600;
+      font-size: small;
+      color: rgba(0, 0, 0, 0.4);}
     

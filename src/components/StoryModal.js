@@ -20,19 +20,13 @@ class StoryModal extends React.Component {
     this.props.createStory(storyData, this.props.team);
     this.props.toggleModal();
   }
-  componentDidMount () {
+  componentDidMount() {
     this.props.getSprints(this.props.team._id);
   }
-  componentDidUpdate (prevSprint) {
-    console.log(prevSprint);
-    if (this.props.team.sprints.length !== prevSprint.team.sprints.length && this.props.openModal ){
-      this.props.getSprints(this.props.team._id);
-    }
-  }
-  renderSprints () {
-      if (this.props.openModal){
-      return this.props.team.sprints.map((sprint)=> {
-        return <option>{sprint.number}</option>
+  renderSprints() {
+    if (this.props.openModal) {
+      return this.props.team.sprints.map((sprint) => {
+        return <option>{sprint.number}</option>;
       });
     }
   }
@@ -54,7 +48,7 @@ class StoryModal extends React.Component {
             backgroundColor: " rgba(255,255,255,0.9)",
             width: "40%",
             minWidth: "300px",
-            height: "90vh",
+            height: "93vh",
             margin: "auto",
           },
         }}

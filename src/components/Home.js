@@ -17,7 +17,8 @@ class Home extends React.Component {
     e.preventDefault();
     this.props.createTeam(
       this.props.currentUser.userId,
-      this.props.currentUser.name,
+      this.props.currentUser.userName,
+      this.props.currentUser.userPicture,
       this.makeInput.value
     );
   }
@@ -25,7 +26,8 @@ class Home extends React.Component {
     e.preventDefault();
     this.props.joinTeam(
       this.props.currentUser.userId,
-      this.props.currentUser.name,
+      this.props.currentUser.userName,
+      this.props.currentUser.userPicture,
       teamname
     );
   }

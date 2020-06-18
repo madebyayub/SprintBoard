@@ -1,70 +1,4 @@
-.title{
-    width: 92%;
-    font-size: 21px;
-    font-weight: 600;
-    border: none;
-} 
-.edit:hover{
-    border-bottom: 1px solid;
-}
-.noEdit{
-    border-bottom: none;
-}
-.editButtonContainer{
-    text-align: right;
-}
 
-.editIcon{
-    background-color: transparent;
-    border: none;
-}
-.cancelBtn{
-    height:98%;
-    border:1px solid;
-    float: right;
-    background-color:rgba(251,248,248);
-    border-radius:5px;
-}
-.saveBtn{
-    height:98%;
-    border:1px solid rgb(0,0,0);
-    float: right;
-    background-color:rgba(48,72,103);
-    color: white;
-    border-radius:5px;
-    box-shadow: rgba(0,0,0,0.5);
-}
-.saveBtn:hover{
-    background-color: rgba(48,72,103,0.9);;
-}
-.cancelBtn:hover{
-    background-color: rgba(206, 201, 201, 0.89);
-}
-.line{
-    color: rgba(0, 0, 0, 0.3);
-    border-bottom: solid 1px;
-    height: 13px;
-    line-height: 22px;
-    text-align: center;
-}
-.lineDetail {
-    font-weight: 500;
-    display: inline;
-    color: black;
-    background-color: white;
-    padding: 0 5px;
-}
-.detailSection{
-    width: 75%;
-    display: inline-block;
-    padding: 3px;
-    background-color: white;
-}
-.labelSection{
-    display: block;
-    margin: 0;
-    font-size: 10px;
-}
 .detailInput {
     width: 75%;
     outline: none;
@@ -74,18 +8,22 @@
     font-size: 10pt;
     background-color: white;
 }
-.detail-container.empty{
-  padding-top:40%;}
-  .empty-message{
-    text-align: center;
-    font-size: small;
-    font-weight: 600;
-    color: grey;}
-  .empty-message.icon{
-    font-size: 50px}
-
+#story-preview{
+  border-radius: 10px;
+  position: fixed;
+  top: 60px;
+  right:-400px;
+  height: 85%;
+  width: 30%;
+  box-shadow: 0 0 10px rgba(0,0,0,.12);
+  transition: all 0.2s ease-in-out;}
+  #story-preview.show{
+  top:60px;
+  right:0;}
 .detail-container{
   height: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   overflow-y: auto;
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.2);}
@@ -95,16 +33,14 @@
   .textEditButton{
     width: 100%;
     text-align: center;}
-  .text-edithide{
-    visibility: hidden;}
-  .text-editshow{
-    visibility: show;}
   .detail-container label{
     color:rgba(48,72,103);
     font-size: x-small;
     font-weight: 800;
     width: 90%;
     margin: 0;}
+  .detail-container #edit-header-label{
+    font-size: large;}
   #unselectIcon{
     font-size: x-large;
     background-color: transparent;
@@ -135,7 +71,3 @@
     border: 1px solid rgba(0,0,0,0);
     border-radius: 0;
     border-bottom: 1px solid rgba(0,0,0,0.1);}
-    .detailInput.editState{
-      background-color: white;
-      border: 1px solid rgba(0,0,0,0.2);
-      border-radius: 5px;}

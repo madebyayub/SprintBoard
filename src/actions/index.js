@@ -28,7 +28,7 @@ export const resetResults = () => {
     type: "RESET_RESULTS",
   };
 };
-export const createTeam = (userID, username, teamname) => {
+export const createTeam = (userID, username, userpicture, teamname) => {
   return async (dispatch) => {
     const response = await ServerAPI({
       method: "post",
@@ -36,6 +36,7 @@ export const createTeam = (userID, username, teamname) => {
       data: {
         userID,
         username,
+        userpicture,
         teamname: teamname.toLowerCase(),
       },
     });
@@ -45,7 +46,7 @@ export const createTeam = (userID, username, teamname) => {
     dispatch({ type: "CREATE_TEAM", payload: response.data });
   };
 };
-export const joinTeam = (userID, username, teamname) => {
+export const joinTeam = (userID, username, userpicture, teamname) => {
   return async (dispatch) => {
     const response = await ServerAPI({
       method: "patch",
@@ -54,6 +55,7 @@ export const joinTeam = (userID, username, teamname) => {
         instruction: "ADD",
         userID,
         username,
+        userpicture,
         teamname: teamname.toLowerCase(),
       },
     });
@@ -141,7 +143,11 @@ export const getStories = (teamId, prevStories) => {
       method: "get",
       url: `/stories/${teamId}`,
     });
-    if (!prevStories || typeof prevStories[0] === "string") {
+    if (
+      !prevStories ||
+      typeof prevStories[0] === "string" ||
+      (prevStories[0] && typeof prevStories[0].author === "string")
+    ) {
       dispatch({ type: "GET_STORIES", payload: response.data });
     }
   };
@@ -150,9 +156,9 @@ export const getStories = (teamId, prevStories) => {
 export const getSprints = (teamId) => {
   return async (dispatch) => {
     const response = await ServerAPI({
-        method: "get",
-        url: `/sprint/${teamId}`,
+      method: "get",
+      url: `/sprint/${teamId}`,
     });
-    dispatch ({type: "GET_SPRINTS", payload: response.data});
+    dispatch({ type: "GET_SPRINTS", payload: response.data });
   };
 };
