@@ -4,7 +4,7 @@ import BacklogContainer from "./BacklogContainer";
 import SprintContainer from "./SprintContainer";
 import "../../../stylesheets/backlog.css";
 import { connect } from "react-redux";
-import { getStories, deleteStory } from "../../../actions";
+import { getStories, deleteStory, createSprint } from "../../../actions";
 
 class Backlog extends React.Component {
   state = { activeTab: "Backlog", showModal: false };
@@ -28,12 +28,20 @@ class Backlog extends React.Component {
       this.props.currentUser.team.stories
     );
   }
-
+  createSprint () {
+    const sprintNumber = this.props.currentUser.team.sprints.length + 1;
+    const sprintdata= {
+      number: sprintNumber,
+      current: false,
+    }
+    this.props.createSprint(this.props.currentUser.team, sprintdata);
+  }
+  
   renderContainer() {
     if (this.state.activeTab === "Backlog") {
       return <BacklogContainer currentUser={this.props.currentUser} />;
     } else {
-      return <SprintContainer />;
+      return <SprintContainer currentUser={this.props.currentUser}/>;
     }
   }
   render() {
@@ -58,7 +66,7 @@ class Backlog extends React.Component {
               >
                 Sprints
               </button>
-              <div id="create-sprint" className="m-0 py-2 px-4 mt-1 mr-3">
+              <div id="create-sprint" className="m-0 py-2 px-4 mt-1 mr-3" onClick={() => this.createSprint()}>
                 Create A Sprint
               </div>
               <div
@@ -92,4 +100,4 @@ const mapStateToProps = (state) => {
     },
   };
 };
-export default connect(mapStateToProps, { getStories, deleteStory })(Backlog);
+export default connect(mapStateToProps, { getStories, deleteStory, createSprint })(Backlog);

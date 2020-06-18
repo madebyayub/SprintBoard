@@ -87,6 +87,17 @@ export default (state = INITIAL_STATE, action) => {
           },
         },
       };
+    case "CREATE_SPRINT":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          team: {
+            ...state.user.team,
+            sprints: action.payload.sprints,
+          },
+        },
+      };
     case "GET_SPRINTS":
       return {
         ...state,
