@@ -20,8 +20,10 @@ class StoryModal extends React.Component {
     this.props.createStory(storyData, this.props.team);
     this.props.toggleModal();
   }
-  componentDidMount() {
-    this.props.getSprints(this.props.team._id);
+  componentDidUpdate(prevState) {
+    if (this.props.openModal && !prevState.openModal) {
+      this.props.getSprints(this.props.team._id);
+    }
   }
   renderSprints() {
     if (this.props.openModal) {

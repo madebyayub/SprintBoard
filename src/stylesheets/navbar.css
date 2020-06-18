@@ -40,21 +40,49 @@ span.badge {
     right: 0;
     transition:all 0.4s ease-in-out;
 }
-.navbar.toggled {
-    left:300px;
-    width:auto;
-}
-#main-page{
-  color: white;
-  font-size: large;
-  font-family: 'Merriweather', serif;
-}
 
-#team-label{
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 200;
-  letter-spacing: 3px;
+#navbar-labels{
+  z-index:100;
 }
+.navbar-left{
+  display: inline-block;}
+  #team-btn{
+    color: inherit;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255,255,255,.2);
+    font-weight: 400;}
+    #team-btn:hover{
+      background-color: rgba(255,255,255,.3);}
+    #team-btn:focus{
+      outline: 0;}
+    .fa-caret-right, .fa-caret-left{
+      font-size: 18px;}
+  #main-page{
+    color: white;
+    font-size: large;
+    font-family: 'Merriweather', serif;}
+
+
+#leave-dropdown{
+  color: transparent;
+  margin-left: 165px;
+  position: absolute;
+  top:12px;
+  z-index: 0;
+  transition: all 0.4s ease-in-out;}
+  #leave-dropdown.show{
+    font-size: small;
+    color: white;
+    background:rgba(12, 48, 101, 0.8);
+    margin-left: 282px;}
+  .leave-team{
+    cursor: pointer;}
+    .leave-team:hover{
+      background-color: rgba(12, 48, 101, 1);}
+
+
+
 #profileIcon{
   display: inline-block;}
   #profileIcon span{

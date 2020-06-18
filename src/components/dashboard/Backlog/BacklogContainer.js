@@ -50,6 +50,7 @@ class BacklogContainer extends React.Component {
     }
   }
   render() {
+    console.log(this.props.currentUser.team);
     return (
       <>
         <div className="mb-2" id="backlog-list-container">
