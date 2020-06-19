@@ -8,6 +8,17 @@ import "../../../stylesheets/backlog.css";
 
 class BacklogContainer extends React.Component {
   state = { activeStory: null };
+
+  /*
+    Change: This function runs when a user clicks on the
+            story within the backlog container and changes
+            the activeStory state so the correct story
+            is displayed within the edit slide in view.
+
+    Delete: This function deletes a story from the team's
+            story list by calling the action creator that 
+            requests to delete that story from the database. 
+  */
   changeStory = (story) => {
     this.setState({ activeStory: story });
   };
@@ -18,6 +29,10 @@ class BacklogContainer extends React.Component {
     e.stopPropagation();
     this.props.deleteStory(story);
   };
+
+  /*
+    Render Functions
+  */
   renderStories() {
     if (
       this.props.currentUser.team.stories !== undefined &&
@@ -27,6 +42,8 @@ class BacklogContainer extends React.Component {
         return (
           <React.Fragment key={story._id}>
             <UserStory
+              addStoryToSprint={this.props.addStoryToSprint}
+              removeStoryFromSprint={this.props.removeStoryFromSprint}
               story={story}
               deleteStory={this.deleteStory}
               changeStory={this.changeStory}
@@ -50,19 +67,29 @@ class BacklogContainer extends React.Component {
     }
   }
   render() {
-    console.log(this.props.currentUser.team);
     return (
       <>
         <div className="mb-2" id="backlog-list-container">
-          <table className="table table-borderless mb-0">
+          <table className="table table-borderless mt-2 mb-0">
             <thead>
               <tr id="backlog-list-header">
-                <th scope="col">Title</th>
-                <th scope="col">Made By</th>
-                <th scope="col">Status</th>
-                <th scope="col">Points</th>
-                <th scope="col">Assigned To</th>
-                <th scope="col"></th>
+                <th className="check-col" scole="col"></th>
+                <th className="title-col" scope="col">
+                  Title
+                </th>
+                <th className="person-col" scope="col">
+                  Made By
+                </th>
+                <th className="status-col" scope="col">
+                  Status
+                </th>
+                <th className="points-col" scope="col">
+                  Points
+                </th>
+                <th className="person-col" scope="col">
+                  Assigned To
+                </th>
+                <th className="actions-col" scope="col"></th>
               </tr>
             </thead>
             <tbody>{this.renderStories()}</tbody>

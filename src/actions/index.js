@@ -138,17 +138,17 @@ export const deleteStory = (story, team) => {
 };
 export const createSprint = (team, sprintData) => {
   return async (dispatch) => {
-    const response = await ServerAPI ({
-      method:"post",
+    const response = await ServerAPI({
+      method: "post",
       url: "/sprint",
       data: {
         team: team,
         sprint: sprintData,
       },
-    }); 
-    dispatch({type: "CREATE_SPRINT", payload: response.data });
-  }
-}
+    });
+    dispatch({ type: "CREATE_SPRINT", payload: response.data });
+  };
+};
 
 export const getStories = (teamId, prevStories) => {
   return async (dispatch) => {
