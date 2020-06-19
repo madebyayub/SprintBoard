@@ -92,10 +92,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         user: {
           ...state.user,
-          team: {
-            ...state.user.team,
-            sprints: action.payload.sprints,
-          },
+          team: action.payload,
         },
       };
     case "GET_SPRINTS":

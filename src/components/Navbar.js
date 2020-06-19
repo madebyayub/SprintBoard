@@ -5,7 +5,7 @@ import "../stylesheets/navbar.css";
 
 class Navbar extends React.Component {
   container = React.createRef();
-  state = { showLeaveTeam: false };
+  state = { showLeaveModal: false };
 
   componentDidMount() {
     window.gapi.load("client:auth2", () => {
@@ -21,12 +21,8 @@ class Navbar extends React.Component {
           this.auth.isSignedIn.listen(this.onAuthChange);
         });
     });
-    document.addEventListener("mousedown", this.handleClickOutside);
   }
 
-  componentWillUnmount() {
-    document.addEventListener("mousedown", this.handleClickOutside);
-  }
   onAuthChange = (isSignedIn) => {
     if (isSignedIn) {
     } else {
@@ -36,43 +32,7 @@ class Navbar extends React.Component {
   onSignOutClick = () => {
     this.auth.signOut();
   };
-  handleClickOutside = (event) => {
-    if (
-      this.container.current &&
-      !this.container.current.contains(event.target)
-    ) {
-      this.setState({ showLeaveTeam: false });
-    }
-  };
-  toggleDropdown = (e) => {
-    e.stopPropagation();
-    this.setState((prevState) => ({
-      showLeaveTeam: !prevState.showLeaveTeam,
-    }));
-  };
-  renderDropdown = () => {
-    return (
-      <div
-        id="leave-dropdown"
-        className={`${this.state.showLeaveTeam ? "show" : ""}`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div
-          ref={this.container}
-          className="leave-team py-1 px-3"
-          onClick={() =>
-            this.props.leaveTeam(
-              this.props.currentUser.userId,
-              this.props.currentUser.userName,
-              this.props.currentUser.team.name
-            )
-          }
-        >
-          <span>Leave Team</span>
-        </div>
-      </div>
-    );
-  };
+
   render() {
     const img = this.props.currentUser.userPicture;
     return (
@@ -82,23 +42,13 @@ class Navbar extends React.Component {
             <span id="main-page">SprintBoard</span>
           </div>
           <div className="navbar-left ml-5" id="team-label">
-            <button
-              id="team-btn"
-              className="py-2 px-3"
-              onClick={(e) => this.toggleDropdown(e)}
-            >
+            <button id="team-btn" className="py-2 px-3">
               <i className="fas fa-users mr-2"></i>
               {this.props.currentUser.team.name}
-              <i
-                className={`fas ${
-                  this.state.showLeaveTeam ? "fa-caret-left" : "fa-caret-right"
-                } ml-3`}
-              ></i>
+              <i className="fas fa-sort-down ml-2"></i>
             </button>
           </div>
         </div>
-        {this.renderDropdown()}
-
         <div id="profileIcon">
           <button
             id="profileIconBtn"

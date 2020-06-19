@@ -70,10 +70,21 @@
         overflow-y: scroll;
         width: 100%;}
       .table th{
-        width: 20%;
         max-width: 50px;
         color: rgba(0, 0, 0, 0.7);
         padding: 5px;}
+        .table .check-col{
+          width: 1%;}
+        .table .title-col{
+          width: 15%;}
+        .table .person-col{
+          width: 10%;}
+        .table .status-col{
+          width: 5%;}
+        .table .points-col{
+          width: 5%;}
+        .table .actions-col{
+          width: 5%;}
       .table td{
         color: rgba(75, 75, 75, 0.8);
         cursor: pointer;

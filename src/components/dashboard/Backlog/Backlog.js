@@ -7,13 +7,40 @@ import { connect } from "react-redux";
 import { getStories, deleteStory, createSprint } from "../../../actions";
 
 class Backlog extends React.Component {
-  state = { activeTab: "Backlog", showModal: false };
+  state = { activeTab: "Backlog", showModal: false, selectedStories: [] };
+
+  /*
+    Component lifecycle methods
+    Mount: Fetches all the stories of the current team to
+           display correct stories within the backlog container
+  */
   componentDidMount() {
     this.props.getStories(
       this.props.currentUser.team._id,
       this.props.currentUser.team.stories
     );
   }
+
+  /* 
+    Functions to Add or Remove Stories from the selectedStories State.
+    These functions allow users to add or remove stories that they want
+    to assign to the new sprint.
+  */
+  addStoryToState = (story) => {
+    this.setState({ selectedStories: [...this.state.selectedStories, story] });
+  };
+  removeStoryFromState = (story) => {
+    const newList = this.state.selectedStories.filter((stateStory) => {
+      return story !== stateStory;
+    });
+
+    this.setState({ selectedStories: newList });
+  };
+
+  /*
+    Functions to manage the current tab displayed and 
+    whether the create story modal should be displayed
+  */
   switchTab = (tab) => {
     this.setState({ activeTab: tab });
   };
@@ -22,26 +49,38 @@ class Backlog extends React.Component {
       showModal: !prevState.showModal,
     }));
   };
-  componentDidUpdate() {
-    this.props.getStories(
-      this.props.currentUser.team._id,
-      this.props.currentUser.team.stories
-    );
-  }
-  createSprint () {
-    const sprintNumber = this.props.currentUser.team.sprints.length + 1;
-    const sprintdata= {
-      number: sprintNumber,
-      current: false,
+
+  /*
+    Function to create a sprint, executes if there is at least
+    1 story selected within the backlog container.
+  */
+  createSprint() {
+    if (this.state.selectedStories.length > 0) {
+      const sprintNumber = this.props.currentUser.team.sprints.length + 1;
+      const sprintdata = {
+        number: sprintNumber,
+        current: false,
+        stories: this.state.selectedStories,
+      };
+      this.props.createSprint(this.props.currentUser.team, sprintdata);
     }
-    this.props.createSprint(this.props.currentUser.team, sprintdata);
   }
-  
+
+  /*
+    Render Functions
+  */
   renderContainer() {
     if (this.state.activeTab === "Backlog") {
-      return <BacklogContainer currentUser={this.props.currentUser} />;
+      return (
+        <BacklogContainer
+          removeStoryFromSprint={this.removeStoryFromState}
+          addStoryToSprint={this.addStoryToState}
+          selectedStories={this.state.selectedStories}
+          currentUser={this.props.currentUser}
+        />
+      );
     } else {
-      return <SprintContainer currentUser={this.props.currentUser}/>;
+      return <SprintContainer currentUser={this.props.currentUser} />;
     }
   }
   render() {
@@ -66,7 +105,11 @@ class Backlog extends React.Component {
               >
                 Sprints
               </button>
-              <div id="create-sprint" className="m-0 py-2 px-4 mt-1 mr-3" onClick={() => this.createSprint()}>
+              <div
+                id="create-sprint"
+                className="m-0 py-2 px-4 mt-1 mr-3"
+                onClick={() => this.createSprint()}
+              >
                 Create A Sprint
               </div>
               <div
@@ -100,4 +143,8 @@ const mapStateToProps = (state) => {
     },
   };
 };
-export default connect(mapStateToProps, { getStories, deleteStory, createSprint })(Backlog);
+export default connect(mapStateToProps, {
+  getStories,
+  deleteStory,
+  createSprint,
+})(Backlog);
