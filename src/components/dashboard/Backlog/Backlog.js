@@ -80,7 +80,11 @@ class Backlog extends React.Component {
         />
       );
     } else {
-      return <SprintContainer currentUser={this.props.currentUser} />;
+      return <SprintContainer      
+      removeStoryFromSprint={this.removeStoryFromState}
+      addStoryToSprint={this.addStoryToState}
+      selectedStories={this.state.selectedStories}
+      currentUser={this.props.currentUser} />;
     }
   }
   render() {
