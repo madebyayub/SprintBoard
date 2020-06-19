@@ -130,7 +130,7 @@ class BacklogContainer extends React.Component {
             {this.props.currentUser
               ? this.props.currentUser.team.stories.length
               : ""}{" "}
-            User Stories
+            Total User Stories
           </label>
         </div>
         <StoryDetail
