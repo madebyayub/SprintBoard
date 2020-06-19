@@ -84,8 +84,6 @@ class Backlog extends React.Component {
     }
   }
   render() {
-    console.log(this.state.selectedStories);
-
     return (
       <>
         <div className="container-fluid">

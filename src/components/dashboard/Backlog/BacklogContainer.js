@@ -34,26 +34,58 @@ class BacklogContainer extends React.Component {
     Render Functions
   */
   renderStories() {
+    // Loop through all stories that team has, then if it's not part of a sprint display
+
     if (
       this.props.currentUser.team.stories !== undefined &&
       this.props.currentUser.team.stories.length > 0
     ) {
-      return this.props.currentUser.team.stories.map((story) => {
-        return (
-          <React.Fragment key={story._id}>
-            <UserStory
-              addStoryToSprint={this.props.addStoryToSprint}
-              removeStoryFromSprint={this.props.removeStoryFromSprint}
-              story={story}
-              deleteStory={this.deleteStory}
-              changeStory={this.changeStory}
-            />
-          </React.Fragment>
-        );
+      // Returns an array of JSX, where if that story has a sprint, returns null instead.
+      let jsxArray = this.props.currentUser.team.stories.map((story) => {
+        if (!story.sprint) {
+          return (
+            <React.Fragment key={story._id}>
+              <UserStory
+                addStoryToSprint={this.props.addStoryToSprint}
+                removeStoryFromSprint={this.props.removeStoryFromSprint}
+                story={story}
+                deleteStory={this.deleteStory}
+                changeStory={this.changeStory}
+              />
+            </React.Fragment>
+          );
+        } else {
+          return null;
+        }
       });
+
+      // Filter out all the null elements
+      jsxArray = jsxArray.filter((elem) => {
+        return elem != null;
+      });
+      console.log(jsxArray);
+      // If all stories have a sprint, display the empty message.
+      if (jsxArray.length > 0) {
+        return jsxArray;
+      } else {
+        return (
+          <tr className="empty-row">
+            <td></td>
+            <td>Your team has no stories in the backlog</td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+          </tr>
+        );
+      }
+
+      // If the the team's stories are empty, display the empty message.
     } else if (this.props.currentUser.team.stories !== undefined) {
       return (
         <tr className="empty-row">
+          <td></td>
           <td>Your team has no stories in the backlog</td>
           <td> </td>
           <td> </td>
