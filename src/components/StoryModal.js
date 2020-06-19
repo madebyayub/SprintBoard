@@ -17,7 +17,7 @@ class StoryModal extends React.Component {
   };
 
   createUserStory(e) {
-    console.log(this.state.assignedUser);
+    console.log(this.state.sprintValue);
     e.preventDefault();
     const storyData = {
       title: this.storyTitle.value,
@@ -31,14 +31,14 @@ class StoryModal extends React.Component {
 
     this.props.createStory(storyData, this.props.team);
     this.props.toggleModal();
-    this.setState({ sprintValue: null });
+    this.setState({ sprintValue: null, assignedUser: null });
   }
 
   renderSprints() {
     if (this.props.openModal) {
       return this.props.team.sprints.map((sprint) => {
         return (
-          <option key={sprint._id} value={sprint._id}>
+          <option key={sprint._id} value={sprint.number}>
             Sprint {sprint.number}
           </option>
         );
