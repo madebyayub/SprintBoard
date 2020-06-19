@@ -15,7 +15,7 @@ const UserStory = (props) => {
       </td>
       <td>{props.story.status}</td>
       <td>{props.story.points}</td>
-      <td>{props.story.assigned}</td>
+      <td>{props.story.assigned.name}</td>
       <td>
         <button
           className="remove-story px-2"

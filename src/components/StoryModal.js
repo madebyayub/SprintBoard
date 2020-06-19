@@ -7,29 +7,51 @@ import "../stylesheets/storymodal.css";
 
 Modal.setAppElement("#root");
 class StoryModal extends React.Component {
+  state = {sprintValue: null, assignedUser: null };
+
+  dropdownValue = (e) => {
+    this.setState({sprintValue: e.target.value});
+  };
+  dropdownUser = (e) => {
+    this.setState({assignedUser: e.target.value});
+  }
+
   createUserStory(e) {
+    console.log(this.state.assignedUser);
     e.preventDefault();
     const storyData = {
       title: this.storyTitle.value,
       user: this.props.currentUser,
       description: this.storyDescription.value,
       status: this.storyState.value,
-      assigned: this.storyAssigned.value,
+      assigned: this.state.assignedUser,
+      sprint: this.state.sprintValue,
       points: this.storyPoint.value,
     };
+
     this.props.createStory(storyData, this.props.team);
     this.props.toggleModal();
+    this.setState({sprintValue: null});
   }
-  componentDidUpdate(prevState) {
-    if (this.props.openModal && !prevState.openModal) {
-      this.props.getSprints(this.props.team._id);
-    }
-  }
+
   renderSprints() {
     if (this.props.openModal) {
       return this.props.team.sprints.map((sprint) => {
-        return <option>{sprint.number}</option>;
+        return <option key ={sprint._id} value={sprint._id}>{sprint.number}</option>;
       });
+    }
+  }
+  renderUsers(){
+    if (this.props.openModal){
+      return this.props.team.members.map((user) => {
+        return <option key ={user.userID} value={user.userID}>{user.name}</option>;
+      });
+    }
+  }
+
+  componentDidUpdate(prevState) {
+    if (this.props.openModal && !prevState.openModal) {
+      this.props.getSprints(this.props.team._id);
     }
   }
 
@@ -75,12 +97,12 @@ class StoryModal extends React.Component {
           </div>
           <select
             className="modalSelect form-control form-control-lg mt-3"
-            ref={(select) => (this.storyAssigned = select)}
+            onChange={(e) => this.dropdownUser(e)}
           >
-            <option disabled selected>
+            <option disabled selected value="null">
               Assigned to
             </option>
-            <option>Default select</option>
+            {this.renderUsers()}
           </select>
           <input
             className="modalInput form-control py-4 mt-2"
@@ -89,9 +111,9 @@ class StoryModal extends React.Component {
           />
           <select
             className="modalSelect form-control form-control-lg mt-3"
-            ref={(select) => (this.storyAssigned = select)}
+            onChange={(e) => this.dropdownValue(e)}
           >
-            <option disabled selected>
+            <option disabled selected value='null'>
               Sprint
             </option>
             {this.renderSprints()}
@@ -127,6 +149,7 @@ const mapStateToProps = (state) => {
   return {
     currentUser: state.auth.user.userId,
     team: state.auth.user.team,
+    user: state.auth.user,
   };
 };
 export default connect(mapStateToProps, { createStory, getSprints })(
