@@ -9,6 +9,7 @@ class StoryDetail extends React.Component {
     status: "",
     point: "",
     description: "",
+    assignedUser: null,
   };
   componentDidMount() {
     if (this.props.story) {
@@ -29,7 +30,9 @@ class StoryDetail extends React.Component {
       this.setState({ description: this.props.story.description });
     }
   }
-
+  dropdownUser = (e) => {
+    this.setState({ assignedUser: e.target.value });
+  };
   unselectStory = () => {
     this.props.changeStory(null);
   };
@@ -46,6 +49,23 @@ class StoryDetail extends React.Component {
     };
     this.props.editUserStory(storyData, this.props.team, storyId);
     this.unselectStory();
+  }
+  renderUsers() {
+    if (this.props.story) {
+      let memberListFiltered = this.props.team.members;
+      if (this.props.story.assigned) {
+        memberListFiltered = this.props.team.members.filter((user) => {
+          return user._id !== this.props.story.assigned._id;
+        });
+      }
+      return memberListFiltered.map((user) => {
+        return (
+          <option key={user.userID} value={user.userID}>
+            {user.name}
+          </option>
+        );
+      });
+    }
   }
   renderSaveButton() {
     if (this.props.story) {
@@ -92,7 +112,23 @@ class StoryDetail extends React.Component {
         </div>
         <div id="assignedDetail" className="mt-2">
           <label>Assigned To</label>
-          <input className={"detailInput mt-0 pl-2 py-2"} />
+          <select
+            className="detailInput form-control form-control-lg pl-1"
+            onChange={(e) => this.dropdownUser(e)}
+          >
+            <option
+              disabled
+              selected
+              value={
+                this.props.story.assigned ? this.props.story.assigned._id : null
+              }
+            >
+              {this.props.story.assigned
+                ? this.props.story.assigned.name
+                : "Unassigned"}
+            </option>
+            {this.renderUsers()}
+          </select>
         </div>
         <div id="stateDetail" className="mt-2">
           <label>State</label>

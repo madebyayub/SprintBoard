@@ -7,14 +7,14 @@ import "../stylesheets/storymodal.css";
 
 Modal.setAppElement("#root");
 class StoryModal extends React.Component {
-  state = {sprintValue: null, assignedUser: null };
+  state = { sprintValue: null, assignedUser: null };
 
   dropdownValue = (e) => {
-    this.setState({sprintValue: e.target.value});
+    this.setState({ sprintValue: e.target.value });
   };
   dropdownUser = (e) => {
-    this.setState({assignedUser: e.target.value});
-  }
+    this.setState({ assignedUser: e.target.value });
+  };
 
   createUserStory(e) {
     console.log(this.state.assignedUser);
@@ -31,20 +31,28 @@ class StoryModal extends React.Component {
 
     this.props.createStory(storyData, this.props.team);
     this.props.toggleModal();
-    this.setState({sprintValue: null});
+    this.setState({ sprintValue: null });
   }
 
   renderSprints() {
     if (this.props.openModal) {
       return this.props.team.sprints.map((sprint) => {
-        return <option key ={sprint._id} value={sprint._id}>{sprint.number}</option>;
+        return (
+          <option key={sprint._id} value={sprint._id}>
+            Sprint {sprint.number}
+          </option>
+        );
       });
     }
   }
-  renderUsers(){
-    if (this.props.openModal){
+  renderUsers() {
+    if (this.props.openModal) {
       return this.props.team.members.map((user) => {
-        return <option key ={user.userID} value={user.userID}>{user.name}</option>;
+        return (
+          <option key={user.userID} value={user.userID}>
+            {user.name}
+          </option>
+        );
       });
     }
   }
@@ -100,7 +108,7 @@ class StoryModal extends React.Component {
             onChange={(e) => this.dropdownUser(e)}
           >
             <option disabled selected value="null">
-              Assigned to
+              Unassigned
             </option>
             {this.renderUsers()}
           </select>
@@ -113,8 +121,8 @@ class StoryModal extends React.Component {
             className="modalSelect form-control form-control-lg mt-3"
             onChange={(e) => this.dropdownValue(e)}
           >
-            <option disabled selected value='null'>
-              Sprint
+            <option disabled selected value="null">
+              Backlog
             </option>
             {this.renderSprints()}
           </select>
