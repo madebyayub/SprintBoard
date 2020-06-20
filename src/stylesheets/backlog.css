@@ -29,17 +29,24 @@
           background-color: #dedede;
           color: white;}
       #create-sprint{
+        border:none;
         float: right;
         cursor: pointer;
         border-radius: 5px;
         font-size: small;
         font-weight: 600;
-        background-color: rgba(12, 48, 101, 0.8);
+        background-color: rgba(12, 48, 101, 1);
         transition: all 0.2s ease-in-out;
         color: white;}
         #create-sprint:hover{
-          background-color: rgba(12, 48, 101, 1);
-          color: white;}
+          box-shadow: 0 0 8px rgba(71,71,71,0.8);}
+        #create-sprint:focus{
+          outline:0;}
+        #create-sprint.disabled{
+          cursor: default;
+          background-color: rgba(12, 48, 101, 0.8);}
+          #create-sprint.disabled:hover{
+            box-shadow: none}
       .backlog-tab{
         width:86px;
         min-width: 86px;
@@ -84,6 +91,7 @@
         .table .points-col{
           width: 5%;}
         .table .actions-col{
+          text-align: right;
           width: 5%;}
       .table td{
         color: rgba(75, 75, 75, 0.8);
@@ -109,11 +117,13 @@
           background-color: rgba(75, 75, 75, 0.05);}
         .title-col{
           font-weight: 800;}
+        .sprint-num-label{
+          text-align: center;
+          font-weight: 700;}
         .story-row-profile{
           border-radius: 50%;
           width: 20px;}
         .remove-story{
-          float:right;
           border-radius:5px;
           border: none;
           background-color: transparent;

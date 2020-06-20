@@ -20,7 +20,6 @@ class BacklogContainer extends React.Component {
             requests to delete that story from the database. 
   */
   changeStory = (story) => {
-    console.log(story);
     this.setState({ activeStory: story });
   };
   deleteStory = (e, story) => {

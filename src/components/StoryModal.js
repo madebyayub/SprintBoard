@@ -7,7 +7,7 @@ import "../stylesheets/storymodal.css";
 
 Modal.setAppElement("#root");
 class StoryModal extends React.Component {
-  state = { sprintValue: null, assignedUser: null };
+  state = { sprintValue: null, assignedUser: null, stateValue: "To-do" };
 
   dropdownValue = (e) => {
     this.setState({ sprintValue: e.target.value });
@@ -15,15 +15,17 @@ class StoryModal extends React.Component {
   dropdownUser = (e) => {
     this.setState({ assignedUser: e.target.value });
   };
-
+  dropdownState = (e) => {
+    this.setState({ stateValue: e.target.value });
+  };
   createUserStory(e) {
-    console.log(this.state.sprintValue);
+    console.log(this.state.stateValue);
     e.preventDefault();
     const storyData = {
       title: this.storyTitle.value,
       user: this.props.currentUser,
       description: this.storyDescription.value,
-      status: this.storyState.value,
+      status: this.state.stateValue,
       assigned: this.state.assignedUser,
       sprint: this.state.sprintValue,
       points: this.storyPoint.value,
@@ -31,7 +33,11 @@ class StoryModal extends React.Component {
 
     this.props.createStory(storyData, this.props.team);
     this.props.toggleModal();
-    this.setState({ sprintValue: null, assignedUser: null });
+    this.setState({
+      sprintValue: null,
+      assignedUser: null,
+      stateValue: "To-do",
+    });
   }
 
   renderSprints() {
@@ -107,21 +113,26 @@ class StoryModal extends React.Component {
             className="modalSelect form-control form-control-lg mt-3"
             onChange={(e) => this.dropdownUser(e)}
           >
-            <option disabled selected value="null">
+            <option selected value="null">
               Unassigned
             </option>
             {this.renderUsers()}
           </select>
-          <input
-            className="modalInput form-control py-4 mt-2"
-            placeholder="State"
-            ref={(input) => (this.storyState = input)}
-          />
+          <select
+            className="modalSelect form-control form-control-lg mt-3"
+            onChange={(e) => this.dropdownState(e)}
+          >
+            <option selected value="To-do">
+              To-do
+            </option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
           <select
             className="modalSelect form-control form-control-lg mt-3"
             onChange={(e) => this.dropdownValue(e)}
           >
-            <option disabled selected value="null">
+            <option selected value="null">
               Backlog
             </option>
             {this.renderSprints()}

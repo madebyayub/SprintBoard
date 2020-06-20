@@ -1,12 +1,19 @@
 .sprintDropdown{
-    width: 20%;
+    cursor: pointer;
+    color: rgb(5, 8, 37);
+    font-weight: 400;
+    text-align: center!important;
+    width: 30%;
     height: 92%;
+    border: none;
     border-radius: 3px;
-    border: 0.5px solid rgba(218, 214, 214, 0.5);
-    background-color: rgba(218, 214, 214, 1);
+    background-color: rgba(75, 75, 75, 0.09);
+}
+.sprintDropdown:focus{
+    outline: 0;
 }
 .sprintDropdown:hover{
-    background-color: rgba(218, 214, 214, 0.7);
+  background-color: rgba(75, 75, 75, 0.2);
 }
 .sprintContainer{
     height: 40px;

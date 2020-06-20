@@ -1,6 +1,9 @@
 import React from "react";
 import UserStory from "../Backlog/UserStory";
 import StoryDetail from "../Backlog/StoryDetail";
+import { connect } from "react-redux";
+
+import { editUserStory } from "../../../actions";
 import "../../../stylesheets/sprintstory.css";
 
 /* <button className="sprintDropdown dropdown-toggle"> Sprint</button>*/
@@ -13,11 +16,15 @@ class SprintContainer extends React.Component {
 
   renderSprints() {
     return this.props.currentUser.team.sprints.map((sprint) => {
-      return (
-        <option key={sprint._id} value={sprint._id}>
-          Sprint {sprint.number}
-        </option>
-      );
+      if (this.state.currentSprintVal === sprint._id) {
+        return <></>;
+      } else {
+        return (
+          <React.Fragment key={sprint._id}>
+            <option value={sprint._id}>Sprint {sprint.number}</option>
+          </React.Fragment>
+        );
+      }
     });
   }
 
@@ -35,12 +42,19 @@ class SprintContainer extends React.Component {
     this.setState({ activeStory: story });
   };
 
-  deleteStory = (e, story) => {
-    if (this.state.activeStory && story._id === this.state.activeStory._id) {
-      this.changeStory(null);
-    }
+  sendStoryToBacklog = (e, story) => {
     e.stopPropagation();
-    this.props.deleteStory(story);
+    const storyData = {
+      title: story.title,
+      user: this.props.currentUser.userId,
+      description: story.description,
+      status: story.status,
+      assigned: story.assigned ? story.assigned._id : null,
+      point: story.points,
+      sprint: null,
+    };
+    console.log(storyData);
+    this.props.editUserStory(storyData, this.props.team, story._id);
   };
 
   renderSprintStories() {
@@ -56,10 +70,11 @@ class SprintContainer extends React.Component {
                 return (
                   <React.Fragment key={sprintStory._id}>
                     <UserStory
+                      sprintContainer
                       addStoryToSprint={this.props.addStoryToSprint}
                       removeStoryFromSprint={this.props.removeStoryFromSprint}
                       story={sprintStory}
-                      deleteStory={this.deleteStory}
+                      sendStoryToBacklog={this.sendStoryToBacklog}
                       changeStory={this.changeStory}
                     />
                   </React.Fragment>
@@ -67,6 +82,8 @@ class SprintContainer extends React.Component {
               } else {
                 return null;
               }
+            } else {
+              return undefined;
             }
           }
         );
@@ -74,9 +91,21 @@ class SprintContainer extends React.Component {
         sprintstories = sprintstories.filter((elem) => {
           return elem != null;
         });
-        // If all stories have a sprint, display the empty message.
+        // If the sprint has no stories, display the empty message.
         if (sprintstories.length > 0) {
           return sprintstories;
+        } else {
+          return (
+            <tr className="empty-row">
+              <td></td>
+              <td>Your team has no stories in this sprint</td>
+              <td> </td>
+              <td> </td>
+              <td> </td>
+              <td> </td>
+              <td> </td>
+            </tr>
+          );
         }
       } else if (
         this.state.selectedSprint == null &&
@@ -86,6 +115,8 @@ class SprintContainer extends React.Component {
           (sprint) => {
             if (sprint.current === true) {
               return sprint;
+            } else {
+              return null;
             }
           }
         );
@@ -108,7 +139,7 @@ class SprintContainer extends React.Component {
         return (
           <tr className="empty-row">
             <td></td>
-            <td>Your team has no stories in the sprint</td>
+            <td>Your team has no stories in this sprint</td>
             <td> </td>
             <td> </td>
             <td> </td>
@@ -174,4 +205,4 @@ class SprintContainer extends React.Component {
     );
   }
 }
-export default SprintContainer;
+export default connect(null, { editUserStory })(SprintContainer);

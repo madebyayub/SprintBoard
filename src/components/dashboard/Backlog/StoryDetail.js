@@ -49,6 +49,9 @@ class StoryDetail extends React.Component {
   dropdownUser = (e) => {
     this.setState({ assigned: e.target.value });
   };
+  dropdownState = (e) => {
+    this.setState({ status: e.target.value });
+  };
   unselectStory = () => {
     this.props.changeStory(null);
   };
@@ -69,7 +72,13 @@ class StoryDetail extends React.Component {
   }
   renderSprints() {
     if (this.props.story) {
-      return this.props.team.sprints.map((sprint) => {
+      let sprintsListFiltered = this.props.team.sprints;
+      if (this.props.story.sprint) {
+        sprintsListFiltered = this.props.team.sprints.filter((sprint) => {
+          return sprint._id !== this.props.story.sprint._id;
+        });
+      }
+      return sprintsListFiltered.map((sprint) => {
         return (
           <option key={sprint._id} value={sprint._id}>
             Sprint {sprint.number}
@@ -88,7 +97,7 @@ class StoryDetail extends React.Component {
       }
       return memberListFiltered.map((user) => {
         return (
-          <option key={user.userID} value={user.userID}>
+          <option key={user.userID} value={user._id}>
             {user.name}
           </option>
         );
@@ -147,7 +156,6 @@ class StoryDetail extends React.Component {
               onChange={(e) => this.dropdownUser(e)}
             >
               <option
-                disabled
                 selected
                 value={
                   this.props.story.assigned
@@ -169,7 +177,6 @@ class StoryDetail extends React.Component {
               onChange={(e) => this.dropdownSprint(e)}
             >
               <option
-                disabled
                 selected
                 value={
                   this.props.story.sprint ? this.props.story.sprint._id : null
@@ -184,12 +191,18 @@ class StoryDetail extends React.Component {
           </div>
         </div>
         <div id="stateDetail" className="mt-2">
-          <label>State</label>
-          <input
-            className={"detailInput mt-0 pl-2 py-2"}
-            value={this.state.status ? this.state.status : info.status}
-            onChange={(e) => this.setState({ status: e.target.value })}
-          />
+          <label>Status</label>
+          <select
+            className="detailInput form-control form-control-lg pl-1"
+            onChange={(e) => this.dropdownState(e)}
+          >
+            <option selected disabled value={this.props.story.status}>
+              {this.props.story.status}
+            </option>
+            <option value="To-do">To-do</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
         </div>
         <div id="pointsDetail" className="mt-2">
           <label>Points</label>
@@ -216,8 +229,6 @@ class StoryDetail extends React.Component {
   }
 
   render() {
-    console.log(this.state);
-
     if (this.props.story) {
       return (
         <div id="story-preview" className="ml-3 mb-1 show">

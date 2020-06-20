@@ -39,6 +39,7 @@
       box-shadow: none;
       background-color: transparent;}
   .modalSelect{
+    cursor: pointer;
     background: transparent;
     font-size: small;
     width: 90%;

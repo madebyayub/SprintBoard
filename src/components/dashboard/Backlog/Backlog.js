@@ -83,11 +83,31 @@ class Backlog extends React.Component {
     } else {
       return (
         <SprintContainer
+          team={this.props.currentUser.team}
           removeStoryFromSprint={this.removeStoryFromState}
           addStoryToSprint={this.addStoryToState}
           selectedStories={this.state.selectedStories}
           currentUser={this.props.currentUser}
         />
+      );
+    }
+  }
+  renderCreateSprint() {
+    if (this.state.selectedStories.length === 0) {
+      return (
+        <button id="create-sprint" className="m-0 py-2 px-4 mt-1 mr-3 disabled">
+          Create A Sprint
+        </button>
+      );
+    } else {
+      return (
+        <button
+          id="create-sprint"
+          className="m-0 py-2 px-4 mt-1 mr-3"
+          onClick={() => this.createSprint()}
+        >
+          Create A Sprint
+        </button>
       );
     }
   }
@@ -113,13 +133,7 @@ class Backlog extends React.Component {
               >
                 Sprints
               </button>
-              <div
-                id="create-sprint"
-                className="m-0 py-2 px-4 mt-1 mr-3"
-                onClick={() => this.createSprint()}
-              >
-                Create A Sprint
-              </div>
+              {this.renderCreateSprint()}
               <div
                 id="create-story"
                 className="m-0 py-2 px-3 mt-1 mr-3"
