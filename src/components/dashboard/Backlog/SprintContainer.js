@@ -5,17 +5,21 @@ import "../../../stylesheets/sprintstory.css";
 
 /* <button className="sprintDropdown dropdown-toggle"> Sprint</button>*/
 class SprintContainer extends React.Component {
-  state = {selectedSprint: null, activeStory: null, currentSprintVal: null};
+  state = { selectedSprint: null, activeStory: null, currentSprintVal: null };
 
   sprintValue = (e) => {
-    this.setState({selectedSprint: e.target.value});
+    this.setState({ selectedSprint: e.target.value });
   };
 
-  renderSprints () {
+  renderSprints() {
     return this.props.currentUser.team.sprints.map((sprint) => {
-      return <option key={sprint._id} value={sprint._id}>Sprint {sprint.number}</option>;
+      return (
+        <option key={sprint._id} value={sprint._id}>
+          Sprint {sprint.number}
+        </option>
+      );
     });
-  };
+  }
 
   /*
     Change: This function runs when a user clicks on the
@@ -30,7 +34,7 @@ class SprintContainer extends React.Component {
   changeStory = (story) => {
     this.setState({ activeStory: story });
   };
-  
+
   deleteStory = (e, story) => {
     if (this.state.activeStory && story._id === this.state.activeStory._id) {
       this.changeStory(null);
@@ -39,50 +43,66 @@ class SprintContainer extends React.Component {
     this.props.deleteStory(story);
   };
 
-
-  renderSprintStories () {
-    if (this.props.currentUser.team.stories !== undefined && this.props.currentUser.team.stories.length > 0){
-      if (this.state.selectedSprint != null){
-        let sprintstories = this.props.currentUser.team.stories.map((sprintStory)=>{
-          if(sprintStory.sprint !== null){
-            if (sprintStory.sprint === this.state.selectedSprint){
-              return (
-                <React.Fragment key={sprintStory._id}>
-                  <UserStory
-                    addStoryToSprint={this.props.addStoryToSprint}
-                    removeStoryFromSprint={this.props.removeStoryFromSprint}
-                    story={sprintStory}
-                    deleteStory={this.deleteStory}
-                    changeStory={this.changeStory}
-                  />
-                </React.Fragment>
-              );
-            }
-            else{
-              return null;
+  renderSprintStories() {
+    if (
+      this.props.currentUser.team.stories !== undefined &&
+      this.props.currentUser.team.stories.length > 0
+    ) {
+      if (this.state.selectedSprint != null) {
+        let sprintstories = this.props.currentUser.team.stories.map(
+          (sprintStory) => {
+            if (sprintStory.sprint !== null) {
+              if (sprintStory.sprint._id === this.state.selectedSprint) {
+                return (
+                  <React.Fragment key={sprintStory._id}>
+                    <UserStory
+                      addStoryToSprint={this.props.addStoryToSprint}
+                      removeStoryFromSprint={this.props.removeStoryFromSprint}
+                      story={sprintStory}
+                      deleteStory={this.deleteStory}
+                      changeStory={this.changeStory}
+                    />
+                  </React.Fragment>
+                );
+              } else {
+                return null;
+              }
             }
           }
+        );
+        // Filter out all the null elements
+        sprintstories = sprintstories.filter((elem) => {
+          return elem != null;
         });
-         // Filter out all the null elements
-         sprintstories = sprintstories.filter((elem) => {
-        return elem != null;
-        });
-        console.log(sprintstories);
         // If all stories have a sprint, display the empty message.
         if (sprintstories.length > 0) {
           return sprintstories;
         }
-      } else if (this.state.selectedSprint == null && this.props.currentUser.team.sprints.length > 0 ){
-        let currentSprint = this.props.currentUser.team.sprints.map((sprint)=>{
-          if(sprint.current === true){
-            return sprint;
+      } else if (
+        this.state.selectedSprint == null &&
+        this.props.currentUser.team.sprints.length > 0
+      ) {
+        let currentSprint = this.props.currentUser.team.sprints.map(
+          (sprint) => {
+            if (sprint.current === true) {
+              return sprint;
+            }
           }
-        });
+        );
         currentSprint = currentSprint.filter((elem) => {
           return elem != null;
         });
-        this.setState({selectedSprint: currentSprint[0]._id, currentSprintVal: currentSprint[0]._id});
-        console.log(currentSprint);
+        if (currentSprint.length > 0) {
+          this.setState({
+            selectedSprint: currentSprint[0]._id,
+            currentSprintVal: currentSprint[0]._id,
+          });
+        } else {
+          this.setState({
+            selectedSprint: this.props.currentUser.team.sprints[0]._id,
+            currentSprintVal: this.props.currentUser.team.sprints[0]._id,
+          });
+        }
         // If the the team's stories are empty, display the empty message.
       } else if (this.props.currentUser.team.stories !== undefined) {
         return (
@@ -102,11 +122,14 @@ class SprintContainer extends React.Component {
     }
   }
 
-  render(){
+  render() {
     return (
       <div className="mb-2" id="backlog-list-container">
         <div className="dropdown sprintContainer m-2">
-          <select className="dropdown-toggle sprintDropdown ml-3" onChange={(e) => this.sprintValue(e)}>
+          <select
+            className="dropdown-toggle sprintDropdown ml-3"
+            onChange={(e) => this.sprintValue(e)}
+          >
             <option selected value={this.state.currentSprintVal}>
               Current Sprint
             </option>
@@ -149,6 +172,6 @@ class SprintContainer extends React.Component {
         />
       </div>
     );
-  };
-};
+  }
+}
 export default SprintContainer;

@@ -20,6 +20,7 @@ class BacklogContainer extends React.Component {
             requests to delete that story from the database. 
   */
   changeStory = (story) => {
+    console.log(story);
     this.setState({ activeStory: story });
   };
   deleteStory = (e, story) => {
@@ -63,7 +64,6 @@ class BacklogContainer extends React.Component {
       jsxArray = jsxArray.filter((elem) => {
         return elem != null;
       });
-      console.log(jsxArray);
       // If all stories have a sprint, display the empty message.
       if (jsxArray.length > 0) {
         return jsxArray;

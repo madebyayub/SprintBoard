@@ -118,7 +118,6 @@ export const editUserStory = (storyData, team, storyId) => {
         story: storyData,
       },
     });
-    console.log(response.data);
     dispatch({ type: "EDIT_STORY", payload: response.data });
   };
 };

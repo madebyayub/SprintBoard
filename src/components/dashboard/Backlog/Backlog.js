@@ -63,6 +63,7 @@ class Backlog extends React.Component {
         stories: this.state.selectedStories,
       };
       this.props.createSprint(this.props.currentUser.team, sprintdata);
+      this.setState({ selectedStories: [] });
     }
   }
 
@@ -80,11 +81,14 @@ class Backlog extends React.Component {
         />
       );
     } else {
-      return <SprintContainer      
-      removeStoryFromSprint={this.removeStoryFromState}
-      addStoryToSprint={this.addStoryToState}
-      selectedStories={this.state.selectedStories}
-      currentUser={this.props.currentUser} />;
+      return (
+        <SprintContainer
+          removeStoryFromSprint={this.removeStoryFromState}
+          addStoryToSprint={this.addStoryToState}
+          selectedStories={this.state.selectedStories}
+          currentUser={this.props.currentUser}
+        />
+      );
     }
   }
   render() {
