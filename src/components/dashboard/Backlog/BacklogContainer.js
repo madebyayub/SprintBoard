@@ -7,7 +7,7 @@ import { deleteStory } from "../../../actions";
 import "../../../stylesheets/backlog.css";
 
 class BacklogContainer extends React.Component {
-  state = { activeStory: null };
+  state = { activeStory: null, numStories: 0 };
 
   /*
     Change: This function runs when a user clicks on the
@@ -65,8 +65,12 @@ class BacklogContainer extends React.Component {
       });
       // If all stories have a sprint, display the empty message.
       if (jsxArray.length > 0) {
+        if (this.state.numStories !== jsxArray.length)
+          this.setState({ numStories: jsxArray.length });
         return jsxArray;
       } else {
+        if (this.state.numStories !== 0) this.setState({ numStories: 0 });
+
         return (
           <tr className="empty-row">
             <td></td>
@@ -127,9 +131,11 @@ class BacklogContainer extends React.Component {
           </table>
           <label id="numStories" className="mr-3 pt-2">
             {this.props.currentUser
-              ? this.props.currentUser.team.stories.length
+              ? this.state.numStories +
+                " / " +
+                this.props.currentUser.team.stories.length
               : ""}{" "}
-            Total User Stories
+            Total User Stories in Backlog
           </label>
         </div>
         <StoryDetail

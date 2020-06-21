@@ -8,7 +8,12 @@ import "../../../stylesheets/sprintstory.css";
 
 /* <button className="sprintDropdown dropdown-toggle"> Sprint</button>*/
 class SprintContainer extends React.Component {
-  state = { selectedSprint: null, activeStory: null, currentSprintVal: null };
+  state = {
+    selectedSprint: null,
+    numStories: 0,
+    activeStory: null,
+    currentSprintVal: null,
+  };
 
   sprintValue = (e) => {
     this.setState({ selectedSprint: e.target.value });
@@ -93,8 +98,11 @@ class SprintContainer extends React.Component {
         });
         // If the sprint has no stories, display the empty message.
         if (sprintstories.length > 0) {
+          if (this.state.numStories !== sprintstories.length)
+            this.setState({ numStories: sprintstories.length });
           return sprintstories;
         } else {
+          if (this.state.numStories !== 0) this.setState({ numStories: 0 });
           return (
             <tr className="empty-row">
               <td></td>
@@ -136,6 +144,7 @@ class SprintContainer extends React.Component {
         }
         // If the the team's stories are empty, display the empty message.
       } else if (this.props.currentUser.team.stories !== undefined) {
+        if (this.state.numStories !== 0) this.setState({ numStories: 0 });
         return (
           <tr className="empty-row">
             <td></td>
@@ -167,7 +176,7 @@ class SprintContainer extends React.Component {
             {this.renderSprints()}
           </select>
         </div>
-        <table className="table table-borderless mt-2 mb-0">
+        <table className="table table-borderless sprint mt-2 mb-0">
           <thead>
             <tr id="backlog-list-header">
               <th className="check-col" scole="col"></th>
@@ -192,10 +201,8 @@ class SprintContainer extends React.Component {
           <tbody>{this.renderSprintStories()}</tbody>
         </table>
         <label id="numStories" className="mr-3 pt-2">
-          {this.props.currentUser
-            ? this.props.currentUser.team.stories.length
-            : ""}{" "}
-          User Stories
+          {this.state.numStories} / {this.props.currentUser.team.stories.length}{" "}
+          User Stories In This Sprint
         </label>
         <StoryDetail
           changeStory={this.changeStory}

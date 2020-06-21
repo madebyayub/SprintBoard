@@ -5,7 +5,7 @@ import MessageBoard from "./MessageBoard";
 import Navbar from "../Navbar";
 import Backlog from "./Backlog/Backlog";
 import Sidebar from "../Sidebar";
-import StoryModal from "../StoryModal";
+import StoryModal from "./Backlog/StoryModal";
 import { fetchTeam, signIn } from "../../actions";
 import history from "../../history";
 
