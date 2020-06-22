@@ -16,7 +16,6 @@ class StatusGroup extends React.Component {
     if (this.props.activeSprint === null) {
       return <div id="noCurrentSprintMessage">No Active Sprint</div>;
     } else {
-      console.log(this.props.activeSprint);
       return this.props.activeSprint.stories.map((story) => {
         if (story.status === this.props.status) {
           return <UserStory key={story._id} story={story} />;
@@ -26,7 +25,7 @@ class StatusGroup extends React.Component {
   }
   render() {
     return (
-      <div className="status ml-1">
+      <div className="status ml-1 mt-3">
         <div className="status-label mt-2 ml-3 mb-3">
           {this.renderIcon()}
           {this.props.status}

@@ -55,7 +55,7 @@ class Dashboard extends React.Component {
             <>
               <Navbar activeTab="Active" />
               <Sidebar activeTab="Active" />
-              <ActiveSprint />
+              <ActiveSprint currentUser={this.props.currentUser} />
             </>
           );
         case "board":
