@@ -2,7 +2,6 @@ import React from "react";
 import StoryModal from "./StoryModal";
 import BacklogContainer from "./BacklogContainer";
 import SprintContainer from "./SprintContainer";
-import "../../../stylesheets/backlog.css";
 import { connect } from "react-redux";
 import {
   getStories,
@@ -10,6 +9,7 @@ import {
   deleteStory,
   createSprint,
 } from "../../../actions";
+import "../../../stylesheets/backlog.css";
 
 class Backlog extends React.Component {
   state = { activeTab: "Backlog", showModal: false, selectedStories: [] };

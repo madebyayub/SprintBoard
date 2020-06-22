@@ -10,6 +10,10 @@ import "../../../stylesheets/active.css";
 class ActiveSprint extends React.Component {
   state = { currentSprint: null };
   componentDidMount() {
+    this.props.getStories(
+      this.props.currentUser.team._id,
+      this.props.currentUser.team.stories
+    );
     for (let i = 0; i < this.props.currentUser.team.sprints.length; i++) {
       if (this.props.currentUser.team.sprints[i].current) {
         this.setState({
@@ -18,13 +22,8 @@ class ActiveSprint extends React.Component {
         break;
       }
     }
-    this.props.getStories(
-      this.props.currentUser.team._id,
-      this.props.currentUser.team.stories
-    );
-    this.props.getSprints(this.props.currentUser.team._id);
   }
-  componentDidUpdate() {}
+
   render() {
     console.log(this.state.currentSprint);
     return (

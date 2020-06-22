@@ -19,7 +19,6 @@ class StoryModal extends React.Component {
     this.setState({ stateValue: e.target.value });
   };
   createUserStory(e) {
-    console.log(this.state.stateValue);
     e.preventDefault();
     const storyData = {
       title: this.storyTitle.value,

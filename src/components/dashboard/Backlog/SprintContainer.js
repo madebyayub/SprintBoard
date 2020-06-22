@@ -15,23 +15,38 @@ class SprintContainer extends React.Component {
     currentSprintVal: null,
   };
 
+  componentDidMount() {
+    if (
+      this.state.selectedSprint == null &&
+      this.props.currentUser.team.sprints.length > 0
+    ) {
+      let currentSprint = this.props.currentUser.team.sprints.map((sprint) => {
+        if (sprint.current === true) {
+          return sprint;
+        } else {
+          return null;
+        }
+      });
+      currentSprint = currentSprint.filter((elem) => {
+        return elem != null;
+      });
+      if (currentSprint.length > 0) {
+        this.setState({
+          selectedSprint: currentSprint[0]._id,
+          currentSprintVal: currentSprint[0]._id,
+        });
+      } else {
+        this.setState({
+          selectedSprint: this.props.currentUser.team.sprints[0]._id,
+          currentSprintVal: this.props.currentUser.team.sprints[0]._id,
+        });
+      }
+    }
+  }
+
   sprintValue = (e) => {
     this.setState({ selectedSprint: e.target.value });
   };
-
-  renderSprints() {
-    return this.props.currentUser.team.sprints.map((sprint) => {
-      if (this.state.currentSprintVal === sprint._id) {
-        return <></>;
-      } else {
-        return (
-          <React.Fragment key={sprint._id}>
-            <option value={sprint._id}>Sprint {sprint.number}</option>
-          </React.Fragment>
-        );
-      }
-    });
-  }
 
   /*
     Change: This function runs when a user clicks on the
@@ -58,9 +73,22 @@ class SprintContainer extends React.Component {
       point: story.points,
       sprint: null,
     };
-    console.log(storyData);
     this.props.editUserStory(storyData, this.props.team, story._id);
   };
+
+  renderSprints() {
+    return this.props.currentUser.team.sprints.map((sprint) => {
+      if (this.state.currentSprintVal === sprint._id) {
+        return <></>;
+      } else {
+        return (
+          <React.Fragment key={sprint._id}>
+            <option value={sprint._id}>Sprint {sprint.number}</option>
+          </React.Fragment>
+        );
+      }
+    });
+  }
 
   renderSprintStories() {
     if (
@@ -115,33 +143,6 @@ class SprintContainer extends React.Component {
             </tr>
           );
         }
-      } else if (
-        this.state.selectedSprint == null &&
-        this.props.currentUser.team.sprints.length > 0
-      ) {
-        let currentSprint = this.props.currentUser.team.sprints.map(
-          (sprint) => {
-            if (sprint.current === true) {
-              return sprint;
-            } else {
-              return null;
-            }
-          }
-        );
-        currentSprint = currentSprint.filter((elem) => {
-          return elem != null;
-        });
-        if (currentSprint.length > 0) {
-          this.setState({
-            selectedSprint: currentSprint[0]._id,
-            currentSprintVal: currentSprint[0]._id,
-          });
-        } else {
-          this.setState({
-            selectedSprint: this.props.currentUser.team.sprints[0]._id,
-            currentSprintVal: this.props.currentUser.team.sprints[0]._id,
-          });
-        }
         // If the the team's stories are empty, display the empty message.
       } else if (this.props.currentUser.team.stories !== undefined) {
         if (this.state.numStories !== 0) this.setState({ numStories: 0 });
@@ -159,6 +160,21 @@ class SprintContainer extends React.Component {
       } else {
         return <></>;
       }
+    } else if (
+      this.props.currentUser.team.stories !== undefined &&
+      this.props.currentUser.team.stories.length === 0
+    ) {
+      return (
+        <tr className="empty-row">
+          <td>Empty</td>
+          <td>Your team has no sprints to display</td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+        </tr>
+      );
     }
   }
 
