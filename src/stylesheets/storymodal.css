@@ -26,6 +26,10 @@
     .modalInput:focus{
       background-color: transparent;
       box-shadow: none;}
+    .inputError:focus{
+        border-color: red;}
+    .inputError{
+          border-color: red;}
   .modalTextArea{
     padding-left: 19px;
     font-size: small;

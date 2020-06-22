@@ -7,7 +7,13 @@ import "../stylesheets/storymodal.css";
 
 Modal.setAppElement("#root");
 class StoryModal extends React.Component {
-  state = { sprintValue: null, assignedUser: null, stateValue: "To-do" };
+  state = { 
+    sprintValue: null,
+    assignedUser: null, 
+    stateValue: "To-do", 
+    titleError: false,
+    pointError: false,
+  };
 
   dropdownValue = (e) => {
     this.setState({ sprintValue: e.target.value });
@@ -18,8 +24,36 @@ class StoryModal extends React.Component {
   dropdownState = (e) => {
     this.setState({ stateValue: e.target.value });
   };
+
+  validateTitle (title) {
+      if (title.length === 0 || title === ' ') {
+        console.log("title has a error");
+        this.setState({
+          titleError: true
+        })
+      }
+      else{
+        this.setState({
+          titleError: false
+        })
+      }
+  } 
+
+  validatePoint (point) {
+    let storyDigit = parseInt(point); 
+    if (isNaN(storyDigit)) {
+      console.log("Invalid type in point. Point should be a number.");
+      this.setState({
+        pointError: true
+      })
+    }
+    else{
+      this.setState({
+        pointError: false
+      })
+    } 
+}
   createUserStory(e) {
-    console.log(this.state.stateValue);
     e.preventDefault();
     const storyData = {
       title: this.storyTitle.value,
@@ -30,8 +64,7 @@ class StoryModal extends React.Component {
       sprint: this.state.sprintValue,
       points: this.storyPoint.value,
     };
-
-    this.props.createStory(storyData, this.props.team);
+ //   this.props.createStory(storyData, this.props.team);
     this.props.toggleModal();
     this.setState({
       sprintValue: null,
@@ -62,7 +95,6 @@ class StoryModal extends React.Component {
       });
     }
   }
-
   componentDidUpdate(prevState) {
     if (this.props.openModal && !prevState.openModal) {
       this.props.getSprints(this.props.team._id);
@@ -105,8 +137,9 @@ class StoryModal extends React.Component {
           <div className="modalTitle mt-2">
             <input
               ref={(input) => (this.storyTitle = input)}
-              className="modalInput py-4 form-control"
+              className= {`${this.state.titleError ? "inputError" : ""} modalInput py-4 form-control`}
               placeholder="Title"
+              onChange={() => this.validateTitle(this.storyTitle.value)}
             />
           </div>
           <select
@@ -138,9 +171,10 @@ class StoryModal extends React.Component {
             {this.renderSprints()}
           </select>
           <input
-            className="form-control modalInput py-4 mt-2"
+            className={`${this.state.pointError ? "inputError" : ""} modalInput py-4 mt-2 form-control`}
             placeholder="Points"
             ref={(input) => (this.storyPoint = input)}
+            onChange= {() => this.validatePoint(this.storyPoint.value) }
           />
           <div className="ModalDescription mt-3">
             <textarea

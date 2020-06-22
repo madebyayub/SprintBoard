@@ -161,7 +161,7 @@ class SprintContainer extends React.Component {
             className="dropdown-toggle sprintDropdown ml-3"
             onChange={(e) => this.sprintValue(e)}
           >
-            <option selected value={this.state.currentSprintVal}>
+            <option value={this.state.currentSprintVal}>
               Current Sprint
             </option>
             {this.renderSprints()}
