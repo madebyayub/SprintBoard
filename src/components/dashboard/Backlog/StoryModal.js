@@ -26,7 +26,7 @@ class StoryModal extends React.Component {
   };
 
   validateTitle (title) {
-      if (title.length === 0 || title === ' ') {
+      if (title.length === 0 || title[0] === ' ') {
         console.log("title has a error");
         this.setState({
           titleError: true
@@ -40,8 +40,9 @@ class StoryModal extends React.Component {
   } 
 
   validatePoint (point) {
-    let storyDigit = parseInt(point); 
-    if (isNaN(storyDigit)) {
+    const digits_only = string => [...string].every(c => '0123456789'.includes(c));
+
+    if (! digits_only(point)) {
       console.log("Invalid type in point. Point should be a number.");
       this.setState({
         pointError: true
@@ -52,7 +53,8 @@ class StoryModal extends React.Component {
         pointError: false
       })
     } 
-}
+  }
+
   createUserStory(e) {
     e.preventDefault();
     const storyData = {
@@ -64,7 +66,7 @@ class StoryModal extends React.Component {
       sprint: this.state.sprintValue,
       points: this.storyPoint.value,
     };
- //   this.props.createStory(storyData, this.props.team);
+    this.props.createStory(storyData, this.props.team);
     this.props.toggleModal();
     this.setState({
       sprintValue: null,
@@ -101,11 +103,38 @@ class StoryModal extends React.Component {
     }
   }
 
+  closeModal = () => {
+    this.setState({
+      titleError: false,
+      pointError: false,
+    });
+    console.log(this.props);
+    this.props.toggleModal();
+  }
+
+  renderCreateStory () {
+    if (this.state.titleError || this.state.pointError){
+      return (<button
+        className="btn btn-success disabled-create disabled"
+        >
+        Create New Story
+        </button>);
+    }
+    else {
+      return (<button
+      className="btn btn-success"
+      onClick={(e) => this.createUserStory(e)}
+      >
+      Create New Story
+      </button>);
+    }
+  }
+
   render() {
     return (
       <Modal
         isOpen={this.props.openModal}
-        onRequestClose={this.props.toggleModal}
+        onRequestClose={() => this.closeModal()}
         style={{
           overlay: {
             backgroundColor: "rgba(0,0,0,0.3)",
@@ -129,7 +158,7 @@ class StoryModal extends React.Component {
             <button
               id="closeModal"
               className="px-3 py-2"
-              onClick={this.props.toggleModal}
+              onClick={() => this.closeModal()}
             >
               <i className="fa fa-times" aria-hidden="true"></i>
             </button>
@@ -185,12 +214,7 @@ class StoryModal extends React.Component {
             ></textarea>
           </div>
           <div className="modalActions mt-4 mb-1">
-            <button
-              className="btn btn-success"
-              onClick={(e) => this.createUserStory(e)}
-            >
-              Create New Story
-            </button>
+            {this.renderCreateStory()}
           </div>
         </div>
       </Modal>
