@@ -76,6 +76,8 @@
         display: block;
         overflow-y: scroll;
         width: 100%;}
+        .table.sprint{
+          height: 89.5%;}
       .table th{
         max-width: 50px;
         color: rgba(0, 0, 0, 0.7);

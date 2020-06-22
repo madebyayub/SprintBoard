@@ -1,49 +1,61 @@
 import React from "react";
+import { connect } from "react-redux";
 
-import UserStory from "./UserStory";
+import StatusGroup from "./StatusGroup";
+
+import { getStories, getSprints } from "../../../actions";
+
 import "../../../stylesheets/active.css";
 
 class ActiveSprint extends React.Component {
+  state = { currentSprint: null };
+  componentDidMount() {
+    this.props.getStories(
+      this.props.currentUser.team._id,
+      this.props.currentUser.team.stories
+    );
+    for (let i = 0; i < this.props.currentUser.team.sprints.length; i++) {
+      if (this.props.currentUser.team.sprints[i].current) {
+        this.setState({
+          currentSprint: this.props.currentUser.team.sprints[i],
+        });
+        break;
+      }
+    }
+  }
+
   render() {
+    console.log(this.state.currentSprint);
     return (
       <div className="container-fluid">
-        <div className="active-container">
-          <div className="status-container mt-2">
-            <div className="status ml-1">
-              <div className="status-label mt-2 ml-3 mb-3">
-                <i className="far fa-list-alt mr-2"></i>To-do
-              </div>
-              <div className="status-list-container">
-                <UserStory />
-                <UserStory />
-                <UserStory />
-              </div>
-            </div>
-            <div className="status ml-3">
-              <div className="status-label mt-2 ml-3 mb-3">
-                <i className="fas fa-spinner mr-2"></i>In progress
-              </div>
-              <div className="status-list-container">
-                <UserStory />
-                <UserStory />
-                <UserStory />
-              </div>
-            </div>
-            <div className="status ml-3">
-              <div className="status-label mt-2 ml-3 mb-3">
-                <i className="fas fa-check-circle mr-2"></i>Completed
-              </div>
-              <div className="status-list-container">
-                <UserStory />
-                <UserStory />
-                <UserStory />
-              </div>
-            </div>
-          </div>
+        <div className="main-container active-sprint ml-4">
+          <StatusGroup
+            activeSprint={this.state.currentSprint}
+            status={"To-do"}
+          />
+          <StatusGroup
+            activeSprint={this.state.currentSprint}
+            status={"In Progress"}
+          />
+          <StatusGroup
+            activeSprint={this.state.currentSprint}
+            status={"Completed"}
+          />
         </div>
       </div>
     );
   }
 }
-
-export default ActiveSprint;
+const mapStateToProps = (state) => {
+  return {
+    currentUser: {
+      team: state.auth.user.team,
+      userId: state.auth.user.userId,
+      userName: state.auth.user.name,
+      userPicture: state.auth.user.profilePicture,
+    },
+  };
+};
+export default connect(mapStateToProps, { getSprints, getStories })(
+  ActiveSprint
+);

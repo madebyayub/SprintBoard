@@ -1,9 +1,9 @@
 import React from "react";
 import Modal from "react-modal";
 import { connect } from "react-redux";
-import { createStory, getSprints } from "../actions";
+import { createStory, getSprints } from "../../../actions";
 
-import "../stylesheets/storymodal.css";
+import "../../../stylesheets/storymodal.css";
 
 Modal.setAppElement("#root");
 class StoryModal extends React.Component {

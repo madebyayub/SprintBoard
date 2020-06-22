@@ -1,10 +1,15 @@
 import React from "react";
-import StoryModal from "../../StoryModal";
+import StoryModal from "./StoryModal";
 import BacklogContainer from "./BacklogContainer";
 import SprintContainer from "./SprintContainer";
-import "../../../stylesheets/backlog.css";
 import { connect } from "react-redux";
-import { getStories, deleteStory, createSprint } from "../../../actions";
+import {
+  getStories,
+  getSprints,
+  deleteStory,
+  createSprint,
+} from "../../../actions";
+import "../../../stylesheets/backlog.css";
 
 class Backlog extends React.Component {
   state = { activeTab: "Backlog", showModal: false, selectedStories: [] };
@@ -19,6 +24,7 @@ class Backlog extends React.Component {
       this.props.currentUser.team._id,
       this.props.currentUser.team.stories
     );
+    this.props.getSprints(this.props.currentUser.team._id);
   }
 
   /* 
@@ -59,7 +65,7 @@ class Backlog extends React.Component {
       const sprintNumber = this.props.currentUser.team.sprints.length + 1;
       const sprintdata = {
         number: sprintNumber,
-        current: false,
+        current: sprintNumber === 1 ? true : false,
         stories: this.state.selectedStories,
       };
       this.props.createSprint(this.props.currentUser.team, sprintdata);
@@ -169,4 +175,5 @@ export default connect(mapStateToProps, {
   getStories,
   deleteStory,
   createSprint,
+  getSprints,
 })(Backlog);

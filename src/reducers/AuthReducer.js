@@ -71,7 +71,8 @@ export default (state = INITIAL_STATE, action) => {
           ...state.user,
           team: {
             ...state.user.team,
-            stories: action.payload,
+            stories: action.payload.stories,
+            sprints: action.payload.sprints,
           },
         },
       };

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { editUserStory, getStories } from "../../../actions";
+import { editUserStory } from "../../../actions";
 import "../../../stylesheets/storydetail.css";
 
 class StoryDetail extends React.Component {
@@ -251,6 +251,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { editUserStory, getStories })(
-  StoryDetail
-);
+export default connect(mapStateToProps, { editUserStory })(StoryDetail);
