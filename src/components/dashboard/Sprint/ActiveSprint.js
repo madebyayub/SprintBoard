@@ -8,37 +8,36 @@ import { getStories, getSprints } from "../../../actions";
 import "../../../stylesheets/active.css";
 
 class ActiveSprint extends React.Component {
-  state = { currentSprint: null };
   componentDidMount() {
     this.props.getStories(
       this.props.currentUser.team._id,
       this.props.currentUser.team.stories
     );
+    this.props.getSprints(this.props.currentUser.team._id);
+  }
+
+  getCurrentSprint() {
     for (let i = 0; i < this.props.currentUser.team.sprints.length; i++) {
       if (this.props.currentUser.team.sprints[i].current) {
-        this.setState({
-          currentSprint: this.props.currentUser.team.sprints[i],
-        });
-        break;
+        return this.props.currentUser.team.sprints[i];
       }
     }
   }
 
   render() {
-    console.log(this.state.currentSprint);
     return (
       <div className="container-fluid">
         <div className="main-container active-sprint ml-4">
           <StatusGroup
-            activeSprint={this.state.currentSprint}
+            activeSprint={this.getCurrentSprint()}
             status={"To-do"}
           />
           <StatusGroup
-            activeSprint={this.state.currentSprint}
+            activeSprint={this.getCurrentSprint()}
             status={"In Progress"}
           />
           <StatusGroup
-            activeSprint={this.state.currentSprint}
+            activeSprint={this.getCurrentSprint()}
             status={"Completed"}
           />
         </div>

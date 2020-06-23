@@ -55,12 +55,12 @@
     margin: auto;
     width: 80%;
     display: block;}
+
   .disabled-create{
     background-color: rgba(40, 167, 69, 0.8);
     border-color: rgba(40, 167, 69, 0.8);
   }
   .disabled-create:hover{
-    background-color: rgba(40, 167, 69, 0.8);
     border-color: rgba(40, 167, 69, 0.8);
     cursor: default;
   }

@@ -196,7 +196,7 @@ class StoryDetail extends React.Component {
             className="detailInput form-control form-control-lg pl-1"
             onChange={(e) => this.dropdownState(e)}
           >
-            <option selected disabled value={this.props.story.status}>
+            <option disabled selected value={this.props.story.status}>
               {this.props.story.status}
             </option>
             <option value="To-do">To-do</option>

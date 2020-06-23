@@ -7,13 +7,20 @@ import "../../../stylesheets/storymodal.css";
 
 Modal.setAppElement("#root");
 class StoryModal extends React.Component {
-  state = { 
+  state = {
     sprintValue: null,
-    assignedUser: null, 
-    stateValue: "To-do", 
+    assignedUser: null,
+    stateValue: "To-do",
+    titleHasChanged: false,
     titleError: false,
     pointError: false,
   };
+
+  componentDidUpdate(prevState) {
+    if (this.props.openModal && !prevState.openModal) {
+      this.props.getSprints(this.props.team._id);
+    }
+  }
 
   dropdownValue = (e) => {
     this.setState({ sprintValue: e.target.value });
@@ -25,34 +32,34 @@ class StoryModal extends React.Component {
     this.setState({ stateValue: e.target.value });
   };
 
-  validateTitle (title) {
-      if (title.length === 0 || title[0] === ' ') {
-        console.log("title has a error");
-        this.setState({
-          titleError: true
-        })
-      }
-      else{
-        this.setState({
-          titleError: false
-        })
-      }
-  } 
+  validateTitle(title) {
+    this.setState({ titleHasChanged: true });
 
-  validatePoint (point) {
-    const digits_only = string => [...string].every(c => '0123456789'.includes(c));
-
-    if (! digits_only(point)) {
-      console.log("Invalid type in point. Point should be a number.");
+    if (title.length === 0 || title[0] === " ") {
       this.setState({
-        pointError: true
-      })
+        titleError: true,
+      });
+    } else {
+      this.setState({
+        titleError: false,
+      });
     }
-    else{
+  }
+
+  validatePoint(point) {
+    this.setState({ pointsHasChanged: true });
+    const digits_only = (string) =>
+      [...string].every((c) => "0123456789".includes(c));
+
+    if (!digits_only(point)) {
       this.setState({
-        pointError: false
-      })
-    } 
+        pointError: true,
+      });
+    } else {
+      this.setState({
+        pointError: false,
+      });
+    }
   }
 
   createUserStory(e) {
@@ -67,13 +74,23 @@ class StoryModal extends React.Component {
       points: this.storyPoint.value,
     };
     this.props.createStory(storyData, this.props.team);
-    this.props.toggleModal();
+    this.closeModal();
     this.setState({
       sprintValue: null,
       assignedUser: null,
       stateValue: "To-do",
     });
   }
+
+  closeModal = () => {
+    this.setState({
+      titleHasChanged: false,
+      pointsHasChanged: false,
+      titleError: false,
+      pointError: false,
+    });
+    this.props.toggleModal();
+  };
 
   renderSprints() {
     if (this.props.openModal) {
@@ -86,6 +103,7 @@ class StoryModal extends React.Component {
       });
     }
   }
+
   renderUsers() {
     if (this.props.openModal) {
       return this.props.team.members.map((user) => {
@@ -97,36 +115,27 @@ class StoryModal extends React.Component {
       });
     }
   }
-  componentDidUpdate(prevState) {
-    if (this.props.openModal && !prevState.openModal) {
-      this.props.getSprints(this.props.team._id);
-    }
-  }
 
-  closeModal = () => {
-    this.setState({
-      titleError: false,
-      pointError: false,
-    });
-    console.log(this.props);
-    this.props.toggleModal();
-  }
-
-  renderCreateStory () {
-    if (this.state.titleError || this.state.pointError){
-      return (<button
-        className="btn btn-success disabled-create disabled"
+  renderCreateStory() {
+    if (
+      !this.state.titleHasChanged ||
+      this.state.titleError ||
+      this.state.pointError
+    ) {
+      return (
+        <button className="btn btn-success disabled-create disabled">
+          Create New Story
+        </button>
+      );
+    } else {
+      return (
+        <button
+          className="btn btn-success"
+          onClick={(e) => this.createUserStory(e)}
         >
-        Create New Story
-        </button>);
-    }
-    else {
-      return (<button
-      className="btn btn-success"
-      onClick={(e) => this.createUserStory(e)}
-      >
-      Create New Story
-      </button>);
+          Create New Story
+        </button>
+      );
     }
   }
 
@@ -166,7 +175,9 @@ class StoryModal extends React.Component {
           <div className="modalTitle mt-2">
             <input
               ref={(input) => (this.storyTitle = input)}
-              className= {`${this.state.titleError ? "inputError" : ""} modalInput py-4 form-control`}
+              className={`${
+                this.state.titleError ? "inputError" : ""
+              } modalInput py-4 form-control`}
               placeholder="Title"
               onChange={() => this.validateTitle(this.storyTitle.value)}
             />
@@ -175,18 +186,14 @@ class StoryModal extends React.Component {
             className="modalSelect form-control form-control-lg mt-3"
             onChange={(e) => this.dropdownUser(e)}
           >
-            <option selected value="null">
-              Unassigned
-            </option>
+            <option value="null">Unassigned</option>
             {this.renderUsers()}
           </select>
           <select
             className="modalSelect form-control form-control-lg mt-3"
             onChange={(e) => this.dropdownState(e)}
           >
-            <option selected value="To-do">
-              To-do
-            </option>
+            <option value="To-do">To-do</option>
             <option value="In Progress">In Progress</option>
             <option value="Completed">Completed</option>
           </select>
@@ -194,16 +201,16 @@ class StoryModal extends React.Component {
             className="modalSelect form-control form-control-lg mt-3"
             onChange={(e) => this.dropdownValue(e)}
           >
-            <option selected value="null">
-              Backlog
-            </option>
+            <option value="null">Backlog</option>
             {this.renderSprints()}
           </select>
           <input
-            className={`${this.state.pointError ? "inputError" : ""} modalInput py-4 mt-2 form-control`}
+            className={`${
+              this.state.pointError ? "inputError" : ""
+            } modalInput py-4 mt-2 form-control`}
             placeholder="Points"
             ref={(input) => (this.storyPoint = input)}
-            onChange= {() => this.validatePoint(this.storyPoint.value) }
+            onChange={() => this.validatePoint(this.storyPoint.value)}
           />
           <div className="ModalDescription mt-3">
             <textarea

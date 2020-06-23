@@ -65,7 +65,7 @@ class UserStory extends React.Component {
         <td>{this.props.story.title}</td>
         <td>{this.props.story.author.name}</td>
         <td>{this.props.story.status}</td>
-        <td>{this.props.story.points}</td>
+        <td>{this.props.story.points ? this.props.story.points : "-"}</td>
         <td>
           {this.props.story.assigned
             ? this.props.story.assigned.name
