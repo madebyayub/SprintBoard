@@ -1,8 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-
 import StatusGroup from "./StatusGroup";
-
 import { getStories, getSprints } from "../../../actions";
 
 import "../../../stylesheets/active.css";

@@ -101,7 +101,10 @@ class Backlog extends React.Component {
   renderCreateSprint() {
     if (this.state.selectedStories.length === 0) {
       return (
-        <button id="create-sprint" className="m-0 py-2 px-4 mt-1 mr-3 disabled">
+        <button id="create-sprint" type="button" className="m-0 py-2 px-4 mt-1 mr-3 disabled" 
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title="Select 1 or more stories to create a Sprint">
           Create A Sprint
         </button>
       );

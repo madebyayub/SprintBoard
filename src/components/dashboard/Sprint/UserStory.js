@@ -1,4 +1,5 @@
 import React from "react";
+import StoryModal from "../Backlog/StoryModal";
 
 class UserStory extends React.Component {
   componentDidMount() {

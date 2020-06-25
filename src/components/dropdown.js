@@ -1,18 +1,21 @@
 import React from "react";
 import '../stylesheets/dropdown.css';
 
-const Dropdown = (props) => {
-
-    return (
-        <div className={`${props.dropdownState ? "show-dropdown" : "hide-dropdown"}`} onClick={(e)=> e.stopPropagation()}>
-            <div className="menu-items">
-                <span>action 1</span>
+class Dropdown extends React.Component {
+    removeUser = (e) =>  {
+        e.stopPropagation();
+        this.props.leaveTeamAction();
+        this.props.showDropdown();
+    }
+    render (){
+        return (
+            <div className={`${this.props.dropdownState ? "show-dropdown" : "hide-dropdown"}`} onClick={this.removeUser }>
+                <div className="menu-items">
+                    <span>Leave</span>
+                </div>
             </div>
-            <div className="menu-items">
-                <span>action 2</span>
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
 

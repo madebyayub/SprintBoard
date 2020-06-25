@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { signOut, leaveTeam } from "../actions";
+import Dropdown from "./Dropdown";
 import "../stylesheets/navbar.css";
 
 class Navbar extends React.Component {
@@ -33,6 +34,16 @@ class Navbar extends React.Component {
     this.auth.signOut();
   };
 
+  showDropdown = () => {
+    this.setState(prevState => ({
+      showLeaveModal: !prevState.showLeaveModal
+    }));
+  }
+  leaveTeamAction = () => {
+    console.log(this.props.currentUser);
+    this.props.leaveTeam(this.props.currentUser.userId, this.props.currentUser.userName, this.props.currentUser.team.name);
+  }
+
   render() {
     const img = this.props.currentUser.userPicture;
     return (
@@ -42,11 +53,14 @@ class Navbar extends React.Component {
             <span id="main-page">SprintBoard</span>
           </div>
           <div className="navbar-left ml-5" id="team-label">
-            <button id="team-btn" className="py-2 px-3">
+            <button id="team-btn" className="py-2 px-3" onClick= {this.showDropdown}>
               <i className="fas fa-users mr-2"></i>
               {this.props.currentUser.team.name}
               <i className="fas fa-sort-down ml-2"></i>
             </button>
+          </div>
+          <div>
+            <Dropdown dropdownState={this.state.showLeaveModal} showDropdown= {this.showDropdown} leaveTeamAction={this.leaveTeamAction}/>
           </div>
         </div>
         <div id="profileIcon">

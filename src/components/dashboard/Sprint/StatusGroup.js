@@ -4,6 +4,7 @@ import { editUserStory } from "../../../actions";
 import UserStory from "./UserStory";
 
 class StatusGroup extends React.Component {
+
   componentDidMount() {
     this.statusContainer.addEventListener("dragover", this.handleDragOverEvent);
     this.statusContainer.addEventListener("drop", this.handleDropEvent);
@@ -77,6 +78,7 @@ class StatusGroup extends React.Component {
       return <i className="fas fa-check-circle mr-2"></i>;
     }
   }
+ 
   renderStories() {
     if (this.props.activeSprint === null) {
       return <div id="noCurrentSprintMessage">No Active Sprint</div>;

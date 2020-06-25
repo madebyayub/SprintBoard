@@ -2,7 +2,8 @@
     position: absolute;
     padding: 0.7rem;
     top:51px;
-    width: 268px;
+    left: 21%;
+    width: 9%;
     transform: translateX(-79%);
     background-color: black;
     visibility: hidden;
@@ -10,16 +11,18 @@
     border-radius: 4%;
 }
 .menu-items{
-    height: 50px;
+    height: 25px;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .show-dropdown {
     position: absolute;
     padding: 0.7rem;
     top:51px;
-    width: 268px;
+    left: 21%;
+    width: 9%;
     transform: translateX(-79%);
     background-color: rgba(0, 0, 0, 0.8);
     overflow: hidden;
