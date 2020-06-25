@@ -71,8 +71,26 @@
     border: 1px solid rgba(0,0,0,0);
     border-radius: 0;
     border-bottom: 1px solid rgba(0,0,0,0.1);}
+  .inputError{
+    border: none;
+    border-bottom: 1px solid rgb(255, 0, 0);}
+    .inputError:focus{
+      border: none;
+      border-bottom: 1px solid rgb(255, 0, 0);}
+
   #assignedAndSprintDetail{
     width: 100%;}
     .assignedAndSprintDetail{
       display: inline-block;
       width: 50%;}
+  .disabled-create{
+        background-color: rgba(40, 167, 69, 0.8);
+        border-color: rgba(40, 167, 69, 0.8);
+      }
+    .disabled-create:hover{
+        border-color: rgba(40, 167, 69, 0.8);
+        cursor: default;
+      }
+    .disabled-create:focus{
+        outline: none;
+      }

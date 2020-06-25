@@ -11,6 +11,8 @@ class StoryDetail extends React.Component {
     description: "",
     assigned: null,
     sprint: null,
+    titleError: false,
+    pointError: false,
   };
   componentDidMount() {
     if (this.props.story) {
@@ -40,6 +42,8 @@ class StoryDetail extends React.Component {
           ? this.props.story.assigned._id
           : null,
         sprint: this.props.story.sprint ? this.props.story.sprint._id : null,
+        titleError: false,
+        pointError: false,
       });
     }
   }
@@ -54,6 +58,10 @@ class StoryDetail extends React.Component {
   };
   unselectStory = () => {
     this.props.changeStory(null);
+    this.setState({
+      titleError: false,
+      pointError: false,
+    })
   };
 
   editStory(e, storyId) {
@@ -69,6 +77,10 @@ class StoryDetail extends React.Component {
     };
     this.props.editUserStory(storyData, this.props.team, storyId);
     this.unselectStory();
+    this.setState({
+      titleError: false,
+      pointError: false,
+    })
   }
   renderSprints() {
     if (this.props.story) {
@@ -105,27 +117,61 @@ class StoryDetail extends React.Component {
     }
   }
   renderSaveButton() {
-    if (this.props.story) {
+      if (this.state.titleError || this.state.pointError){
       return (
         <button
-          className={"btn btn-success btn-sm mb-2 textEditButton"}
-          onClick={(e) => this.editStory(e, this.props.story._id)}
+          className={"btn btn-success btn-sm mb-2 textEditButton disabled-create disabled"}
         >
           Save
         </button>
       );
+      } else{
+        return (
+          <button
+            className={"btn btn-success btn-sm mb-2 textEditButton"}
+            onClick={(e) => this.editStory(e, this.props.story._id)}
+          >
+            Save
+          </button>
+        );
+      }
+  }
+
+  validateTitle(title) {
+    this.setState({ titleHasChanged: true });
+
+    if (title.length === 0 || title[0] === " ") {
+      this.setState({
+        titleError: true,
+        title: title,
+      });
     } else {
-      return <></>;
+      this.setState({
+        titleError: false,
+        title: title
+      });
     }
   }
+
+  validatePoint(point) {
+    this.setState({ pointsHasChanged: true });
+    const digits_only = (string) =>
+      [...string].every((c) => "0123456789".includes(c));
+
+    if (!digits_only(point)) {
+      this.setState({
+        pointError: true,
+        point: point,
+      });
+    } else {
+      this.setState({
+        pointError: false,
+        point: point,
+      });
+    }
+  }
+
   renderContentDetail() {
-    const info = {
-      title: this.props.story.title,
-      status: this.props.story.status,
-      points: this.props.story.points,
-      description: this.props.story.description,
-      assigned: this.props.story.assigned,
-    };
     return (
       <div className="detail-container pt-1 px-3">
         <div id="detail-header">
@@ -143,9 +189,9 @@ class StoryDetail extends React.Component {
         <div id="titleDetail" className="mt-2">
           <label>Title</label>
           <input
-            className={"detailInput mt-0 pl-2 py-2"}
-            value={this.state.title ? this.state.title : info.title}
-            onChange={(e) => this.setState({ title: e.target.value })}
+            className={`${this.state.titleError ? "inputError" : ""} detailInput mt-0 pl-2 py-2`}
+            value={this.state.title}
+            onChange={(e) => this.validateTitle(e.target.value)}
           />
         </div>
         <div id="assignedAndSprintDetail" className="mt-2">
@@ -207,9 +253,9 @@ class StoryDetail extends React.Component {
         <div id="pointsDetail" className="mt-2">
           <label>Points</label>
           <input
-            className={"detailInput mt-0 pl-2 py-2"}
-            value={this.state.point ? this.state.point : info.points}
-            onChange={(e) => this.setState({ point: e.target.value })}
+            className={`${this.state.pointError ? "inputError" : ""} detailInput mt-0 pl-2 py-2`}
+            value={this.state.point}
+            onChange={(e) => this.validatePoint(e.target.value)}
           />
         </div>
         <div id="descriptionDetail" className="my-2">
@@ -217,8 +263,7 @@ class StoryDetail extends React.Component {
           <textarea
             className={"detailInput mt-0 pl-2 py-2"}
             value={
-              this.state.description ? this.state.description : info.description
-            }
+              this.state.description}
             onChange={(e) => this.setState({ description: e.target.value })}
             rows="4"
           />
