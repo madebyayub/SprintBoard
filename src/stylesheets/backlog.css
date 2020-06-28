@@ -71,31 +71,38 @@
       display: block;
       width: 93%;
       height: 85%;}
-      .table{
+      #backlog-list-container .table{
+        overflow: scroll;
         height: 100%;
         display: block;
-        overflow-y: scroll;
         width: 100%;}
         .table.sprint{
           height: 89.5%;}
-      .table th{
+      #backlog-list-container .table > thead > tr > th{
+        border-radius: 0;
+        z-index: 60;
+        border-bottom: 1px solid rgba(75, 75, 75, 0.2);
+        background-color: rgb(238, 238, 238);
+        position: sticky;
+        top: 0px;}
+        #backlog-list-container .table th{
         max-width: 50px;
         color: rgba(0, 0, 0, 0.7);
         padding: 5px;}
-        .table .check-col{
+        #backlog-list-container .table .check-col{
           width: 1%;}
-        .table .title-col{
+        #backlog-list-container .table .title-col{
           width: 15%;}
-        .table .person-col{
+        #backlog-list-container .table .person-col{
           width: 10%;}
-        .table .status-col{
+        #backlog-list-container .table .status-col{
           width: 5%;}
-        .table .points-col{
+        #backlog-list-container .table .points-col{
           width: 5%;}
-        .table .actions-col{
+        #backlog-list-container .table .actions-col{
           text-align: right;
           width: 5%;}
-      .table td{
+        #backlog-list-container .table td{
         color: rgba(75, 75, 75, 0.8);
         cursor: pointer;
         padding: 3px;}

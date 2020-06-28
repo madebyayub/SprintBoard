@@ -3,10 +3,10 @@ import Modal from "react-modal";
 import { connect } from "react-redux";
 import { createStory, getSprints } from "../../../actions";
 
-import "../../../stylesheets/storymodal.css";
+import "../../../stylesheets/createstorymodal.css";
 
 Modal.setAppElement("#root");
-class StoryModal extends React.Component {
+class CreateStoryModal extends React.Component {
   state = {
     sprintValue: null,
     assignedUser: null,
@@ -176,7 +176,7 @@ class StoryModal extends React.Component {
             <input
               ref={(input) => (this.storyTitle = input)}
               className={`${
-                this.state.titleError ? "inputError" : ""
+                this.state.titleError ? "inputErrorModals" : ""
               } modalInput py-4 form-control`}
               placeholder="Title"
               onChange={() => this.validateTitle(this.storyTitle.value)}
@@ -206,7 +206,7 @@ class StoryModal extends React.Component {
           </select>
           <input
             className={`${
-              this.state.pointError ? "inputError" : ""
+              this.state.pointError ? "inputErrorModals" : ""
             } modalInput py-4 mt-2 form-control`}
             placeholder="Points"
             ref={(input) => (this.storyPoint = input)}
@@ -237,5 +237,5 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps, { createStory, getSprints })(
-  StoryModal
+  CreateStoryModal
 );

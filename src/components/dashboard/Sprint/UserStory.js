@@ -1,7 +1,7 @@
 import React from "react";
-import StoryModal from "../Backlog/StoryModal";
 
 class UserStory extends React.Component {
+  state = { top: 0 };
   componentDidMount() {
     this.storyContainer.addEventListener(
       "dragstart",
@@ -24,13 +24,16 @@ class UserStory extends React.Component {
     e.dataTransfer.setData("transfer", JSON.stringify(this.props.story));
     this.storyContainer.classList.add("dragging");
   };
-
+  handleStoryChange = () => {
+    this.props.changeStory(this.props.story);
+  };
   render() {
     return (
       <div
         ref={(elem) => (this.storyContainer = elem)}
         className={`story-container mx-2 mb-1 px-2 py-2`}
         draggable="true"
+        onClick={this.handleStoryChange}
       >
         <div className="col-10 story-title p-0">{this.props.story.title}</div>
         <div className="row ml-0">

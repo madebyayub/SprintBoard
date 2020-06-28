@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { signOut, leaveTeam } from "../actions";
-import Dropdown from "./Dropdown";
+import TeamModal from "./TeamModal";
 import "../stylesheets/navbar.css";
 
 class Navbar extends React.Component {
@@ -35,45 +35,57 @@ class Navbar extends React.Component {
   };
 
   showDropdown = () => {
-    this.setState(prevState => ({
-      showLeaveModal: !prevState.showLeaveModal
+    this.setState((prevState) => ({
+      showLeaveModal: !prevState.showLeaveModal,
     }));
-  }
+  };
   leaveTeamAction = () => {
-    console.log(this.props.currentUser);
-    this.props.leaveTeam(this.props.currentUser.userId, this.props.currentUser.userName, this.props.currentUser.team.name);
-  }
-
+    this.props.leaveTeam(
+      this.props.currentUser.userId,
+      this.props.currentUser.userName,
+      this.props.currentUser.team.name
+    );
+  };
+  closeTeamModal = () => {
+    this.setState({ showLeaveModal: false });
+  };
   render() {
     const img = this.props.currentUser.userPicture;
     return (
-      <div className="navbar fixed-top">
-        <div id="navbar-labels">
-          <div className="navbar-left ml-2" id="page-label">
-            <span id="main-page">SprintBoard</span>
+      <>
+        <div className="navbar fixed-top">
+          <div id="navbar-labels">
+            <div className="navbar-left ml-2" id="page-label">
+              <span id="main-page">SprintBoard</span>
+            </div>
+            <div className="navbar-left ml-5" id="team-label">
+              <button
+                id="team-btn"
+                className="py-2 px-3"
+                onClick={this.showDropdown}
+              >
+                <i className="fas fa-users mr-2"></i>
+                {this.props.currentUser.team.name}
+                <i className="fas fa-sort-down ml-2"></i>
+              </button>
+            </div>
           </div>
-          <div className="navbar-left ml-5" id="team-label">
-            <button id="team-btn" className="py-2 px-3" onClick= {this.showDropdown}>
-              <i className="fas fa-users mr-2"></i>
-              {this.props.currentUser.team.name}
-              <i className="fas fa-sort-down ml-2"></i>
+          <div id="profileIcon">
+            <button
+              id="profileIconBtn"
+              className="google-login logged-in p-1"
+              onClick={this.onSignOutClick}
+            >
+              <img id="profile-logo-icon-nav" src={img} alt="Profile" />
+              <span>Log out</span>
             </button>
           </div>
-          <div>
-            <Dropdown dropdownState={this.state.showLeaveModal} showDropdown= {this.showDropdown} leaveTeamAction={this.leaveTeamAction}/>
-          </div>
         </div>
-        <div id="profileIcon">
-          <button
-            id="profileIconBtn"
-            className="google-login logged-in p-1"
-            onClick={this.onSignOutClick}
-          >
-            <img id="profile-logo-icon-nav" src={img} alt="Profile" />
-            <span>Log out</span>
-          </button>
-        </div>
-      </div>
+        <TeamModal
+          closeModal={this.closeTeamModal}
+          showLeaveModal={this.state.showLeaveModal}
+        />
+      </>
     );
   }
 }

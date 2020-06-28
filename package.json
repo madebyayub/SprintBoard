@@ -9,6 +9,7 @@
     "axios": "^0.19.2",
     "history": "^4.10.1",
     "react": "^16.13.1",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.13.1",
     "react-hooks": "^1.0.1",
     "react-modal": "^3.11.2",

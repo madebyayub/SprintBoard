@@ -9,6 +9,7 @@
     background-color: white;
 }
 #story-preview{
+  z-index:70;
   border-radius: 10px;
   position: fixed;
   top: 60px;

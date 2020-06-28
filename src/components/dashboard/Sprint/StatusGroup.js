@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+
 import { editUserStory } from "../../../actions";
 import UserStory from "./UserStory";
 
 class StatusGroup extends React.Component {
-
   componentDidMount() {
     this.statusContainer.addEventListener("dragover", this.handleDragOverEvent);
     this.statusContainer.addEventListener("drop", this.handleDropEvent);
@@ -35,7 +36,7 @@ class StatusGroup extends React.Component {
       );
     }*/
   };
-
+  /*
   getDragAfterElement(container, y) {
     const draggableElements = [
       ...container.querySelectorAll(".story-container:not(.dragging)"),
@@ -52,7 +53,7 @@ class StatusGroup extends React.Component {
       },
       { offset: Number.NEGATIVE_INFINITY }
     ).element;
-  }
+  }*/
 
   handleDropEvent = (e) => {
     e.preventDefault();
@@ -78,14 +79,20 @@ class StatusGroup extends React.Component {
       return <i className="fas fa-check-circle mr-2"></i>;
     }
   }
- 
+
   renderStories() {
     if (this.props.activeSprint === null) {
       return <div id="noCurrentSprintMessage">No Active Sprint</div>;
     } else {
       return this.props.activeSprint.stories.map((story) => {
         if (story.status === this.props.status) {
-          return <UserStory key={story._id} story={story} />;
+          return (
+            <UserStory
+              changeStory={this.props.changeStory}
+              key={story._id}
+              story={story}
+            />
+          );
         } else {
           return null;
         }

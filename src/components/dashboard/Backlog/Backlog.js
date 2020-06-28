@@ -1,5 +1,5 @@
 import React from "react";
-import StoryModal from "./StoryModal";
+import CreateStoryModal from "./CreateStoryModal";
 import BacklogContainer from "./BacklogContainer";
 import SprintContainer from "./SprintContainer";
 import { connect } from "react-redux";
@@ -101,10 +101,14 @@ class Backlog extends React.Component {
   renderCreateSprint() {
     if (this.state.selectedStories.length === 0) {
       return (
-        <button id="create-sprint" type="button" className="m-0 py-2 px-4 mt-1 mr-3 disabled" 
-        data-toggle="tooltip"
-        data-placement="bottom"
-        title="Select 1 or more stories to create a Sprint">
+        <button
+          id="create-sprint"
+          type="button"
+          className="m-0 py-2 px-4 mt-1 mr-3 disabled"
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Select 1 or more stories to create a Sprint"
+        >
           Create A Sprint
         </button>
       );
@@ -155,7 +159,7 @@ class Backlog extends React.Component {
             {this.renderContainer()}
           </div>
         </div>
-        <StoryModal
+        <CreateStoryModal
           openModal={this.state.showModal}
           toggleModal={this.toggleModal}
         />

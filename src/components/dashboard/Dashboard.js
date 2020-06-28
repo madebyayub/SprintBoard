@@ -5,7 +5,6 @@ import MessageBoard from "./MessageBoard";
 import Navbar from "../Navbar";
 import Backlog from "./Backlog/Backlog";
 import Sidebar from "../Sidebar";
-import StoryModal from "./Backlog/StoryModal";
 import { fetchTeam, signIn } from "../../actions";
 import history from "../../history";
 
@@ -47,7 +46,6 @@ class Dashboard extends React.Component {
               <Navbar activeTab="Backlog" />
               <Sidebar activeTab="Backlog" />
               <Backlog />
-              <StoryModal />
             </>
           );
         case "active":

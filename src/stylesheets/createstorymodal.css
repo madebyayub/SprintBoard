@@ -1,7 +1,17 @@
 .ModalContainer{}
+  #ModalHeader{
+    display: flex;
+    justify-content: space-between;}
+  #ActiveModalTitle{
+    width: 100%;}
   #ModalTitle{
+    color: #2973e8;
     font-size: large;
     font-family: 'Montserrat', sans-serif;}
+  #ModalAuthor{
+    color: rgba(128, 128, 128, 0.9);
+    font-weight: 500;
+    font-size: 11px;}
   #closeModal{
     float:right;
     margin-left:right;
@@ -26,10 +36,11 @@
     .modalInput:focus{
       background-color: transparent;
       box-shadow: none;}
-    .inputError:focus{
-        border-color: red;}
-    .inputError{
-          border-color: red;}
+    .inputErrorModals:focus{
+        border-bottom: 2px solid red;}
+    .inputErrorModals{
+        border-bottom: 2px solid red;}
+
   .modalTextArea{
     padding-left: 19px;
     font-size: small;
