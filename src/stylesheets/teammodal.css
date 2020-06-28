@@ -119,8 +119,10 @@
     width:100px;}
 
 #MemberListContainer .table tr{}
+  #MemberListContainer .table tr.member-row.current{
+    background-color: rgba(71,71,71,0.05);}
   #MemberListContainer .table td{
-    border-bottom: 1px solid rgba(75, 75, 75, 0.2);
+    border-bottom: 1px solid rgba(71, 71, 71, 0.1);
     vertical-align: middle!important;}
   td.profile-picture-member{
     text-align: center;}

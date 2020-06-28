@@ -62,7 +62,11 @@ class TeamModal extends React.Component {
   renderMembers() {
     return this.props.currentUser.team.members.map((member) => {
       return (
-        <tr className="member-row">
+        <tr
+          className={`member-row ${
+            member.userID === this.props.currentUser.userId ? "current" : ""
+          }`}
+        >
           <td className="profile-picture-member">
             <img src={member.profilePic}></img>
           </td>
