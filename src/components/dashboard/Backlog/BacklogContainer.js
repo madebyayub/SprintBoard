@@ -102,48 +102,52 @@ class BacklogContainer extends React.Component {
     }
   }
   render() {
-    return (
-      <>
-        <div className="mb-2" id="backlog-list-container">
-          <table className="table table-borderless mt-2 mb-0">
-            <thead>
-              <tr id="backlog-list-header">
-                <th className="check-col" scole="col"></th>
-                <th className="title-col" scope="col">
-                  Title
-                </th>
-                <th className="person-col" scope="col">
-                  Made By
-                </th>
-                <th className="status-col" scope="col">
-                  Status
-                </th>
-                <th className="points-col" scope="col">
-                  Points
-                </th>
-                <th className="person-col" scope="col">
-                  Assigned To
-                </th>
-                <th className="actions-col" scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>{this.renderStories()}</tbody>
-          </table>
-          <label id="numStories" className="mr-3 pt-2">
-            {this.props.currentUser
-              ? this.state.numStories +
-                " / " +
-                this.props.currentUser.team.stories.length
-              : ""}{" "}
-            Total User Stories in Backlog
-          </label>
-        </div>
-        <StoryDetail
-          changeStory={this.changeStory}
-          story={this.state.activeStory}
-        />
-      </>
-    );
+    if (this.props.currentUser.team.members) {
+      return (
+        <>
+          <div className="mb-2" id="backlog-list-container">
+            <table className="table table-borderless mt-2 mb-0">
+              <thead>
+                <tr id="backlog-list-header">
+                  <th className="check-col" scole="col"></th>
+                  <th className="title-col" scope="col">
+                    Title
+                  </th>
+                  <th className="person-col" scope="col">
+                    Made By
+                  </th>
+                  <th className="status-col" scope="col">
+                    Status
+                  </th>
+                  <th className="points-col" scope="col">
+                    Points
+                  </th>
+                  <th className="person-col" scope="col">
+                    Assigned To
+                  </th>
+                  <th className="actions-col" scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>{this.renderStories()}</tbody>
+            </table>
+            <label id="numStories" className="mr-3 pt-2">
+              {this.props.currentUser
+                ? this.state.numStories +
+                  " / " +
+                  this.props.currentUser.team.stories.length
+                : ""}{" "}
+              Total User Stories in Backlog
+            </label>
+          </div>
+          <StoryDetail
+            changeStory={this.changeStory}
+            story={this.state.activeStory}
+          />
+        </>
+      );
+    } else {
+      return <></>;
+    }
   }
 }
 

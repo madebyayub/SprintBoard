@@ -63,6 +63,20 @@ export const joinTeam = (userID, username, userpicture, teamname) => {
     dispatch({ type: "JOIN_TEAM", payload: response.data });
   };
 };
+export const updateUser = (userID, userpicture, username) => {
+  return async (dispatch) => {
+    const response = await ServerAPI({
+      method: "patch",
+      url: `/user`,
+      data: {
+        userID,
+        username,
+        userpicture,
+      },
+    });
+    dispatch({ type: "UPDATE_USER", payload: response.data });
+  };
+};
 export const fetchTeam = (userID) => {
   return async (dispatch) => {
     const response = await ServerAPI.get(`/team/user/${userID}`);
@@ -92,6 +106,22 @@ export const leaveTeam = (userID, username, teamname) => {
     });
     history.push("/");
     dispatch({ type: "LEAVE_TEAM", payload: response.data });
+  };
+};
+export const kickTeam = (userID, username, teamname) => {
+  console.log("test");
+  return async (dispatch) => {
+    const response = await ServerAPI({
+      method: "patch",
+      url: `/team`,
+      data: {
+        instruction: "REMOVE",
+        userID,
+        username,
+        teamname: teamname.toLowerCase(),
+      },
+    });
+    dispatch({ type: "KICK_TEAM", payload: response.data });
   };
 };
 

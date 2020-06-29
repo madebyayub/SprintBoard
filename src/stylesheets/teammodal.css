@@ -65,12 +65,13 @@
   background-color: rgba(161,194,250,.16);
   color: rgba(88, 98, 116, 0.36);
   font-size: large;
-  font-weight: 500;
+  font-weight: 400;
   padding-bottom: 10px;}
   .modalNavigationTab:focus{
     outline: 0;}
   .modalNavigationTab.active{
     color: #3b78e7;
+    font-weight: 500;
     background-color: rgba(161,194,250,.26);}
   .modalNavigationTab::before{
     content: '';
@@ -140,14 +141,14 @@
     font-weight: 500;}
   td.created-member, td.assigned-member{
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
     color: rgba(75, 75, 75, 0.8);
-    font-weight: 300;}
+    font-weight: 500;}
   td.actions-member{
     font-size: x-large;
     text-align: center;}
     td.actions-member button{
-      color: rgba(75, 75, 75, 0.15);
+      color: rgba(75, 75, 75, 0.35);
       border: none;
       border-radius: 5px;
       background-color: transparent;

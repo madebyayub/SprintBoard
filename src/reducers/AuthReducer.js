@@ -28,6 +28,17 @@ export default (state = INITIAL_STATE, action) => {
         hasTeam: false,
         user: { userId: null, profilePicture: null, name: null },
       };
+    case "UPDATE_USER":
+      return {
+        ...state,
+        user: {
+          userId: action.payload.userID,
+          name: action.payload.name,
+          profilePicture: action.payload.profilePic,
+          leader: action.payload.leader,
+          team: action.payload.team,
+        },
+      };
     case "FETCH_TEAM":
       return {
         ...state,
@@ -41,6 +52,17 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         hasTeam: false,
+        user: {
+          team: action.payload.team,
+        },
+      };
+    case "KICK_TEAM":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          team: action.payload.team,
+        },
       };
     case "GET_STORIES":
       return {

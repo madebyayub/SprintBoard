@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import { connect } from "react-redux";
-import { getStories, getSprints, leaveTeam } from "../actions";
+import { getStories, kickTeam, getSprints, leaveTeam } from "../actions";
 
 import "../stylesheets/teammodal.css";
 
@@ -14,13 +14,30 @@ class TeamModal extends React.Component {
     );
     this.props.getSprints(this.props.currentUser.team._id);
   }
-  leaveTeamAction = () => {
+  leaveTeamAction = (user, id, leave) => {
     this.props.leaveTeam(
-      this.props.currentUser.userId,
-      this.props.currentUser.name,
-      this.props.currentUser.team.name
+      id,
+      user.name,
+      this.props.currentUser.team.name,
+      leave
     );
   };
+  storiesCreatedAndAssigned(user) {
+    let created_count = 0;
+    let assigned_count = 0;
+    for (let i = 0; i < this.props.currentUser.team.stories.length; i++) {
+      if (
+        this.props.currentUser.team.stories[i].assigned &&
+        this.props.currentUser.team.stories[i].assigned._id === user._id
+      ) {
+        assigned_count += 1;
+      }
+      if (this.props.currentUser.team.stories[i].author._id === user._id) {
+        created_count += 1;
+      }
+    }
+    return { created: created_count, assigned: assigned_count };
+  }
   renderTitle() {
     return (
       <div id="TeamModalTitle">
@@ -61,6 +78,9 @@ class TeamModal extends React.Component {
   }
   renderMembers() {
     return this.props.currentUser.team.members.map((member) => {
+      const count = this.storiesCreatedAndAssigned(member);
+      console.log(member.userID);
+      console.log(this.props.currentUser.userId);
       return (
         <tr
           className={`member-row ${
@@ -68,17 +88,39 @@ class TeamModal extends React.Component {
           }`}
         >
           <td className="profile-picture-member">
-            <img src={member.profilePic}></img>
+            <img src={member.profilePic} alt="member-profile"></img>
           </td>
           <td className="leader-member">
-            <i className="fas fa-crown"></i>
+            {member.leader ? <i className="fas fa-crown"></i> : <></>}
           </td>
           <td className="name-member">{member.name}</td>
-          <td className="created-member">2</td>
-          <td className="assigned-member">2</td>
+          <td className="created-member">{count.created}</td>
+          <td className="assigned-member">{count.assigned}</td>
           <td className="actions-member">
-            <button className="px-2 py-0">
-              <i className="fas fa-times-circle"></i>
+            <button
+              className="px-2 py-0"
+              onClick={
+                member.userID === this.props.currentUser.userId
+                  ? () =>
+                      this.leaveTeamAction(
+                        this.props.currentUser,
+                        this.props.currentUser.userId
+                      )
+                  : () =>
+                      this.props.kickTeam(
+                        member.userID,
+                        member.name,
+                        this.props.currentUser.team.name
+                      )
+              }
+            >
+              {member.userID === this.props.currentUser.userId ? (
+                <i className="fas fa-door-open"></i>
+              ) : this.props.currentUser.leader ? (
+                <i className="fas fa-times-circle"></i>
+              ) : (
+                <></>
+              )}
             </button>
           </td>
         </tr>
@@ -105,7 +147,7 @@ class TeamModal extends React.Component {
                 Assigned
               </th>
               <th className="kick-col" scope="col">
-                Kick
+                Leave
               </th>
             </tr>
           </thead>
@@ -117,44 +159,41 @@ class TeamModal extends React.Component {
   renderSprintsView() {
     return <div>Sprints</div>;
   }
-  renderLeaveButton() {
-    return (
-      <div id="LeaveTeamSection">
-        <button onClick={this.leaveTeamAction}>Leave Team</button>
-      </div>
-    );
-  }
+
   render() {
-    return (
-      <Modal
-        isOpen={this.props.showLeaveModal ? true : false}
-        onRequestClose={() => this.props.closeModal()}
-        style={{
-          overlay: {
-            backgroundColor: "rgba(0,0,0,0.3)",
-            zIndex: 1031,
-          },
-          content: {
-            padding: "0",
-            border: "none",
-            borderRadius: "5px",
-            boxShadow: "0 0 15px rgba(0,0,0,0.5)",
-            backgroundColor: " rgba(240,240,240,1)",
-            width: "50%",
-            minWidth: "300px",
-            height: "93vh",
-            margin: "auto",
-          },
-        }}
-      >
-        {this.renderTitle()}
-        {this.renderModalNavigation()}
-        {this.state.currentTab === 0
-          ? this.renderMemberView()
-          : this.renderSprintsView()}
-        {this.renderLeaveButton()}
-      </Modal>
-    );
+    if (this.props.currentUser.team.members) {
+      return (
+        <Modal
+          isOpen={this.props.showLeaveModal ? true : false}
+          onRequestClose={() => this.props.closeModal()}
+          style={{
+            overlay: {
+              backgroundColor: "rgba(0,0,0,0.3)",
+              zIndex: 1031,
+            },
+            content: {
+              padding: "0",
+              border: "none",
+              borderRadius: "5px",
+              boxShadow: "0 0 15px rgba(0,0,0,0.5)",
+              backgroundColor: " rgba(240,240,240,1)",
+              width: "50%",
+              minWidth: "300px",
+              height: "93vh",
+              margin: "auto",
+            },
+          }}
+        >
+          {this.renderTitle()}
+          {this.renderModalNavigation()}
+          {this.state.currentTab === 0
+            ? this.renderMemberView()
+            : this.renderSprintsView()}
+        </Modal>
+      );
+    } else {
+      return <></>;
+    }
   }
 }
 
@@ -164,6 +203,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getStories, getSprints, leaveTeam })(
-  TeamModal
-);
+export default connect(mapStateToProps, {
+  getStories,
+  getSprints,
+  leaveTeam,
+  kickTeam,
+})(TeamModal);

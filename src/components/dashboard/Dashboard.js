@@ -5,7 +5,7 @@ import MessageBoard from "./MessageBoard";
 import Navbar from "../Navbar";
 import Backlog from "./Backlog/Backlog";
 import Sidebar from "../Sidebar";
-import { fetchTeam, signIn } from "../../actions";
+import { fetchTeam, updateUser, signIn } from "../../actions";
 import history from "../../history";
 
 class Dashboard extends React.Component {
@@ -22,6 +22,11 @@ class Dashboard extends React.Component {
           if (this.auth.isSignedIn.get()) {
             const currentUser = this.auth.currentUser.get();
             this.props.signIn(
+              currentUser.getId(),
+              currentUser.getBasicProfile().getImageUrl(),
+              currentUser.getBasicProfile().getName()
+            );
+            this.props.updateUser(
               currentUser.getId(),
               currentUser.getBasicProfile().getImageUrl(),
               currentUser.getBasicProfile().getName()
@@ -84,4 +89,6 @@ const mapStateToProps = (state) => {
     },
   };
 };
-export default connect(mapStateToProps, { fetchTeam, signIn })(Dashboard);
+export default connect(mapStateToProps, { fetchTeam, updateUser, signIn })(
+  Dashboard
+);

@@ -29,7 +29,6 @@ class StoryDetail extends React.Component {
     }
   }
   componentDidUpdate(prevState) {
-    console.log(this.props.story);
     if (
       (!prevState.story && this.props.story) ||
       (this.props.story && this.props.story._id !== prevState.story._id)
