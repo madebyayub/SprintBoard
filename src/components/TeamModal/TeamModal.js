@@ -53,13 +53,8 @@ class TeamModal extends React.Component {
     }
   };
 
-  leaveTeamAction = (user, id, leave) => {
-    this.props.leaveTeam(
-      id,
-      user.name,
-      this.props.currentUser.team.name,
-      leave
-    );
+  leaveTeamAction = (id) => {
+    this.props.leaveTeam(id, this.props.currentUser.team);
   };
 
   renderTitleState() {

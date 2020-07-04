@@ -19,6 +19,7 @@ export const signOut = () => {
     type: "SIGN_OUT",
   };
 };
+
 export const searchTeamName = (teamname) => {
   return async (dispatch) => {
     const response = await ServerAPI.get(`/team/${teamname}`);
@@ -110,18 +111,29 @@ export const editTeamName = (team, newTeamName) => {
   };
 };
 
-export const leaveTeam = (userID, username, teamname) => {
+export const leaveTeam = (userID, team) => {
   return async (dispatch) => {
-    const response = await ServerAPI({
-      method: "patch",
-      url: `/team`,
-      data: {
-        instruction: "REMOVE",
-        userID,
-        username,
-        teamname: teamname,
-      },
-    });
+    let response;
+    if (team.members.length === 1) {
+      response = await ServerAPI({
+        method: "delete",
+        url: "/team",
+        data: {
+          teamId: team._id,
+          userID,
+        },
+      });
+    } else {
+      response = await ServerAPI({
+        method: "patch",
+        url: `/team`,
+        data: {
+          instruction: "REMOVE",
+          userID,
+          teamname: team.name,
+        },
+      });
+    }
     history.push("/");
     dispatch({ type: "LEAVE_TEAM", payload: response.data });
   };
@@ -134,7 +146,6 @@ export const kickTeam = (userID, username, teamname) => {
       data: {
         instruction: "REMOVE",
         userID,
-        username,
         teamname: teamname,
       },
     });
