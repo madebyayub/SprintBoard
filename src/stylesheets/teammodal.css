@@ -53,6 +53,7 @@
 #TeamModalNavigation{
   height: 10vh;
   background-color: #fafafa;
+  border-bottom: 1.1px solid rgba(0,0,0,.12);
 }
 
 .modalNavigationTab{
@@ -62,30 +63,20 @@
   height: 100%;
   border:none;
   border-bottom: 2px solid transparent;
-  background-color: rgba(161,194,250,.16);
   color: rgba(88, 98, 116, 0.36);
   font-size: large;
   font-weight: 400;
-  padding-bottom: 10px;}
+  padding-bottom: 10px;
+  padding-top: 10px;}
+  .modalNavigationTab:hover{
+    color: #3b78e7;}
   .modalNavigationTab:focus{
-    outline: 0;}
+    outline: transparent;}
   .modalNavigationTab.active{
     color: #3b78e7;
-    font-weight: 500;
-    background-color: rgba(161,194,250,.26);}
-  .modalNavigationTab::before{
-    content: '';
-    position: absolute;
-    left:0;
-    border-bottom: 2px solid transparent;
-    right:0;
-    bottom: 0;
-    height: 2px;
-    background-color: #3b78e7;
-    transition: transform 0.2s ease-in-out;
-    transform: scaleX(0);}
-    .modalNavigationTab:hover::before{
-      transform: scale(1);}
+    font-weight: 700;
+    border-bottom: 3px solid #1a73e8;}
+
 
 /* CSS for the Members View */
 

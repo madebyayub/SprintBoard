@@ -72,12 +72,12 @@
       width: 93%;
       height: 85%;}
       #backlog-list-container .table{
-        overflow: scroll;
+        overflow: auto;
         height: 100%;
         display: block;
         width: 100%;}
         .table.sprint{
-          height: 89.5%;}
+          height: 89.5%!important;}
       #backlog-list-container .table > thead > tr > th{
         border-radius: 0;
         z-index: 60;
