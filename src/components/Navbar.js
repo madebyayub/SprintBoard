@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { signOut, leaveTeam } from "../actions";
-import TeamModal from "./TeamModal";
+import TeamModal from "./TeamModal/TeamModal";
 import "../stylesheets/navbar.css";
 
 class Navbar extends React.Component {

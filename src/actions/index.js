@@ -1,5 +1,7 @@
 import ServerAPI from "../api/ServerAPI";
 import history from "../history";
+import { notifySuccess } from "../utils/utils";
+
 export const signIn = (userId, profilePicture, name) => {
   return {
     type: "SIGN_IN",
@@ -37,7 +39,7 @@ export const createTeam = (userID, username, userpicture, teamname) => {
         userID,
         username,
         userpicture,
-        teamname: teamname.toLowerCase(),
+        teamname: teamname,
       },
     });
     if (response.data.response === "Succesfully saved new team") {
@@ -56,7 +58,7 @@ export const joinTeam = (userID, username, userpicture, teamname) => {
         userID,
         username,
         userpicture,
-        teamname: teamname.toLowerCase(),
+        teamname: teamname,
       },
     });
     history.push("/backlog");
@@ -92,6 +94,22 @@ export const fetchTeam = (userID) => {
     });
   };
 };
+
+export const editTeamName = (team, newTeamName) => {
+  return async (dispatch) => {
+    const response = await ServerAPI({
+      method: "patch",
+      url: `/team`,
+      data: {
+        instruction: "CHANGE_NAME",
+        teamname: team.name,
+        newTeamName,
+      },
+    });
+    dispatch({ type: "CHANGE_TEAMNAME", payload: response.data });
+  };
+};
+
 export const leaveTeam = (userID, username, teamname) => {
   return async (dispatch) => {
     const response = await ServerAPI({
@@ -101,7 +119,7 @@ export const leaveTeam = (userID, username, teamname) => {
         instruction: "REMOVE",
         userID,
         username,
-        teamname: teamname.toLowerCase(),
+        teamname: teamname,
       },
     });
     history.push("/");
@@ -109,7 +127,6 @@ export const leaveTeam = (userID, username, teamname) => {
   };
 };
 export const kickTeam = (userID, username, teamname) => {
-  console.log("test");
   return async (dispatch) => {
     const response = await ServerAPI({
       method: "patch",
@@ -118,9 +135,12 @@ export const kickTeam = (userID, username, teamname) => {
         instruction: "REMOVE",
         userID,
         username,
-        teamname: teamname.toLowerCase(),
+        teamname: teamname,
       },
     });
+    if (response.status !== 404 || response.status !== 500) {
+      notifySuccess("Successfully kicked " + username);
+    }
     dispatch({ type: "KICK_TEAM", payload: response.data });
   };
 };
@@ -135,6 +155,9 @@ export const createStory = (storyData, team) => {
         story: storyData,
       },
     });
+    if (response.status !== 404 || response.status !== 500) {
+      notifySuccess("Successfully created new story");
+    }
     dispatch({ type: "CREATE_STORY", payload: response.data });
   };
 };
@@ -148,6 +171,9 @@ export const editUserStory = (storyData, team, storyId) => {
         story: storyData,
       },
     });
+    if (response.status !== 404 || response.status !== 500) {
+      notifySuccess("Successfully edited story");
+    }
     dispatch({ type: "EDIT_STORY", payload: response.data });
   };
 };
@@ -162,6 +188,9 @@ export const deleteStory = (story, team) => {
         story,
       },
     });
+    if (response.status !== 404 || response.status !== 500) {
+      notifySuccess("Successfully deleted story");
+    }
     dispatch({ type: "DELETE_STORY", payload: response.data });
   };
 };
@@ -175,15 +204,33 @@ export const createSprint = (team, sprintData) => {
         sprint: sprintData,
       },
     });
+    if (response.status !== 404 || response.status !== 500) {
+      notifySuccess("Created Sprint " + sprintData.number);
+    }
     dispatch({ type: "CREATE_SPRINT", payload: response.data });
   };
 };
-
+export const deleteSprint = (team, sprint) => {
+  return async (dispatch) => {
+    const response = await ServerAPI({
+      method: "delete",
+      url: "/sprint",
+      data: {
+        teamId: team._id,
+        sprintId: sprint._id,
+      },
+    });
+    if (response.status !== 404 || response.status !== 500) {
+      notifySuccess("Successfully deleted Sprint " + sprint.number);
+    }
+    dispatch({ type: "DELETE_SPRINT", payload: response.data });
+  };
+};
 export const getStories = (teamId, prevStories) => {
   return async (dispatch) => {
     const response = await ServerAPI({
       method: "get",
-      url: `/stories/${teamId}`,
+      url: `/story/${teamId}`,
     });
     if (
       !prevStories ||

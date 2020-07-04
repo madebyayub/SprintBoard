@@ -64,15 +64,20 @@ export default (state = INITIAL_STATE, action) => {
           team: action.payload.team,
         },
       };
+    case "CHANGE_TEAMNAME":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          team: action.payload.team,
+        },
+      };
     case "GET_STORIES":
       return {
         ...state,
         user: {
           ...state.user,
-          team: {
-            ...state.user.team,
-            stories: action.payload.stories,
-          },
+          team: action.payload.team,
         },
       };
     case "CREATE_STORY":
@@ -80,10 +85,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         user: {
           ...state.user,
-          team: {
-            ...state.user.team,
-            stories: action.payload.stories,
-          },
+          team: action.payload.team,
         },
       };
     case "EDIT_STORY":
@@ -91,23 +93,15 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         user: {
           ...state.user,
-          team: {
-            ...state.user.team,
-            stories: action.payload.stories,
-            sprints: action.payload.sprints,
-          },
+          team: action.payload.team,
         },
       };
-
     case "DELETE_STORY":
       return {
         ...state,
         user: {
           ...state.user,
-          team: {
-            ...state.user.team,
-            stories: action.payload.stories,
-          },
+          team: action.payload.team,
         },
       };
     case "CREATE_SPRINT":
@@ -115,7 +109,15 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         user: {
           ...state.user,
-          team: action.payload,
+          team: action.payload.team,
+        },
+      };
+    case "DELETE_SPRINT":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          team: action.payload.team,
         },
       };
     case "GET_SPRINTS":

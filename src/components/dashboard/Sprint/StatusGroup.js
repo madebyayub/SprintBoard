@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 import { editUserStory } from "../../../actions";
 import UserStory from "./UserStory";
