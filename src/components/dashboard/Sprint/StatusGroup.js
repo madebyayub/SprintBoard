@@ -1,5 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0f90ea4162d41e26dca7f653b55aa99b38928e25
 import { editUserStory } from "../../../actions";
 import UserStory from "./UserStory";
 

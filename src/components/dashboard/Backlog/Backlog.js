@@ -62,7 +62,12 @@ class Backlog extends React.Component {
   */
   createSprint() {
     if (this.state.selectedStories.length > 0) {
-      const sprintNumber = this.props.currentUser.team.sprints.length + 1;
+      const sprintNumber =
+        parseInt(
+          this.props.currentUser.team.sprints[
+            this.props.currentUser.team.sprints.length - 1
+          ].number
+        ) + 1;
       const sprintdata = {
         number: sprintNumber,
         current: sprintNumber === 1 ? true : false,

@@ -9,21 +9,66 @@
   background-color: #1a73e8;
 }
 
+#TeamTitleContainer{
+  display: inline-block;
+  width: 87%;
+}
+
 #TeamTitle{
   color: white;
   display: inline-block;
-  width: 85%;
   line-height: normal;
   vertical-align: middle;
 }
 
+#TeamTitleContainer input{
+  background-color: transparent;
+  border: none;
+  color: white;
+  border-bottom: 2px solid white;
+  border-radius: 0;
+}
+
+#TeamTitleContainer input:focus{
+  outline: transparent;
+  box-shadow: none;
+}
+
+#TeamTitleContainer form{
+  display: inline-block;
+}
+
+#TeamTitleEditCancel{
+  border: none;
+  line-height: normal;
+  border-bottom: 2px solid white;
+  background-color: transparent;
+  color: rgba(255,255,255,0.5);
+  border-radius: 0px;
+  padding: .76em 1em;}
+  #TeamTitleEditCancel:focus{
+    outline: transparent}
+  #TeamTitleEditCancel:hover{
+    color: white;}
+
+
+#TeamTitleEdit{
+  border-color: transparent;
+  line-height: normal;
+  background-color: transparent;
+  color: rgba(255,255,255,0.5);
+  border-radius: 4px;
+  padding: 0.25em 0.35em;}
+  #TeamTitleEdit:focus{
+    outline: transparent}
+  #TeamTitleEdit:hover{
+    color: white;}
 #closeTeamModal{
   line-height: 30px;
   width: 8%;
   display: inline-block;
   position: relative;
   vertical-align: middle;
-  margin-left:auto;
   background-color: transparent;
   border: none;
   border-radius: 5px;
@@ -153,7 +198,14 @@
 
 /* CSS for the Sprints View */
 
+.name-member.sprintview, .name-col.sprintview{
+  text-align: center!important;
+}
 
+th.created-stories-col.sprintview, th.assigned-col.sprintview{
+  text-align: center;
+  width: 100px;
+}
 
 /* CSS for the Leave Team View */
 
