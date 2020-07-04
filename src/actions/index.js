@@ -79,7 +79,7 @@ export const updateUser = (userID, userpicture, username) => {
 };
 export const fetchTeam = (userID) => {
   return async (dispatch) => {
-    const response = await ServerAPI.get(`/team/user/${userID}`);
+    const response = await ServerAPI.get(`/user/team/${userID}`);
     const result = response.data.team ? true : false;
     if (result) {
       history.push("/backlog");
