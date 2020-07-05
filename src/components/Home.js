@@ -30,6 +30,7 @@ class Home extends React.Component {
       this.props.currentUser.userPicture,
       teamname
     );
+    this.props.resetResults();
   }
   searchTeam(e) {
     e.preventDefault();

@@ -41,10 +41,7 @@ class MemberView extends React.Component {
               onClick={
                 member.userID === this.props.currentUser.userId
                   ? () =>
-                      this.props.leaveTeamAction(
-                        this.props.currentUser,
-                        this.props.currentUser.userId
-                      )
+                      this.props.leaveTeamAction(this.props.currentUser.userId)
                   : () =>
                       this.props.kickTeam(
                         member.userID,
