@@ -1,0 +1,34 @@
+.sprintDropdown{
+    cursor: pointer;
+    color: rgb(5, 8, 37);
+    font-weight: 400;
+    text-align: center!important;
+    width: 30%;
+    height: 92%;
+    border: none;
+    border-radius: 3px;
+    background-color: rgba(75, 75, 75, 0.09);
+}
+.sprintDropdown:focus{
+    outline: 0;
+}
+.sprintDropdown:hover{
+  background-color: rgba(75, 75, 75, 0.2);
+}
+.sprintContainer{
+    height: 40px;
+}
+.createSprint{
+    float: right;
+    width: 20%;
+    height: 92%;
+    border-radius: 3px;
+    border: 0.5px solid rgba(30, 72, 107,0.5);
+    background-color: rgba(30, 72, 107,0.8);
+    transition: all 0.2s ease-in-out;
+    color: white;
+}
+.createSprint:hover{
+    background-color: rgba(30, 72, 107,1);
+    box-shadow: 0 3px 5px rgba(30,72,107);
+}

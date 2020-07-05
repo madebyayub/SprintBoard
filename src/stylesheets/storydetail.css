@@ -1,0 +1,97 @@
+
+.detailInput {
+    width: 75%;
+    outline: none;
+    border: none;
+    display: block;
+    line-height: 1.2rem;
+    font-size: 10pt;
+    background-color: white;
+}
+#story-preview{
+  z-index:70;
+  border-radius: 10px;
+  position: fixed;
+  top: 60px;
+  right:-400px;
+  height: 85%;
+  width: 30%;
+  box-shadow: 0 0 10px rgba(0,0,0,.12);
+  transition: all 0.2s ease-in-out;}
+  #story-preview.show{
+  top:60px;
+  right:0;}
+.detail-container{
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);}
+  .detail-container.empty{
+    border: none;
+    background: transparent;}
+  .textEditButton{
+    width: 100%;
+    text-align: center;}
+  .detail-container label{
+    color:rgba(48,72,103);
+    font-size: x-small;
+    font-weight: 800;
+    width: 90%;
+    margin: 0;}
+  .detail-container #edit-header-label{
+    font-size: large;}
+  #unselectIcon{
+    font-size: x-large;
+    background-color: transparent;
+    border:none;
+    color: rgba(0, 0, 0, 0.3);}
+    #unselectIcon:focus{
+      outline:0;}
+    #unselectIcon:hover{
+      color: rgba(0,0,0,0.8);}
+  #editIcon{
+    font-size: large;
+    display: block;
+    margin-left: auto;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    color: rgba(0, 0, 0, 0.3);}
+    #editIcon:focus{
+      outline:0;}
+    #editIcon:hover{
+      color: rgba(0,0,0,0.8);}
+  .detailInput{
+    font-size: small;
+    display: block;
+    margin: auto;
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid rgba(0,0,0,0);
+    border-radius: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);}
+  .inputError{
+    border: none;
+    border-bottom: 1px solid rgb(255, 0, 0);}
+    .inputError:focus{
+      border: none;
+      border-bottom: 1px solid rgb(255, 0, 0);}
+
+  #assignedAndSprintDetail{
+    width: 100%;}
+    .assignedAndSprintDetail{
+      display: inline-block;
+      width: 50%;}
+  .disabled-create{
+        background-color: rgba(40, 167, 69, 0.8);
+        border-color: rgba(40, 167, 69, 0.8);
+      }
+    .disabled-create:hover{
+        border-color: rgba(40, 167, 69, 0.8);
+        cursor: default;
+      }
+    .disabled-create:focus{
+        outline: none;
+      }

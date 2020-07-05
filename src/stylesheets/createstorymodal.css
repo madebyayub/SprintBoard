@@ -1,0 +1,82 @@
+.ModalContainer{}
+  #ModalHeader{
+    display: flex;
+    justify-content: space-between;}
+  #ActiveModalTitle{
+    width: 100%;}
+  #ModalTitle{
+    color: #2973e8;
+    font-size: large;
+    font-family: 'Montserrat', sans-serif;}
+  #ModalAuthor{
+    color: rgba(128, 128, 128, 0.9);
+    font-weight: 500;
+    font-size: 11px;}
+  #closeModal{
+    float:right;
+    margin-left:right;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    color: rgba(0,0,0,0.4);
+    transition: all 0.2s ease-in-out;}
+    #closeModal:hover{
+      background-color: rgba(0,0,0,0.2);
+      color: whitesmoke;}
+  .modalInput{
+    padding-left: 19px;
+    font-size: small;
+    display: block;
+    margin: auto;
+    width: 90%;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid rgba(0,0,0,0.1);}
+    .modalInput:focus{
+      background-color: transparent;
+      box-shadow: none;}
+    .inputErrorModals:focus{
+        border-bottom: 2px solid red;}
+    .inputErrorModals{
+        border-bottom: 2px solid red;}
+
+  .modalTextArea{
+    padding-left: 19px;
+    font-size: small;
+    width: 90%;
+    margin: auto;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid rgba(0,0,0,0.1);}
+    .modalTextArea:focus{
+      box-shadow: none;
+      background-color: transparent;}
+  .modalSelect{
+    cursor: pointer;
+    background: transparent;
+    font-size: small;
+    width: 90%;
+    margin: auto;
+    border: none;
+    border-radius:0;
+    border-bottom: 2px solid rgba(0,0,0,0.1);}
+  .modalActions button{
+    margin: auto;
+    width: 80%;
+    display: block;}
+
+  .disabled-create{
+    background-color: rgba(40, 167, 69, 0.8);
+    border-color: rgba(40, 167, 69, 0.8);
+  }
+  .disabled-create:hover{
+    border-color: rgba(40, 167, 69, 0.8);
+    cursor: default;
+  }
+  .disabled-create:focus{
+    outline: none;
+  }
+
+  
