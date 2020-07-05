@@ -85,7 +85,7 @@ class SprintModal extends React.Component {
       user: this.props.currentUser,
       description: this.state.description,
       status: this.state.status,
-      assigned: this.state.assigned,
+      assigned: this.state.assigned === "Unassigned" ? null : this.state.assigned,
       point: this.state.point,
       sprint: this.state.sprint,
     };
@@ -210,6 +210,7 @@ class SprintModal extends React.Component {
                 : "Unassigned"}
             </option>
             {this.renderUsers()}
+            {this.props.story.assigned ? <option value={null} >Unassigned</option> : <></>}
           </select>
           <select
             className="modalSelect form-control form-control-lg mt-3"
