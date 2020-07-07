@@ -1,36 +1,13 @@
 import React from "react";
 
 class UserStory extends React.Component {
-  state = { top: 0 };
-  componentDidMount() {
-    this.storyContainer.addEventListener(
-      "dragstart",
-      this.handleDragStartEvent
-    );
-    this.storyContainer.addEventListener("dragend", this.handleDragEndEvent);
-  }
-  componentWillUnmount() {
-    this.storyContainer.removeEventListener(
-      "dragstart",
-      this.handleDragStartEvent
-    );
-    this.storyContainer.removeEventListener("dragend", this.handleDragEndEvent);
-  }
-  handleDragEndEvent = (e) => {
-    this.storyContainer.classList.remove("dragging");
-  };
-
-  handleDragStartEvent = (e) => {
-    e.dataTransfer.setData("transfer", JSON.stringify(this.props.story));
-    this.storyContainer.classList.add("dragging");
-  };
   handleStoryChange = () => {
     this.props.changeStory(this.props.story);
   };
   render() {
     return (
       <div
-        ref={(elem) => (this.storyContainer = elem)}
+        ref={this.props.referenceProp}
         className={`story-container mx-2 mb-1 px-2 py-2`}
         draggable="true"
         onClick={this.handleStoryChange}
