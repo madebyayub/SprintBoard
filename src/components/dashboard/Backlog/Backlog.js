@@ -64,7 +64,7 @@ class Backlog extends React.Component {
     if (this.state.selectedStories.length > 0) {
       let sprintNumber;
       if (this.props.currentUser.team.sprints.length === 0){
-        sprintNumber =1;
+        sprintNumber = 1;
       }
       else{
         sprintNumber =
