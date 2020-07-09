@@ -78,20 +78,20 @@ class SprintModal extends React.Component {
     }
   }
 
-  editStory(e, storyId) {
+  editStory(e, story) {
     e.preventDefault();
     const storyData = {
+      ...story,
       title: this.state.title,
-      user: this.props.currentUser,
       description: this.state.description,
       status: this.state.status,
-      assigned: this.state.assigned === "Unassigned" ? null : this.state.assigned,
+      assigned:
+        this.state.assigned === "Unassigned" ? null : this.state.assigned,
       point: this.state.point,
       sprint: this.state.sprint,
     };
-    console.log(storyData);
 
-    this.props.editUserStory(storyData, this.props.team, storyId);
+    this.props.editUserStory(storyData, this.props.team);
     this.setState({
       titleError: false,
       pointError: false,
@@ -160,7 +160,7 @@ class SprintModal extends React.Component {
       return (
         <button
           className={"btn btn-success btn-sm mb-2 textEditButton"}
-          onClick={(e) => this.editStory(e, this.props.story._id)}
+          onClick={(e) => this.editStory(e, this.props.story)}
         >
           Save
         </button>
@@ -210,7 +210,11 @@ class SprintModal extends React.Component {
                 : "Unassigned"}
             </option>
             {this.renderUsers()}
-            {this.props.story.assigned ? <option value={null} >Unassigned</option> : <></>}
+            {this.props.story.assigned ? (
+              <option value={null}>Unassigned</option>
+            ) : (
+              <></>
+            )}
           </select>
           <select
             className="modalSelect form-control form-control-lg mt-3"
@@ -259,9 +263,7 @@ class SprintModal extends React.Component {
       );
     }
   }
-  renderInfoModal() {
-    return <div></div>;
-  }
+
   render() {
     return (
       <Modal
@@ -284,7 +286,7 @@ class SprintModal extends React.Component {
           },
         }}
       >
-        {this.state.editState ? this.renderEditModal() : this.renderInfoModal()}
+        {this.renderEditModal()}
       </Modal>
     );
   }

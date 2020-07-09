@@ -1,73 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { editUserStory } from "../../../actions";
-import UserStory from "./UserStory";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
 class StatusGroup extends React.Component {
-  componentDidMount() {
-    this.statusContainer.addEventListener("dragover", this.handleDragOverEvent);
-    this.statusContainer.addEventListener("drop", this.handleDropEvent);
-  }
-  componentWillUnmount() {
-    this.statusContainer.removeEventListener(
-      "dragover",
-      this.handleDragOverEvent
-    );
-    this.statusContainer.removeEventListener("drop", this.handleDropEvent);
-  }
-
-  handleDragOverEvent = (e) => {
-    e.preventDefault();
-    /*const afterElement = this.getDragAfterElement(
-      this.statusContainer,
-      e.clientY
-    );
-    const storyContainer = document.querySelector(".dragging");
-    this.statusContainer.children[1].appendChild(storyContainer);
-
-    if (afterElement == null) {
-      this.statusContainer.children[1].appendChild(storyContainer);
-    } else {
-      this.statusContainer.children[1].insertBefore(
-        storyContainer,
-        afterElement
-      );
-    }*/
-  };
-  /*
-  getDragAfterElement(container, y) {
-    const draggableElements = [
-      ...container.querySelectorAll(".story-container:not(.dragging)"),
-    ];
-    return draggableElements.reduce(
-      (closest, child) => {
-        const box = child.getBoundingClientRect();
-        const offset = y - box.top - box.height / 2;
-        if (offset < 0 && offset > closest.offset) {
-          return { offset: offset, element: child };
-        } else {
-          return closest;
-        }
-      },
-      { offset: Number.NEGATIVE_INFINITY }
-    ).element;
-  }*/
-
-  handleDropEvent = (e) => {
-    e.preventDefault();
-    const story = JSON.parse(e.dataTransfer.getData("transfer"));
-    const storyData = {
-      title: story.title,
-      user: null,
-      description: story.description,
-      status: this.props.status,
-      assigned: story.assigned,
-      point: story.point,
-      sprint: story.sprint,
-    };
-    this.props.editUserStory(storyData, this.props.team, story._id);
-  };
-
   renderIcon() {
     if (this.props.status === "To-do") {
       return <i className="fas fa-map-marker mr-2"></i>;
@@ -79,36 +14,83 @@ class StatusGroup extends React.Component {
   }
 
   renderStories() {
-    if (this.props.activeSprint === null) {
+    if (!this.props.activeSprint) {
       return <div id="noCurrentSprintMessage">No Active Sprint</div>;
     } else {
-      return this.props.activeSprint.stories.map((story) => {
-        if (story.status === this.props.status) {
-          return (
-            <UserStory
-              changeStory={this.props.changeStory}
-              key={story._id}
-              story={story}
-            />
-          );
-        } else {
-          return null;
-        }
+      return this.props.stories.map((story, index) => {
+        return (
+          <Draggable key={story._id} draggableId={story._id} index={index}>
+            {(provided, snapshot) => {
+              return (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+                  className={`story-container mx-2 my-1 px-2 py-2`}
+                  style={{
+                    userSelect: "none",
+                    backgroundColor: snapshot.isDragging
+                      ? "white"
+                      : "rgba(255, 255, 255, 0.1)",
+                    opacity: snapshot.isDragging ? 0.5 : 1,
+                    ...provided.draggableProps.style,
+                  }}
+                  onClick={() => this.props.changeStory(story)}
+                >
+                  <div className="col-10 story-title p-0">{story.title}</div>
+                  <div className="row ml-0">
+                    <div className="col-10 story-description pl-0">
+                      {story.description}
+                    </div>
+                    <div className="col-2 user-assigned">
+                      <img
+                        className="story-profile-pic"
+                        src={
+                          story.assigned
+                            ? story.assigned.profilePic
+                            : "https://ccivr.com/wp-content/uploads/2019/07/empty-profile.png"
+                        }
+                        alt="assigned profile"
+                      ></img>
+                    </div>
+                  </div>
+                </div>
+              );
+            }}
+          </Draggable>
+        );
       });
     }
   }
   render() {
     return (
-      <div
-        ref={(elem) => (this.statusContainer = elem)}
-        className="status ml-1 mt-3"
-      >
-        <div className="status-label mt-2 ml-3 mb-3">
-          {this.renderIcon()}
-          {this.props.status}
+      <>
+        <div className="status ml-1 mt-3">
+          <div className="status-label mt-2 ml-3 mb-3">
+            {this.renderIcon()}
+            {this.props.status}
+          </div>
+          <Droppable droppableId={this.props.status}>
+            {(provided, snapshot) => {
+              return (
+                <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  style={{
+                    boxShadow: snapshot.isDraggingOver
+                      ? "inset 0 0 6px rgb(26, 115, 232)"
+                      : "none",
+                  }}
+                  className="status-story-container py-2"
+                >
+                  {this.renderStories()}
+                  {provided.placeholder}
+                </div>
+              );
+            }}
+          </Droppable>
         </div>
-        <div className="status-story-container">{this.renderStories()}</div>
-      </div>
+      </>
     );
   }
 }
@@ -117,4 +99,4 @@ const mapStateToProps = (state) => {
     team: state.auth.user.team,
   };
 };
-export default connect(mapStateToProps, { editUserStory })(StatusGroup);
+export default connect(mapStateToProps)(StatusGroup);

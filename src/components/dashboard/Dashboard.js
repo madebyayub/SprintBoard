@@ -19,8 +19,8 @@ class Dashboard extends React.Component {
         })
         .then(() => {
           this.auth = window.gapi.auth2.getAuthInstance();
-          if (this.auth.isSignedIn.get()) {
-            const currentUser = this.auth.currentUser.get();
+          const currentUser = this.auth.currentUser.get();
+          if (!this.props.isSignedIn) {
             this.props.signIn(
               currentUser.getId(),
               currentUser.getBasicProfile().getImageUrl(),
@@ -31,6 +31,8 @@ class Dashboard extends React.Component {
               currentUser.getBasicProfile().getImageUrl(),
               currentUser.getBasicProfile().getName()
             );
+          }
+          if (this.auth.isSignedIn.get()) {
             this.props.fetchTeam(currentUser.getId());
           } else {
             history.push("/");

@@ -33,7 +33,7 @@ span.badge {
     position: fixed;
     left:0px;
     z-index: 99;
-    background-color: #1a73e8 !important;
+    background-color: rgb(26, 115, 232) !important;
     box-shadow: 0 5px 5px rgba(0,0,0,0.2);
     color: whitesmoke;
     width: auto;
