@@ -20,17 +20,6 @@ export const signOut = () => {
   };
 };
 
-export const searchTeamName = (teamname) => {
-  return async (dispatch) => {
-    const response = await ServerAPI.get(`/team/${teamname}`);
-    dispatch({ type: "JOIN_SEARCH_TEAMNAME", payload: response.data });
-  };
-};
-export const resetResults = () => {
-  return {
-    type: "RESET_RESULTS",
-  };
-};
 export const createTeam = (userID, username, userpicture, teamname) => {
   return async (dispatch) => {
     const response = await ServerAPI({
@@ -80,6 +69,14 @@ export const updateUser = (userID, userpicture, username) => {
     dispatch({ type: "UPDATE_USER", payload: response.data });
   };
 };
+
+export const initialFetchTeam = (team, teamStatus) => {
+  return {
+    type: "FETCH_TEAM",
+    payload: { team, teamStatus },
+  };
+};
+
 export const fetchTeam = (userID) => {
   return async (dispatch) => {
     const response = await ServerAPI.get(`/user/team/${userID}`);
