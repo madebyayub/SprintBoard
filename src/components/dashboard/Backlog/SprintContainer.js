@@ -65,15 +65,15 @@ class SprintContainer extends React.Component {
   sendStoryToBacklog = (e, story) => {
     e.stopPropagation();
     const storyData = {
+      ...story,
       title: story.title,
-      user: this.props.currentUser.userId,
       description: story.description,
       status: story.status,
       assigned: story.assigned ? story.assigned._id : null,
       point: story.points,
       sprint: null,
     };
-    this.props.editUserStory(storyData, this.props.team, story._id);
+    this.props.editUserStory(storyData, this.props.team);
   };
 
   renderSprints() {
@@ -186,9 +186,7 @@ class SprintContainer extends React.Component {
             className="dropdown-toggle sprintDropdown ml-3"
             onChange={(e) => this.sprintValue(e)}
           >
-            <option value={this.state.currentSprintVal}>
-              Current Sprint
-            </option>
+            <option value={this.state.currentSprintVal}>Current Sprint</option>
             {this.renderSprints()}
           </select>
         </div>

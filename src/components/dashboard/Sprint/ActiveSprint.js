@@ -118,7 +118,7 @@ class ActiveSprint extends React.Component {
         description: story.description,
         status: result.destination.droppableId,
         assigned: story.assigned,
-        point: story.point,
+        point: story.points,
         sprint: story.sprint,
       };
       this.props.editUserStory(storyData, this.props.currentUser.team);

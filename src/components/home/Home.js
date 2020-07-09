@@ -42,9 +42,7 @@ class Home extends React.Component {
         currentUser.getBasicProfile().getName()
       );
       try {
-        const data = await ServerAPI.get(
-          `/user/team/${currentUser.getId()}`
-        ).then((res) => {
+        await ServerAPI.get(`/user/team/${currentUser.getId()}`).then((res) => {
           this.props.initialFetchTeam(
             res.data.team,
             res.data.team ? true : false
@@ -111,8 +109,6 @@ const mapStateToProps = (state) => {
       userName: state.auth.user.name,
       userPicture: state.auth.user.profilePicture,
     },
-    joinTeamResults: state.home.joinTeam.searchResults,
-    status: state.home.makeTeam.status,
   };
 };
 
