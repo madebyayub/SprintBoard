@@ -20,7 +20,7 @@ class Login extends React.Component {
             onClick={this.props.onSignInClick}
           >
             <span id="google-logo-container" className="py-1 px-1">
-              <i class="fab fa-google"></i>
+              <i className="fab fa-google"></i>
             </span>
             <div id="sign-in" className="pr-5 pl-4 py-2">
               Sign in with Google

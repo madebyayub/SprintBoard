@@ -1,11 +1,11 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Spinner } from "react-bootstrap";
 
 import Login from "./Login";
 import TeamChoices from "./TeamChoices";
 import ServerAPI from "../../api/ServerAPI";
-import history from "../../history";
 import "../../stylesheets/home.css";
 
 import {
@@ -83,8 +83,7 @@ class Home extends React.Component {
 
   render() {
     if (this.props.currentUser && this.props.hasTeam) {
-      history.push("/backlog");
-      return <></>;
+      return <Redirect to="/backlog" />;
     }
     return (
       <>

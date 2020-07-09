@@ -101,16 +101,15 @@ class SprintContainer extends React.Component {
             if (sprintStory.sprint !== null) {
               if (sprintStory.sprint._id === this.state.selectedSprint) {
                 return (
-                  <React.Fragment key={sprintStory._id}>
-                    <UserStory
-                      sprintContainer
-                      addStoryToSprint={this.props.addStoryToSprint}
-                      removeStoryFromSprint={this.props.removeStoryFromSprint}
-                      story={sprintStory}
-                      sendStoryToBacklog={this.sendStoryToBacklog}
-                      changeStory={this.changeStory}
-                    />
-                  </React.Fragment>
+                  <UserStory
+                    key={sprintStory._id}
+                    sprintContainer
+                    addStoryToSprint={this.props.addStoryToSprint}
+                    removeStoryFromSprint={this.props.removeStoryFromSprint}
+                    story={sprintStory}
+                    sendStoryToBacklog={this.sendStoryToBacklog}
+                    changeStory={this.changeStory}
+                  />
                 );
               } else {
                 return null;
