@@ -9,6 +9,7 @@ import "../../../stylesheets/active.css";
 
 class ActiveSprint extends React.Component {
   state = {
+    activeSprint: null,
     activeStory: null,
     todo: [],
     inprogress: [],
@@ -17,6 +18,7 @@ class ActiveSprint extends React.Component {
 
   componentDidMount() {
     const currentSprint = this.getCurrentSprint();
+    this.setState({ activeSprint: currentSprint });
     this.splitStories(currentSprint);
   }
 
@@ -30,20 +32,21 @@ class ActiveSprint extends React.Component {
   }
 
   splitStories(sprint) {
-    const todo = sprint.stories.filter((story) => {
-      return story.status === "To-do";
-    });
-    const inprogress = sprint.stories.filter((story) => {
-      return story.status === "In Progress";
-    });
-    const completed = sprint.stories.filter((story) => {
-      return story.status === "Completed";
-    });
-    this.setState({ todo, inprogress, completed });
+    if (sprint) {
+      const todo = sprint.stories.filter((story) => {
+        return story.status === "To-do";
+      });
+      const inprogress = sprint.stories.filter((story) => {
+        return story.status === "In Progress";
+      });
+      const completed = sprint.stories.filter((story) => {
+        return story.status === "Completed";
+      });
+      this.setState({ todo, inprogress, completed });
+    }
   }
 
   handleDropEvent = (result) => {
-    console.log(result);
     if (!result.destination) return;
 
     // Frontend change to the status groups
@@ -101,29 +104,24 @@ class ActiveSprint extends React.Component {
     this.setState({ ...newState });
 
     // Database call to edit the story's status
-    const activeSprint = this.getCurrentSprint();
     let story = null;
-    for (let i = 0; i < activeSprint.stories.length; i++) {
-      if (activeSprint.stories[i]._id === result.draggableId) {
-        story = activeSprint.stories[i];
+    for (let i = 0; i < this.state.activeSprint.stories.length; i++) {
+      if (this.state.activeSprint.stories[i]._id === result.draggableId) {
+        story = this.state.activeSprint.stories[i];
         break;
       }
     }
     if (story && destination.droppableId !== source.droppableId) {
       const storyData = {
+        ...story,
         title: story.title,
-        user: null,
         description: story.description,
         status: result.destination.droppableId,
         assigned: story.assigned,
         point: story.point,
         sprint: story.sprint,
       };
-      this.props.editUserStory(
-        storyData,
-        this.props.currentUser.team,
-        story._id
-      );
+      this.props.editUserStory(storyData, this.props.currentUser.team);
     }
   };
 
@@ -139,16 +137,19 @@ class ActiveSprint extends React.Component {
               onDragEnd={(result) => this.handleDropEvent(result)}
             >
               <StatusGroup
+                activeSprint={this.state.activeSprint}
                 changeStory={this.changeStory}
                 stories={this.state.todo}
                 status={"To-do"}
               />
               <StatusGroup
+                activeSprint={this.state.activeSprint}
                 changeStory={this.changeStory}
                 stories={this.state.inprogress}
                 status={"In Progress"}
               />
               <StatusGroup
+                activeSprint={this.state.activeSprint}
                 changeStory={this.changeStory}
                 stories={this.state.completed}
                 status={"Completed"}

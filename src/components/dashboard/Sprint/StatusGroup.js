@@ -14,7 +14,7 @@ class StatusGroup extends React.Component {
   }
 
   renderStories() {
-    if (this.props.activeSprint === null) {
+    if (!this.props.activeSprint) {
       return <div id="noCurrentSprintMessage">No Active Sprint</div>;
     } else {
       return this.props.stories.map((story, index) => {
@@ -65,27 +65,31 @@ class StatusGroup extends React.Component {
   render() {
     return (
       <>
-        <Droppable droppableId={this.props.status}>
-          {(provided, snapshot) => {
-            return (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                style={{
-                  boxShadow: snapshot.isDraggingOver
-                    ? "0 0 6px rgb(26, 115, 232)"
-                    : "none",
-                }}
-                className="status ml-1 mt-3"
-              >
-                <div className="status-story-container">
+        <div className="status ml-1 mt-3">
+          <div className="status-label mt-2 ml-3 mb-3">
+            {this.renderIcon()}
+            {this.props.status}
+          </div>
+          <Droppable droppableId={this.props.status}>
+            {(provided, snapshot) => {
+              return (
+                <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  style={{
+                    boxShadow: snapshot.isDraggingOver
+                      ? "inset 0 0 6px rgb(26, 115, 232)"
+                      : "none",
+                  }}
+                  className="status-story-container py-2"
+                >
                   {this.renderStories()}
+                  {provided.placeholder}
                 </div>
-                {provided.placeholder}
-              </div>
-            );
-          }}
-        </Droppable>
+              );
+            }}
+          </Droppable>
+        </div>
       </>
     );
   }

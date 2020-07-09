@@ -172,11 +172,11 @@ export const createStory = (storyData, team) => {
     dispatch({ type: "CREATE_STORY", payload: response.data });
   };
 };
-export const editUserStory = (storyData, team, storyId) => {
+export const editUserStory = (storyData, team) => {
   return async (dispatch) => {
     const response = await ServerAPI({
       method: "put",
-      url: `/story/${storyId}`,
+      url: `/story`,
       data: {
         team: team,
         story: storyData,
