@@ -48,7 +48,31 @@
     margin-left: auto;
     display: block;
 }
+.inputMessage:focus{
+    outline: transparent;
+}
 .inputContainer{
     height: 100%;
     width: 100%;
+}
+.messageSection{
+    width: 100%;
+    height: 10%;
+}
+.messageContainerleft{
+    background-color: yellow;
+    max-width: 55%;
+    height: fit-content;
+    float: left;
+    border-radius: 1.3em;
+}
+.messageContainerright{
+    background-color: yellow;
+    max-width: 55%;
+    height: fit-content;
+    float: right;
+    border-radius: 1.3em;
+}
+.inputContainer form{
+    height: 100%;
 }
