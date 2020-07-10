@@ -72,12 +72,12 @@ class Navbar extends React.Component {
           </div>
           <div id="main-page-profile">
             <button className="p-2" onClick={this.onSignOutClick}>
-              Log out as {this.props.currentUser.userName}
               <img
-                className="ml-2"
+                className="mr-2"
                 src={this.props.currentUser.userPicture}
                 alt="profile"
               ></img>
+              Log out
             </button>
           </div>
         </div>
