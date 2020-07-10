@@ -1,0 +1,54 @@
+.messageBoardContainer{
+    display:flex;
+    height: 100%;
+    width: 100%;
+    margin-left:15px;
+    margin-top: 56px;
+}
+.messageBoardContainer .groupSection{
+    width: 25%;
+    border-right: 2px solid rgba(75, 75, 75, 0.1);
+}
+.groupSectionHeader{
+    display: inline-flex;
+    font-size: xx-large;
+    height: 50px;
+    width: 100%;
+}.text{
+    font-weight: 800;
+}
+.messageBoardContainer .mainChatSection{
+    width: 75%;
+}
+.mainChatHeader{
+    height: 50px;
+    border-bottom: 2px solid rgba(75, 75, 75, 0.1);
+}
+.mainChat{
+    float: left;
+    height: 100%;
+    width: 68%;
+}
+.mainChatRight{
+    float: right;
+    height: 100%;
+    width: 32%;
+    border-left: 2px solid rgba(75, 75, 75, 0.1);
+}
+.MessageBoxContainer{
+    height:74%;
+    width:100%;
+}
+.inputMessage{
+    width: 74%;
+    height: 6%;
+    margin-right: auto;
+    border-radius: 30px;
+    border: 2px solid rgba(75, 75, 75, 0.1);
+    margin-left: auto;
+    display: block;
+}
+.inputContainer{
+    height: 100%;
+    width: 100%;
+}
