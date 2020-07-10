@@ -25,6 +25,7 @@ class Home extends React.Component {
           clientId:
             "1081400884742-gfbkgjc37s6t38qbtgt936jpfmf62ekt.apps.googleusercontent.com",
           scope: "email",
+          ux_mode: "redirect",
         })
         .then(() => {
           this.auth = window.gapi.auth2.getAuthInstance();

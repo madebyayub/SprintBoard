@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import ActiveSprint from "./Sprint/ActiveSprint";
-import MessageBoard from "./MessageBoard";
+import MessageBoard from "./MessageBoard/MessageBoard";
 import Navbar from "../Navbar";
 import Backlog from "./Backlog/Backlog";
 import Sidebar from "../Sidebar";
-import { fetchTeam, updateUser, signIn } from "../../actions";
+import { fetchTeam, updateUser, signIn, signOut } from "../../actions";
 import history from "../../history";
 
 class Dashboard extends React.Component {
@@ -16,30 +16,39 @@ class Dashboard extends React.Component {
           clientId:
             "1081400884742-gfbkgjc37s6t38qbtgt936jpfmf62ekt.apps.googleusercontent.com",
           scope: "email",
+          ux_mode: "redirect",
         })
         .then(() => {
           this.auth = window.gapi.auth2.getAuthInstance();
-          const currentUser = this.auth.currentUser.get();
-          if (!this.props.isSignedIn) {
-            this.props.signIn(
-              currentUser.getId(),
-              currentUser.getBasicProfile().getImageUrl(),
-              currentUser.getBasicProfile().getName()
-            );
-            this.props.updateUser(
-              currentUser.getId(),
-              currentUser.getBasicProfile().getImageUrl(),
-              currentUser.getBasicProfile().getName()
-            );
-          }
-          if (this.auth.isSignedIn.get()) {
-            this.props.fetchTeam(currentUser.getId());
-          } else {
-            history.push("/");
-          }
+          this.onAuthChange(this.auth.isSignedIn.get());
+          this.auth.isSignedIn.listen(this.onAuthChange);
         });
     });
   }
+  onAuthChange = (isSignedIn) => {
+    if (isSignedIn) {
+      const currentUser = this.auth.currentUser.get();
+      if (!this.props.isSignedIn) {
+        this.props.signIn(
+          currentUser.getId(),
+          currentUser.getBasicProfile().getImageUrl(),
+          currentUser.getBasicProfile().getName()
+        );
+        this.props.updateUser(
+          currentUser.getId(),
+          currentUser.getBasicProfile().getImageUrl(),
+          currentUser.getBasicProfile().getName()
+        );
+      }
+      if (this.auth.isSignedIn.get()) {
+        this.props.fetchTeam(currentUser.getId());
+      } else {
+        history.push("/");
+      }
+    } else {
+      this.props.signOut();
+    }
+  };
   render() {
     if (
       this.props.isSignedIn &&
@@ -50,7 +59,7 @@ class Dashboard extends React.Component {
         case "backlog":
           return (
             <>
-              <Navbar activeTab="Backlog" />
+              <Navbar auth={this.auth} activeTab="Backlog" />
               <Sidebar activeTab="Backlog" />
               <Backlog />
             </>
@@ -58,7 +67,7 @@ class Dashboard extends React.Component {
         case "active":
           return (
             <>
-              <Navbar activeTab="Active" />
+              <Navbar auth={this.auth} activeTab="Active" />
               <Sidebar activeTab="Active" />
               <ActiveSprint currentUser={this.props.currentUser} />
             </>
@@ -66,7 +75,7 @@ class Dashboard extends React.Component {
         case "board":
           return (
             <>
-              <Navbar activeTab="Board" />
+              <Navbar auth={this.auth} activeTab="Board" />
               <Sidebar activeTab="Board" />
               <MessageBoard />
             </>
@@ -91,6 +100,9 @@ const mapStateToProps = (state) => {
     },
   };
 };
-export default connect(mapStateToProps, { fetchTeam, updateUser, signIn })(
-  Dashboard
-);
+export default connect(mapStateToProps, {
+  fetchTeam,
+  updateUser,
+  signIn,
+  signOut,
+})(Dashboard);

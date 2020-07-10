@@ -8,30 +8,8 @@ class Navbar extends React.Component {
   container = React.createRef();
   state = { showLeaveModal: false };
 
-  componentDidMount() {
-    window.gapi.load("client:auth2", () => {
-      window.gapi.client
-        .init({
-          clientId:
-            "1081400884742-gfbkgjc37s6t38qbtgt936jpfmf62ekt.apps.googleusercontent.com",
-          scope: "email",
-        })
-        .then(() => {
-          this.auth = window.gapi.auth2.getAuthInstance();
-          this.onAuthChange(this.auth.isSignedIn.get());
-          this.auth.isSignedIn.listen(this.onAuthChange);
-        });
-    });
-  }
-
-  onAuthChange = (isSignedIn) => {
-    if (isSignedIn) {
-    } else {
-      this.props.signOut();
-    }
-  };
   onSignOutClick = () => {
-    this.auth.signOut();
+    this.props.auth.signOut();
   };
 
   showDropdown = () => {
