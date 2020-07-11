@@ -16,9 +16,6 @@ class MessageBoard extends React.Component {
       user: this.props.currentUser,
       msg: " joined the message board",
     });
-  }
-
-  componentDidUpdate() {
     this.socket.on("message", (msg) => {
       console.log(msg);
       this.setState({ channelMessages: [...this.state.channelMessages, msg] });
