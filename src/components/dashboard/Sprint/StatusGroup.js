@@ -26,7 +26,7 @@ class StatusGroup extends React.Component {
                   ref={provided.innerRef}
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
-                  className={`story-container mx-2 my-1 px-2 py-2`}
+                  className={`story-container mx-2 my-1 px-2 py-1`}
                   style={{
                     userSelect: "none",
                     backgroundColor: snapshot.isDragging
@@ -42,7 +42,7 @@ class StatusGroup extends React.Component {
                     <div className="col-10 story-description pl-0">
                       {story.description}
                     </div>
-                    <div className="col-2 user-assigned">
+                    <div className="col-2 mb-1 user-assigned">
                       <img
                         className="story-profile-pic"
                         src={

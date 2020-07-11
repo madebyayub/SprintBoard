@@ -1,23 +1,47 @@
 import React, { Component } from "react";
 
 export default class Messages extends Component {
-  state = { userMessage: "", displayMessage: "", messageSent: false };
+  state = { userMessage: "" };
 
   handleSendMessage(e) {
     e.preventDefault();
-    //this.props.sendMessage(this.state.userMessage);
-    this.setState({messageSent: true});
-    this.setState({displayMessage: this.state.userMessage});
+    this.props.sendMessage(this.state.userMessage);
     this.setState({ userMessage: "" });
   }
-  renderMessage = () => {
-    if(this.state.messageSent){
-    return (
-      <div className="messageContainer author py-1 px-2">
-        <span className="messageContainer author py-1 px-2">{this.state.displayMessage}</span>
-      </div> 
-      );
-    }
+  renderChannelMessages() {
+    return this.props.channelMessages.map((message) => {
+      if (message.author.userID === this.props.currentUser.userId) {
+        return (
+          <>
+            <div className="messageContainer author">
+              <div className="messageContent py-1 px-2">
+                <span>{message.content}</span>
+              </div>
+              <img
+                className="messageProfilePic"
+                src={message.author.profilePic}
+                alt="sender profile"
+              ></img>
+            </div>
+          </>
+        );
+      } else {
+        return (
+          <>
+            <div className="messageContainer">
+              <img
+                className="messageProfilePic"
+                src={message.author.profilePic}
+                alt="sender profile"
+              ></img>
+              <div className="messageContent py-1 px-2">
+                <span>{message.content}</span>
+              </div>
+            </div>
+          </>
+        );
+      }
+    });
   }
 
   render() {
@@ -26,12 +50,7 @@ export default class Messages extends Component {
         <div className="mainChatHeader"></div>
         <div className="mainChat">
           <div className="MessageBoxContainer">
-            <div className="messageSection">
-              <div className="messageContainer py-1 px-2">
-                <span>I did not send this message</span>
-              </div>
-              {this.renderMessage()}
-            </div>
+            <div className="messageSection">{this.renderChannelMessages()}</div>
           </div>
           <div className="inputContainer">
             <form onSubmit={(e) => this.handleSendMessage(e)}>
@@ -39,7 +58,6 @@ export default class Messages extends Component {
                 onChange={(e) => this.setState({ userMessage: e.target.value })}
                 value={this.state.userMessage}
                 autoFocus
-                onBlur={(e) => e.target.focus()}
                 className="form-control inputMessage mt-2 px-2"
                 placeholder="Send a message here..."
               />

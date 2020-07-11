@@ -6,6 +6,7 @@ import { createStory, getSprints } from "../../../actions";
 import "../../../stylesheets/createstorymodal.css";
 
 Modal.setAppElement("#root");
+
 class CreateStoryModal extends React.Component {
   state = {
     sprintValue: null,

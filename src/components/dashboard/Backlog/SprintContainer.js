@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { editUserStory } from "../../../actions";
 import "../../../stylesheets/sprintstory.css";
 
-/* <button className="sprintDropdown dropdown-toggle"> Sprint</button>*/
 class SprintContainer extends React.Component {
   state = {
     selectedSprint: null,
@@ -54,9 +53,9 @@ class SprintContainer extends React.Component {
             the activeStory state so the correct story
             is displayed within the edit slide in view.
 
-    Delete: This function deletes a story from the team's
-            story list by calling the action creator that 
-            requests to delete that story from the database. 
+    SendStoryToBacklog: This function sends a story from the team's
+            sprint list to the backlog by calling the action creator that 
+            requests to edit that story, while changing only the sprint attribute. 
   */
   changeStory = (story) => {
     this.setState({ activeStory: story });
