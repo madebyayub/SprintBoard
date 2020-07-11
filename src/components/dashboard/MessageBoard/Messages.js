@@ -1,12 +1,23 @@
 import React, { Component } from "react";
 
 export default class Messages extends Component {
-  state = { userMessage: "" };
+  state = { userMessage: "", displayMessage: "", messageSent: false };
 
   handleSendMessage(e) {
     e.preventDefault();
-    this.props.sendMessage(this.state.userMessage);
+    //this.props.sendMessage(this.state.userMessage);
+    this.setState({messageSent: true});
+    this.setState({displayMessage: this.state.userMessage});
     this.setState({ userMessage: "" });
+  }
+  renderMessage = () => {
+    if(this.state.messageSent){
+    return (
+      <div className="messageContainer author py-1 px-2">
+        <span className="messageContainer author py-1 px-2">{this.state.displayMessage}</span>
+      </div> 
+      );
+    }
   }
 
   render() {
@@ -19,9 +30,7 @@ export default class Messages extends Component {
               <div className="messageContainer py-1 px-2">
                 <span>I did not send this message</span>
               </div>
-              <div className="messageContainer author py-1 px-2">
-                <span>hello world i sent this message</span>
-              </div>
+              {this.renderMessage()}
             </div>
           </div>
           <div className="inputContainer">
