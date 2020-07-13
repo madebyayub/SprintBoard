@@ -40,18 +40,19 @@
 }
 
 .channels-header button{
+  padding: 0.4em 0.75em;
+  font-size: small;
   border-color: transparent;
   display: block;
   margin-left: auto;
   width: fit-content;
   background-color: transparent;
-  color: rgba(75, 75, 75, 0.3);
+  color: rgba(26, 115, 232,0.8);
   transition: all 0.2s ease-out;
   border-radius: 10%;
 }
 
 .channels-header button:hover{
-  color: rgba(75, 75, 75, 0.6);
   background-color: rgba(75, 75, 75, 0.05);
 }
 

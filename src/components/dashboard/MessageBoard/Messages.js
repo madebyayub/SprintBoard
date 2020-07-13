@@ -64,8 +64,10 @@ export default class Messages extends Component {
           <h2># {this.props.currentChannel.name}</h2>
         </div>
         <div className="mainChat">
-          <div className="MessageBoxContainer px-1 pt-2">
-            <div className="messageSection">{this.renderChannelMessages()}</div>
+          <div className="MessageBoxContainer">
+            <div className="messageSection px-1">
+              {this.renderChannelMessages()}
+            </div>
           </div>
           <div className="inputContainer">
             <form onSubmit={(e) => this.handleSendMessage(e)}>

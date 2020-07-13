@@ -29,7 +29,7 @@ class Channels extends React.Component {
             <p className="ml-2 mb-0">Channels</p>
           </div>
           <div>
-            <button id="create-channel-icon" className="px-2">
+            <button id="create-channel-icon">
               <i className="fas fa-plus"></i>
             </button>
           </div>
