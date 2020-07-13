@@ -131,6 +131,7 @@
   overflow: auto;
 }
 .messageContainer{
+  text-align: left;
   word-wrap: break-word;
   margin-left: 0.4em;
   margin-right: 0.4em;
@@ -148,6 +149,7 @@
 }
 
 .messageContainer.author{
+  text-align: right;
   margin-left: auto;
   color: white;
 }
@@ -158,6 +160,8 @@
 }
 
 .messageContent{
+  text-align: left;
+  max-width: 90%;
   border-radius: 1.3em;
   display: inline-block;
 }
