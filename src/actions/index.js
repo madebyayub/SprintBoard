@@ -4,17 +4,13 @@ import { notifySuccess } from "../utils/utils";
 
 /* Sign in action, sets the currentUser state 
   PARAMS:
-    userId: The google ID of the current user
-    profilePicture: The google profile picture of the current user
+    userID: The google ID of the current user
+    profilePic: The google profile picture of the current user
     name: The google profile name of the current user */
-export const signIn = (userId, profilePicture, name) => {
-  return {
-    type: "SIGN_IN",
-    payload: {
-      userId,
-      profilePicture,
-      name,
-    },
+export const signIn = (userID) => {
+  return async (dispatch) => {
+    const response = await ServerAPI.get(`/user/${userID}`);
+    dispatch({ type: "SIGN_IN", payload: response.data });
   };
 };
 
@@ -23,6 +19,26 @@ export const signOut = () => {
   history.push("/");
   return {
     type: "SIGN_OUT",
+  };
+};
+
+/* Update User action, called upon login to send a patch request to API server and update user info 
+  PARAMS:
+    userID: The google ID of the current user
+    username: The google profile name of the current user
+    userpicture: The google profile picture of the current user */
+export const updateUser = (userID, userpicture, username) => {
+  return async (dispatch) => {
+    const response = await ServerAPI({
+      method: "patch",
+      url: `/user`,
+      data: {
+        userID,
+        username,
+        userpicture,
+      },
+    });
+    dispatch({ type: "UPDATE_USER", payload: response.data });
   };
 };
 
@@ -74,26 +90,6 @@ export const joinTeam = (userID, username, userpicture, teamname) => {
     });
     history.push("/backlog");
     dispatch({ type: "JOIN_TEAM", payload: response.data });
-  };
-};
-
-/* Update User action, called upon login to send a patch request to API server and update user info 
-  PARAMS:
-    userID: The google ID of the current user
-    username: The google profile name of the current user
-    userpicture: The google profile picture of the current user */
-export const updateUser = (userID, userpicture, username) => {
-  return async (dispatch) => {
-    const response = await ServerAPI({
-      method: "patch",
-      url: `/user`,
-      data: {
-        userID,
-        username,
-        userpicture,
-      },
-    });
-    dispatch({ type: "UPDATE_USER", payload: response.data });
   };
 };
 

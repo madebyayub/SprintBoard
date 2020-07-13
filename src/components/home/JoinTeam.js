@@ -7,7 +7,7 @@ class JoinTeam extends React.Component {
 
   joinATeam(teamname) {
     this.props.joinTeam(
-      this.props.currentUser.userId,
+      this.props.currentUser.userID,
       this.props.currentUser.userName,
       this.props.currentUser.userPicture,
       teamname

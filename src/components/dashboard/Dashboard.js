@@ -94,9 +94,9 @@ const mapStateToProps = (state) => {
     hasTeam: state.auth.hasTeam,
     currentUser: {
       team: state.auth.user.team,
-      userId: state.auth.user.userId,
+      userID: state.auth.user.userID,
       userName: state.auth.user.name,
-      userPicture: state.auth.user.profilePicture,
+      userPicture: state.auth.user.profilePic,
     },
   };
 };

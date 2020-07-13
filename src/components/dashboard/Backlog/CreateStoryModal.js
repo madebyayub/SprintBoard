@@ -232,7 +232,7 @@ class CreateStoryModal extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.auth.user.userId,
+    currentUser: state.auth.user.userID,
     team: state.auth.user.team,
     user: state.auth.user,
   };

@@ -8,7 +8,7 @@ import Messages from "./Messages";
 import "../../../stylesheets/messageboard.css";
 
 class MessageBoard extends React.Component {
-  state = { channel: {_id: '5f0ba9f075e46573e24ad12c'}, channelMessages: [] };
+  state = { channel: this.props.currentUser.team.channel, channelMessages: [] };
 
   componentDidMount() {
     this.socket = io("localhost:3001");
@@ -16,11 +16,19 @@ class MessageBoard extends React.Component {
       user: this.props.currentUser,
       msg: " joined the message board",
     });
+    this.socket.emit("populateChannel", {
+      channel: this.state.channel,
+    });
+    this.socket.on("receiveChannel", (populatedChannel) => {
+      this.setState({
+        channelMessages: populatedChannel.channel.messages,
+      });
+    });
     this.socket.on("message", (msg) => {
-      if (msg.author.userID !== this.props.currentUser.userID){
-      console.log(msg);
-      this.setState({ channelMessages: [...this.state.channelMessages, msg] });
-      console.log(this.state.channelMessages);
+      if (msg.author.userID !== this.props.currentUser.userID) {
+        this.setState({
+          channelMessages: [...this.state.channelMessages, msg],
+        });
       }
     });
   }
@@ -29,13 +37,17 @@ class MessageBoard extends React.Component {
     const newMessage = {
       author: {
         name: this.props.currentUser.name,
-        userID: this.props.currentUser.userId,
-        profilePic: this.props.currentUser.profilePicture,
+        userID: this.props.currentUser.userID,
+        profilePic: this.props.currentUser.profilePic,
       },
       date: moment(),
-      content: msg
+      content: msg,
     };
-    this.socket.emit("message", { user: newMessage.author, msg, channel:this.state.channel });
+    this.socket.emit("message", {
+      user: newMessage.author,
+      msg,
+      channel: this.state.channel,
+    });
     this.setState({
       channelMessages: [...this.state.channelMessages, newMessage],
     });

@@ -19,7 +19,7 @@ class MakeTeam extends React.Component {
         method: "post",
         url: `/team`,
         data: {
-          userID: this.props.currentUser.userId,
+          userID: this.props.currentUser.userID,
           username: this.props.currentUser.userName,
           userpicture: this.props.currentUser.userPicture,
           teamname: this.state.newTeamName,

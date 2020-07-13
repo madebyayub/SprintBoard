@@ -23,7 +23,7 @@ class MemberView extends React.Component {
       return (
         <tr
           className={`member-row ${
-            member.userID === this.props.currentUser.userId ? "current" : ""
+            member.userID === this.props.currentUser.userID ? "current" : ""
           }`}
         >
           <td className="profile-picture-member">
@@ -39,9 +39,9 @@ class MemberView extends React.Component {
             <button
               className="px-2 py-0"
               onClick={
-                member.userID === this.props.currentUser.userId
+                member.userID === this.props.currentUser.userID
                   ? () =>
-                      this.props.leaveTeamAction(this.props.currentUser.userId)
+                      this.props.leaveTeamAction(this.props.currentUser.userID)
                   : () =>
                       this.props.kickTeam(
                         member.userID,
@@ -50,7 +50,7 @@ class MemberView extends React.Component {
                       )
               }
             >
-              {member.userID === this.props.currentUser.userId ? (
+              {member.userID === this.props.currentUser.userID ? (
                 <i className="fas fa-door-open"></i>
               ) : this.props.currentUser.leader ? (
                 <i className="fas fa-times-circle"></i>

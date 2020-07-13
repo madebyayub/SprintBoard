@@ -19,7 +19,7 @@ class Navbar extends React.Component {
   };
   leaveTeamAction = () => {
     this.props.leaveTeam(
-      this.props.currentUser.userId,
+      this.props.currentUser.userID,
       this.props.currentUser.userName,
       this.props.currentUser.team.name
     );
@@ -73,9 +73,9 @@ const mapStateToProps = (state) => {
     hasTeam: state.auth.hasTeam,
     currentUser: {
       team: state.auth.user.team,
-      userId: state.auth.user.userId,
+      userID: state.auth.user.userID,
       userName: state.auth.user.name,
-      userPicture: state.auth.user.profilePicture,
+      userPicture: state.auth.user.profilePic,
     },
   };
 };

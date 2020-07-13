@@ -3,8 +3,8 @@ const INITIAL_STATE = {
   hasTeam: null,
   user: {
     team: null,
-    userId: null,
-    profilePicture: null,
+    userID: null,
+    profilePic: null,
     name: null,
   },
 };
@@ -15,29 +15,19 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isSignedIn: true,
-        user: {
-          userId: action.payload.userId,
-          profilePicture: action.payload.profilePicture,
-          name: action.payload.name,
-        },
+        user: { ...action.payload.user, team: state.user.team },
       };
     case "SIGN_OUT":
       return {
         ...state,
         isSignedIn: false,
         hasTeam: false,
-        user: { userId: null, profilePicture: null, name: null },
+        user: { userID: null, profilePic: null, name: null },
       };
     case "UPDATE_USER":
       return {
         ...state,
-        user: {
-          userId: action.payload.userID,
-          name: action.payload.name,
-          profilePicture: action.payload.profilePic,
-          leader: action.payload.leader,
-          team: action.payload.team,
-        },
+        user: { ...action.payload.user, team: state.user.team },
       };
     case "FETCH_TEAM":
       return {

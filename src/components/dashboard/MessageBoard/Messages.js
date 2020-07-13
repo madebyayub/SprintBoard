@@ -10,7 +10,7 @@ export default class Messages extends Component {
   }
   renderChannelMessages() {
     return this.props.channelMessages.map((message) => {
-      if (message.author.userID === this.props.currentUser.userId) {
+      if (message.author.userID === this.props.currentUser.userID) {
         return (
           <>
             <div className="messageContainer author">
