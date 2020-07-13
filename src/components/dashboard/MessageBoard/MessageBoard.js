@@ -57,8 +57,12 @@ class MessageBoard extends React.Component {
     return (
       <div className="container-fluid">
         <div className="messageBoardContainer">
-          <Channels currentUser={this.props.currentUser} />
+          <Channels
+            currentChannel={this.state.channel}
+            currentUser={this.props.currentUser}
+          />
           <Messages
+            currentChannel={this.state.channel}
             channelMessages={this.state.channelMessages}
             socket={this.socket}
             currentUser={this.props.currentUser}

@@ -1,18 +1,31 @@
 import React, { Component } from "react";
 
 export default class Messages extends Component {
-  state = { userMessage: "" };
+  state = { userMessage: "", scroll: true };
+
+  componentDidMount() {
+    this.messageContainer = document.querySelector(".messageSection");
+    this.messageContainer.scrollTop = this.messageContainer.scrollHeight;
+  }
+
+  componentDidUpdate() {
+    if (this.state.scroll) {
+      this.messageContainer.scrollTop = this.messageContainer.scrollHeight;
+      this.setState({ scroll: false });
+    }
+  }
 
   handleSendMessage(e) {
     e.preventDefault();
     this.props.sendMessage(this.state.userMessage);
-    this.setState({ userMessage: "" });
+    this.setState({ userMessage: "", scroll: true });
   }
+
   renderChannelMessages() {
-    return this.props.channelMessages.map((message) => {
+    return this.props.channelMessages.map((message, index) => {
       if (message.author.userID === this.props.currentUser.userID) {
         return (
-          <>
+          <React.Fragment key={message._id}>
             <div className="messageContainer author">
               <div className="messageContent py-1 px-2">
                 <span>{message.content}</span>
@@ -23,11 +36,11 @@ export default class Messages extends Component {
                 alt="sender profile"
               ></img>
             </div>
-          </>
+          </React.Fragment>
         );
       } else {
         return (
-          <>
+          <React.Fragment key={message._id}>
             <div className="messageContainer">
               <img
                 className="messageProfilePic"
@@ -38,7 +51,7 @@ export default class Messages extends Component {
                 <span>{message.content}</span>
               </div>
             </div>
-          </>
+          </React.Fragment>
         );
       }
     });
@@ -47,9 +60,11 @@ export default class Messages extends Component {
   render() {
     return (
       <div className="mainChatSection">
-        <div className="mainChatHeader"></div>
+        <div className="mainChatHeader">
+          <h2># {this.props.currentChannel.name}</h2>
+        </div>
         <div className="mainChat">
-          <div className="MessageBoxContainer">
+          <div className="MessageBoxContainer px-1 pt-2">
             <div className="messageSection">{this.renderChannelMessages()}</div>
           </div>
           <div className="inputContainer">
@@ -64,7 +79,6 @@ export default class Messages extends Component {
             </form>
           </div>
         </div>
-        <div className="right-side"></div>
       </div>
     );
   }
