@@ -8,7 +8,7 @@ import Messages from "./Messages";
 import "../../../stylesheets/messageboard.css";
 
 class MessageBoard extends React.Component {
-  state = { channel: null, channelMessages: [] };
+  state = { channel: {_id: '5f0ba9f075e46573e24ad12c'}, channelMessages: [] };
 
   componentDidMount() {
     this.socket = io("localhost:3001");
@@ -17,8 +17,11 @@ class MessageBoard extends React.Component {
       msg: " joined the message board",
     });
     this.socket.on("message", (msg) => {
+      if (msg.author.userID !== this.props.currentUser.userID){
       console.log(msg);
       this.setState({ channelMessages: [...this.state.channelMessages, msg] });
+      console.log(this.state.channelMessages);
+      }
     });
   }
 
@@ -30,9 +33,9 @@ class MessageBoard extends React.Component {
         profilePic: this.props.currentUser.profilePicture,
       },
       date: moment(),
-      content: msg,
+      content: msg
     };
-    this.socket.emit("message", { user: newMessage.author, msg });
+    this.socket.emit("message", { user: newMessage.author, msg, channel:this.state.channel });
     this.setState({
       channelMessages: [...this.state.channelMessages, newMessage],
     });
