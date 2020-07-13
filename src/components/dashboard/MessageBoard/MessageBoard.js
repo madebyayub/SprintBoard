@@ -14,7 +14,7 @@ class MessageBoard extends React.Component {
     this.socket = io("localhost:3001");
     this.socket.emit("join", {
       user: this.props.currentUser,
-      msg: " joined the message board",
+      channel: this.state.channel,
     });
     this.socket.emit("populateChannel", {
       channel: this.state.channel,
