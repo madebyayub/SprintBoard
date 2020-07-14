@@ -6,9 +6,16 @@ import moment from "moment";
 import Channels from "./Channels";
 import Messages from "./Messages";
 import "../../../stylesheets/messageboard.css";
+import ChannelBrowser from "./ChannelBrowser";
 
 class MessageBoard extends React.Component {
-  state = { channel: this.props.currentUser.team.channel, channelMessages: [] };
+  state = {
+    channel: this.props.currentUser.team.channel,
+    channelMessages: [],
+    browseChannels: false,
+    channelResults: this.props.currentUser.channels,
+    loading: true,
+  };
 
   componentDidMount() {
     this.socket = io("localhost:3001");
@@ -22,6 +29,7 @@ class MessageBoard extends React.Component {
     this.socket.on("receiveChannel", (populatedChannel) => {
       this.setState({
         channelMessages: populatedChannel.channel.messages,
+        loading: false,
       });
     });
     this.socket.on("message", (msg) => {
@@ -30,6 +38,23 @@ class MessageBoard extends React.Component {
           channelMessages: [...this.state.channelMessages, msg],
         });
       }
+    });
+  }
+
+  changeChannel = (channel) => {
+    this.socket.emit("populateChannel", {
+      channel: channel,
+    });
+    this.setState({ channel: channel, browseChannels: false, loading: true });
+  };
+
+  showBrowseChannel = () => {
+    this.setState({ channel: null, browseChannels: true });
+  };
+
+  searchChannel(channelName) {
+    this.socket.emit("searchChannel", {
+      channelName,
     });
   }
 
@@ -58,16 +83,27 @@ class MessageBoard extends React.Component {
       <div className="container-fluid">
         <div className="messageBoardContainer">
           <Channels
+            browseChannels={this.state.browseChannels}
+            changeChannel={this.changeChannel}
+            showBrowseChannel={this.showBrowseChannel}
             currentChannel={this.state.channel}
             currentUser={this.props.currentUser}
           />
-          <Messages
-            currentChannel={this.state.channel}
-            channelMessages={this.state.channelMessages}
-            socket={this.socket}
-            currentUser={this.props.currentUser}
-            sendMessage={this.sendMessage}
-          />
+          {this.state.browseChannels ? (
+            <ChannelBrowser
+              currentUser={this.props.currentUser}
+              channelResults={this.state.channelResults}
+            />
+          ) : (
+            <Messages
+              loading={this.state.loading}
+              currentChannel={this.state.channel}
+              channelMessages={this.state.channelMessages}
+              socket={this.socket}
+              currentUser={this.props.currentUser}
+              sendMessage={this.sendMessage}
+            />
+          )}
         </div>
       </div>
     );

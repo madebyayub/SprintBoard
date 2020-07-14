@@ -66,7 +66,13 @@ export default class Messages extends Component {
         <div className="mainChat">
           <div className="MessageBoxContainer">
             <div className="messageSection px-1">
-              {this.renderChannelMessages()}
+              {this.props.loading ? (
+                <div class="spinner-border text-primary mt-5" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              ) : (
+                this.renderChannelMessages()
+              )}
             </div>
           </div>
           <div className="inputContainer">

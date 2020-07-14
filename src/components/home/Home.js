@@ -1,7 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { Spinner } from "react-bootstrap";
 
 import Login from "./Login";
 import TeamChoices from "./TeamChoices";
@@ -77,7 +76,11 @@ class Home extends React.Component {
           />
         );
       } else {
-        return <Spinner animation="border" />;
+        return (
+          <div class="spinner-border text-light" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        );
       }
     }
   }

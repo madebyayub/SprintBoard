@@ -7,8 +7,12 @@ class Channels extends React.Component {
         <div className="channel-container" key={channel._id}>
           <button
             className={`channel-button ${
-              channel._id === this.props.currentChannel._id ? "current" : ""
+              this.props.currentChannel &&
+              channel._id === this.props.currentChannel._id
+                ? "current"
+                : ""
             }`}
+            onClick={() => this.props.changeChannel(channel)}
           >
             # {channel.name}
           </button>
@@ -37,8 +41,10 @@ class Channels extends React.Component {
         <div className="channels-container mt-2">
           {this.renderChannels()}
           <button
-            className="channel-button create"
-            onClick={this.props.createChannel}
+            className={`channel-button create ${
+              this.props.browseChannels ? "current" : ""
+            }`}
+            onClick={this.props.showBrowseChannel}
           >
             <i className="fas fa-plus"></i>
             Add a channel

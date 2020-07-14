@@ -1,5 +1,4 @@
 import React from "react";
-import { Spinner } from "react-bootstrap";
 import ServerAPI from "../../api/ServerAPI";
 
 class JoinTeam extends React.Component {
@@ -32,7 +31,11 @@ class JoinTeam extends React.Component {
 
   renderResults() {
     if (this.state.loading) {
-      return <Spinner animation="border" />;
+      return (
+        <div class="spinner-border text-light" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      );
     } else if (this.state.results.length > 0) {
       return this.state.results.map((team) => {
         return (
