@@ -161,7 +161,7 @@ class MessageBoard extends React.Component {
             />
           )}
           {this.state.showChannelDetail ? (
-            <ChatDetail /> 
+            <ChatDetail showChannelDetail={this.state.showChannelDetail} showChatDetail={this.showChatDetail} /> 
             ): "" }
         </div>
         /

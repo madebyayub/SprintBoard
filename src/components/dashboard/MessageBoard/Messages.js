@@ -90,12 +90,13 @@ export default class Messages extends Component {
         <div className="mainChatHeader">
           <div className="mainChatHeaderDetail">
           <h2># {this.props.currentChannel.name}</h2>
-          <button
+          {this.props.showChannelDetail ? "" : 
+            <button
               className="mainChatDetailSection px-2"
               onClick={this.props.showChatDetail}
             >
               <i className="fa fa-info-circle" aria-hidden="true"></i>
-            </button>
+            </button>}
           </div>
         </div>
         <div className="mainChat">

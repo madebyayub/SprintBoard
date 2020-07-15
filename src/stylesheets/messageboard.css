@@ -426,3 +426,9 @@
   width:25%;
   background-color: #fafafa;
 }
+.ChatDetailHeader{
+  display: flex;
+  background-color: #fafafa;
+  height: 50px;
+  border-bottom: 1px solid rgba(75, 75, 75, 0.1);
+}
