@@ -102,6 +102,9 @@
 
 
 /* CSS For Main Message Section  */
+.spinner-border{
+  margin-top: 25%!important;
+}
 
 .mainChatSection{
     width: 75%;
