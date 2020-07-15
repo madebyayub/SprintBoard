@@ -29,6 +29,11 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         user: { ...action.payload.user, team: state.user.team },
       };
+    case "UPDATE_USER_CHANNELS":
+      return {
+        ...state,
+        user: { ...state.user, channels: action.payload },
+      };
     case "FETCH_TEAM":
       return {
         ...state,

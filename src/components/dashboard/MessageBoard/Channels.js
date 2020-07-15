@@ -3,27 +3,55 @@ import React from "react";
 class Channels extends React.Component {
   renderChannels() {
     return this.props.currentUser.channels.map((channel) => {
-      return (
-        <div className="channel-container" key={channel._id}>
-          <button
-            className={`channel-button ${
-              this.props.currentChannel &&
-              channel._id === this.props.currentChannel._id
-                ? "current"
-                : ""
-            }`}
-            onClick={() => this.props.changeChannel(channel)}
-          >
-            # {channel.name}
-          </button>
-        </div>
-      );
+      if (channel._id === this.props.currentUser.team.channel._id) {
+        return <></>;
+      } else {
+        return (
+          <div className="channel-container" key={channel._id}>
+            <button
+              className={`channel-button ${
+                this.props.currentChannel &&
+                channel._id === this.props.currentChannel._id
+                  ? "current"
+                  : ""
+              }`}
+              onClick={() => this.props.changeChannel(channel)}
+            >
+              # {channel.name}
+            </button>
+          </div>
+        );
+      }
     });
+  }
+
+  renderTeamChannel() {
+    return (
+      <div
+        className="channel-container"
+        key={this.props.currentUser.team.channel._id}
+      >
+        <button
+          className={`channel-button ${
+            this.props.currentChannel &&
+            this.props.currentUser.team.channel._id ===
+              this.props.currentChannel._id
+              ? "current"
+              : ""
+          }`}
+          onClick={() =>
+            this.props.changeChannel(this.props.currentUser.team.channel)
+          }
+        >
+          # {this.props.currentUser.team.channel.name}
+        </button>
+      </div>
+    );
   }
   render() {
     return (
       <div className="channels">
-        <div className="channels-header mt-2 px-3 py-2">
+        <div className="channels-header px-3">
           <div>
             <img
               className="channel-profile"
@@ -32,13 +60,16 @@ class Channels extends React.Component {
             ></img>
             <p className="ml-2 mb-0">Channels</p>
           </div>
-          <div>
-            <button id="create-channel-icon">
-              <i className="fas fa-plus"></i>
-            </button>
-          </div>
+          <button
+            id="create-channel-icon"
+            onClick={this.props.showBrowseChannel}
+            className="py-1 px-2"
+          >
+            <i className="fas fa-plus"></i>
+          </button>
         </div>
         <div className="channels-container mt-2">
+          {this.renderTeamChannel()}
           {this.renderChannels()}
           <button
             className={`channel-button create ${

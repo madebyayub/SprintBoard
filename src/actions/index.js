@@ -42,6 +42,13 @@ export const updateUser = (userID, userpicture, username) => {
   };
 };
 
+export const updateUserChannels = (channels) => {
+  return {
+    type: "UPDATE_USER_CHANNELS",
+    payload: channels,
+  };
+};
+
 /* Create team action, makes a POST request to API server 
   PARAMS:
     userID: The google ID of the current user

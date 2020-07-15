@@ -8,8 +8,10 @@ export default class Messages extends Component {
     this.messageContainer.scrollTop = this.messageContainer.scrollHeight;
   }
 
-  componentDidUpdate() {
-    if (this.state.scroll) {
+  componentDidUpdate(prevState) {
+    if (prevState.loading) {
+      this.messageContainer.scrollTop = this.messageContainer.scrollHeight;
+    } else if (this.state.scroll) {
       this.messageContainer.scrollTop = this.messageContainer.scrollHeight;
       this.setState({ scroll: false });
     }
@@ -30,11 +32,6 @@ export default class Messages extends Component {
               <div className="messageContent py-1 px-2">
                 <span>{message.content}</span>
               </div>
-              <img
-                className="messageProfilePic"
-                src={message.author.profilePic}
-                alt="sender profile"
-              ></img>
             </div>
           </React.Fragment>
         );
@@ -42,14 +39,44 @@ export default class Messages extends Component {
         return (
           <React.Fragment key={message._id}>
             <div className="messageContainer">
-              <img
-                className="messageProfilePic"
-                src={message.author.profilePic}
-                alt="sender profile"
-              ></img>
-              <div className="messageContent py-1 px-2">
-                <span>{message.content}</span>
-              </div>
+              {index < this.props.channelMessages.length - 1 &&
+              this.props.channelMessages[index + 1].author.userID ===
+                message.author.userID ? (
+                <>
+                  {index > 0 &&
+                  this.props.channelMessages[index - 1].author.userID !==
+                    message.author.userID ? (
+                    <p className="message-author-label">
+                      {message.author.name}
+                    </p>
+                  ) : (
+                    <></>
+                  )}
+                  <div className="messageContent no-picture py-1 px-2">
+                    <span>{message.content}</span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {index > 0 &&
+                  this.props.channelMessages[index - 1].author.userID !==
+                    message.author.userID ? (
+                    <p className="message-author-label">
+                      {message.author.name}
+                    </p>
+                  ) : (
+                    <></>
+                  )}
+                  <img
+                    className="messageProfilePic"
+                    src={message.author.profilePic}
+                    alt="sender profile"
+                  ></img>
+                  <div className="messageContent py-1 px-2">
+                    <span>{message.content}</span>
+                  </div>
+                </>
+              )}
             </div>
           </React.Fragment>
         );
@@ -67,8 +94,8 @@ export default class Messages extends Component {
           <div className="MessageBoxContainer">
             <div className="messageSection px-1">
               {this.props.loading ? (
-                <div class="spinner-border text-primary mt-5" role="status">
-                  <span class="sr-only">Loading...</span>
+                <div className="spinner-border text-primary mt-5" role="status">
+                  <span className="sr-only">Loading...</span>
                 </div>
               ) : (
                 this.renderChannelMessages()
