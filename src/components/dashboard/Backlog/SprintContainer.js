@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { editUserStory } from "../../../actions";
 import "../../../stylesheets/sprintstory.css";
 
-/* <button className="sprintDropdown dropdown-toggle"> Sprint</button>*/
 class SprintContainer extends React.Component {
   state = {
     selectedSprint: null,
@@ -54,9 +53,9 @@ class SprintContainer extends React.Component {
             the activeStory state so the correct story
             is displayed within the edit slide in view.
 
-    Delete: This function deletes a story from the team's
-            story list by calling the action creator that 
-            requests to delete that story from the database. 
+    SendStoryToBacklog: This function sends a story from the team's
+            sprint list to the backlog by calling the action creator that 
+            requests to edit that story, while changing only the sprint attribute. 
   */
   changeStory = (story) => {
     this.setState({ activeStory: story });
@@ -65,15 +64,15 @@ class SprintContainer extends React.Component {
   sendStoryToBacklog = (e, story) => {
     e.stopPropagation();
     const storyData = {
+      ...story,
       title: story.title,
-      user: this.props.currentUser.userId,
       description: story.description,
       status: story.status,
       assigned: story.assigned ? story.assigned._id : null,
       point: story.points,
       sprint: null,
     };
-    this.props.editUserStory(storyData, this.props.team, story._id);
+    this.props.editUserStory(storyData, this.props.team);
   };
 
   renderSprints() {
@@ -101,16 +100,15 @@ class SprintContainer extends React.Component {
             if (sprintStory.sprint !== null) {
               if (sprintStory.sprint._id === this.state.selectedSprint) {
                 return (
-                  <React.Fragment key={sprintStory._id}>
-                    <UserStory
-                      sprintContainer
-                      addStoryToSprint={this.props.addStoryToSprint}
-                      removeStoryFromSprint={this.props.removeStoryFromSprint}
-                      story={sprintStory}
-                      sendStoryToBacklog={this.sendStoryToBacklog}
-                      changeStory={this.changeStory}
-                    />
-                  </React.Fragment>
+                  <UserStory
+                    key={sprintStory._id}
+                    sprintContainer
+                    addStoryToSprint={this.props.addStoryToSprint}
+                    removeStoryFromSprint={this.props.removeStoryFromSprint}
+                    story={sprintStory}
+                    sendStoryToBacklog={this.sendStoryToBacklog}
+                    changeStory={this.changeStory}
+                  />
                 );
               } else {
                 return null;
@@ -186,9 +184,7 @@ class SprintContainer extends React.Component {
             className="dropdown-toggle sprintDropdown ml-3"
             onChange={(e) => this.sprintValue(e)}
           >
-            <option value={this.state.currentSprintVal}>
-              Current Sprint
-            </option>
+            <option value={this.state.currentSprintVal}>Current Sprint</option>
             {this.renderSprints()}
           </select>
         </div>

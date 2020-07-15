@@ -64,20 +64,21 @@ class StoryDetail extends React.Component {
     });
   };
 
-  editStory(e, storyId) {
+  editStory(e, story) {
     e.preventDefault();
     console.log(this.state.assigned);
     const storyData = {
+      ...story,
       title: this.state.title,
-      user: this.props.currentUser,
       description: this.state.description,
       status: this.state.status,
-      assigned: this.state.assigned === "Unassigned" ? null : this.state.assigned,
+      assigned:
+        this.state.assigned === "Unassigned" ? null : this.state.assigned,
       point: this.state.point,
       sprint: this.state.sprint,
     };
-  
-    this.props.editUserStory(storyData, this.props.team, storyId);
+
+    this.props.editUserStory(storyData, this.props.team);
     this.unselectStory();
     this.setState({
       titleError: false,
@@ -133,7 +134,7 @@ class StoryDetail extends React.Component {
       return (
         <button
           className={"btn btn-success btn-sm mb-2 textEditButton"}
-          onClick={(e) => this.editStory(e, this.props.story._id)}
+          onClick={(e) => this.editStory(e, this.props.story)}
         >
           Save
         </button>
@@ -220,7 +221,11 @@ class StoryDetail extends React.Component {
                   : "Unassigned"}
               </option>
               {this.renderUsers()}
-              {this.props.story.assigned ? <option value={null} >Unassigned</option> : <></>}
+              {this.props.story.assigned ? (
+                <option value={null}>Unassigned</option>
+              ) : (
+                <></>
+              )}
             </select>
           </div>
           <div id="sprintDetail" className="assignedAndSprintDetail">
@@ -299,7 +304,7 @@ class StoryDetail extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.auth.user.userId,
+    currentUser: state.auth.user.userID,
     team: state.auth.user.team,
   };
 };

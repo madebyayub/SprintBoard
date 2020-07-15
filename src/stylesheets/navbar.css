@@ -33,7 +33,7 @@ span.badge {
     position: fixed;
     left:0px;
     z-index: 99;
-    background-color: #1a73e8 !important;
+    background-color: rgb(26, 115, 232) !important;
     box-shadow: 0 5px 5px rgba(0,0,0,0.2);
     color: whitesmoke;
     width: auto;
@@ -85,40 +85,23 @@ span.badge {
     font-family: 'Merriweather', serif;}
 
 
-#leave-dropdown{
-  color: transparent;
-  margin-left: 165px;
-  position: absolute;
-  top:12px;
-  z-index: 0;
-  transition: all 0.4s ease-in-out;}
-  #leave-dropdown.show{
-    font-size: small;
-    color: white;
-    background:rgba(12, 48, 101, 0.8);
-    margin-left: 282px;}
-  .leave-team{
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;}
-    .leave-team:hover{
-      background-color: rgba(12, 48, 101, 1);}
-
-
-
-#profileIcon{
-  display: inline-block;}
-  #profileIcon span{
-    font-size: small;
-    margin-left:10px;}
-  #profile-logo-icon-nav{
-    width: 30px!important;
+#main-page-profile{
+  font-family: 'Noto Sans', sans-serif;
+  text-align: center;}
+  #main-page-profile img {
+    width: 25px;
     border-radius: 50%;}
-  #profileIconBtn{
-    padding-left: 10px!important;
-    padding-right: 8px!important;
-    box-shadow: 0px 0px 3px rgba(87, 81, 81, 0.9);
-    border-radius: 10px;
-    background-color: transparent;
-    color: white;
+  #main-page-profile button{
     border: none;
+    vertical-align: middle;
+    background-color: transparent;
+    font-size: small;
+    font-weight: 600;
+    border-radius: 10px;
+    color: rgba(255,255,255,1);
     transition: all 0.2s ease-out;}
+    #main-page-profile button:hover{
+      color: aliceblue;
+      background-color: rgba(72, 72, 72, 0.05);}
+    #main-page-profile button:focus{
+      outline: transparent;}

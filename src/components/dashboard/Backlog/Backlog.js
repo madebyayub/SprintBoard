@@ -63,16 +63,15 @@ class Backlog extends React.Component {
   createSprint() {
     if (this.state.selectedStories.length > 0) {
       let sprintNumber;
-      if (this.props.currentUser.team.sprints.length === 0){
-        sprintNumber =1;
-      }
-      else{
+      if (this.props.currentUser.team.sprints.length === 0) {
+        sprintNumber = 1;
+      } else {
         sprintNumber =
-        parseInt(
-          this.props.currentUser.team.sprints[
-            this.props.currentUser.team.sprints.length - 1
-          ].number
-        ) + 1;
+          parseInt(
+            this.props.currentUser.team.sprints[
+              this.props.currentUser.team.sprints.length - 1
+            ].number
+          ) + 1;
       }
       const sprintdata = {
         number: sprintNumber,
@@ -87,6 +86,8 @@ class Backlog extends React.Component {
   /*
     Render Functions
   */
+
+  /* Depending on the activeTab state, renders the correct view */
   renderContainer() {
     if (this.state.activeTab === "Backlog") {
       return (
@@ -109,6 +110,9 @@ class Backlog extends React.Component {
       );
     }
   }
+
+  /* Renders the create sprint button, checks to see how many stories
+     are selected. Is not clickable if no stories are selected. */
   renderCreateSprint() {
     if (this.state.selectedStories.length === 0) {
       return (
@@ -183,9 +187,9 @@ const mapStateToProps = (state) => {
   return {
     currentUser: {
       team: state.auth.user.team,
-      userId: state.auth.user.userId,
+      userID: state.auth.user.userID,
       userName: state.auth.user.name,
-      userPicture: state.auth.user.profilePicture,
+      userPicture: state.auth.user.profilePic,
     },
   };
 };

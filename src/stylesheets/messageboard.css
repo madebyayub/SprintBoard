@@ -1,0 +1,392 @@
+/* CSS For Main Container */
+.messageBoardContainer{
+    display:flex;
+    height: 100%;
+    width: 100%;
+    margin-left:15px;
+    margin-top: 56px;
+}
+
+/* CSS For Channels Left side bar */
+
+.channels{
+    background-color: #fafafa;
+    width: 25%;
+    border-right: 1px solid rgba(75, 75, 75, 0.1);
+}
+
+.channels-header{
+  padding-bottom: 6px;
+  padding-top: 12px;
+  border-bottom: 1px solid rgba(72,72,72,0.1);
+  display: flex;
+    width: 100%;
+}
+
+.channels-header img{
+  margin-bottom: 0.3em;
+  width: 25px;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(75, 75, 75, 0.9);
+}
+.channels-header p{
+    height: 100%;
+    display: inline-block;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: large;
+    color: rgba(75, 75, 75, 0.8)
+}
+
+.channels-header button{
+  margin-left:auto;
+  font-size: small;
+  border-color: transparent;
+  background-color: transparent;
+  color: rgba(26, 115, 232,0.8);
+  transition: all 0.2s ease-out;
+  border-radius: 10%;
+}
+
+.channels-header button:hover{
+  background-color: rgba(75, 75, 75, 0.05);
+}
+
+.channels-header button:focus{
+  outline: transparent;
+}
+
+.channels-container{
+  max-height: 80%;
+  overflow: auto;
+}
+
+
+.channel-button{
+  padding: 10px 20px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: rgba(75, 75, 75, 0.8);
+  border: none;
+  transition: all 0.1s ease-out;
+}
+.channel-button:focus{
+  outline: transparent;
+}
+.channel-button.current{
+  background-color: rgba(75, 75, 75, 0.05);
+}
+.channel-button.current:hover{
+  text-indent: 0%!important;
+  background-color: rgba(75, 75, 75, 0.05)!important;
+}
+.channel-button.create{
+  font-size: 14px;
+  color: rgb(26, 115, 232);
+}
+.channel-button.create i{
+  margin-right: 0.5em;
+  line-height: 2.5em;
+  font-size: 11px;
+}
+.channel-button.create:hover{
+  background-color: rgba(75, 75, 75, 0.02);
+  text-indent: 2%;
+}
+
+.channel-button:hover{
+  text-indent: 0%;
+  background-color: rgba(75, 75, 75, 0.02);
+  text-indent: 2%;
+}
+
+
+/* CSS For Main Message Section  */
+.spinner-border{
+  margin-top: 25%!important;
+}
+
+.mainChatSection{
+    width: 75%;
+}
+.mainChatHeader{
+  background-color: #fafafa;
+    height: 50px;
+    border-bottom: 1px solid rgba(75, 75, 75, 0.1);
+}
+.mainChatHeader h2{
+  line-height: 2em;
+  vertical-align: middle;
+  height: 100%;
+  margin-left: 0.5em;
+  font-weight: 600;
+  font-size: x-large;
+}
+.mainChat{
+    float: left;
+    height: 100%;
+    width: 98%;
+}
+
+.MessageBoxContainer{
+    height:74%;
+    width:100%;
+}
+
+.messageSection{
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.messageContainer{
+  text-align: left;
+  word-wrap: break-word;
+  margin-left: 0.4em;
+  margin-right: 0.4em;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  font-size: small;
+  max-width: 55%;
+  width: fit-content;
+  height: fit-content;
+}
+
+.message-author-label{
+  margin-top: 0;
+  margin-bottom: 0.3em;
+  font-size: 9px;
+  color: rgba(75, 75, 75, 0.6);
+  margin-left: 28px;
+  font-weight: 700;
+}
+
+.messageContainer .messageContent{
+  margin-left: 0.25em;
+  background-color: rgba(75, 75, 75, 0.1);
+}
+
+.messageContainer.author{
+  text-align: right;
+  margin-left: auto;
+  color: white;
+}
+
+.messageContainer.author .messageContent{
+  margin-right: 0.25em;
+  background-color: rgb(0, 153, 255);
+}
+
+.messageContent.no-picture{
+  margin-left: 22px;
+}
+
+.messageContent{
+  text-align: left;
+  max-width: 100%;
+  border-radius: 1.3em;
+  display: inline-block;
+}
+
+.messageProfilePic{
+  margin-top: 12px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+.inputMessage{
+  font-size: small;
+    width: 90%;
+    height: 6%;
+    border: 1px solid rgba(75, 75, 75, 0.1);
+    margin-right: auto;
+    border-radius: 30px;
+    margin-left: auto;
+    display: block;
+}
+.inputMessage:focus{
+    box-shadow: 0 0 3px rgba(26, 115, 232,0.7);
+}
+.inputContainer{
+    justify-content: center;
+    background-color: #fafafa;
+    border-top: 1px solid rgba(75, 75, 75, 0.1);
+    height: 100%;
+    width: 100%;
+}
+.inputContainer form{
+    height: 100%;
+}
+
+/* CSS for Channel Browser */
+
+.mainChatHeader.channel-browser-header{
+  display: flex;
+}
+
+.mainChatHeader.channel-browser-header p{
+  line-height: 3.4em;
+  vertical-align: middle;
+  font-weight: 600;
+  display: inline-block;
+  margin-left: 1.75em;
+}
+
+.mainChatHeader.channel-browser-header button {
+  padding: 0.3em 1.3em;
+  width: fit-content;
+  border-radius: 5px;
+  margin: auto auto;
+  margin-left: auto;
+  font-size: 14px;
+  margin-right: 2em;
+  color: white;
+  border-color: transparent;
+  background: rgba(21, 62, 124, 0.95);
+}
+
+.searchChannelContainer{
+  margin-top: 1.5em;
+}
+
+.searchChannelInput{
+  display: block;
+  width: 90%;
+  margin: auto;
+  font-size: 15px;
+}
+
+.searchChannelResults{
+  width: 90%;
+  margin: auto;
+  margin-top: 1em;
+}
+
+.channelResultsLabel p{
+  font-size: small;
+  font-weight: 600;
+  color: rgba(75, 75, 75, 0.8)
+}
+
+.channel-result {
+  display: flex;
+  height: 3.5em;
+  line-height: 3em;
+  vertical-align: middle;
+  border-top: 1px solid rgba(75, 75, 75, 0.15);
+}
+
+.channel-result p{
+  display: inline-block;
+}
+
+.channel-result.last-channel{
+  border-bottom: 1px solid rgba(75, 75, 75, 0.15);
+}
+
+.channel-result-name{
+  font-weight: 500;
+}
+
+.channel-result-members{
+  font-weight: 400;
+  font-size: small;
+  color: rgba(75, 75, 75, 0.6);
+}
+
+.joined-btn{
+  margin: auto auto;
+  margin-left: auto;
+  margin-right: 1em;
+  padding: 0.2em 0.75em;
+  background: rgba(75, 75, 75, 0.1);
+  border-color: transparent;
+  color: rgba(75, 75, 75, 0.7);
+  font-weight: 500;
+  line-height: 1.5em;
+  height: fit-content;
+  transition: all 0.1s ease-out;
+}
+
+.joined-btn.not-joined{
+  color: #fff;
+  background: #28a745;
+}
+.joined-btn.not-joined:hover{
+  color: #fff;
+  background-color: #218838;
+}
+#emptyChannelResults{
+  margin-top: 3em;
+  text-align: center;
+}
+
+
+/* CSS For Create Channel Modal */
+
+.createChannelHeader {
+  margin-left: 1em;
+  margin-top: 1em;
+}
+
+.createChannelDescription{
+  margin-top: 1.5em;
+  padding: 0 1em;
+}
+
+
+.createChannelDescription p{
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.createChannelName{
+  margin: 0 1em;
+}
+
+.createChannelName input{
+  background: transparent!important;
+}
+
+.createChannelDetail{
+  margin: 1em 1em;
+}
+
+.createChannelName label, .createChannelDetail label{
+  margin: 0;
+  font-size: small;
+  color: black;
+}
+
+.detailContent{
+  display: flex;
+  justify-content: space-between;
+}
+
+.detailContent p{
+  width: 70%;
+  font-size: small;
+  font-weight: 500;
+  color: rgba(75, 75, 75, 0.7)
+}
+
+.createChannelAction{
+  margin: 2em 1em;
+}
+
+.createChannelAction button{
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  color: rgba(75, 75, 75, 0.9);
+}
+
+/* CSS For right side */
+
+.right-side{
+  float: right;
+  height: 100%;
+  width: 32%;
+  border-left: 1px solid rgba(75, 75, 75, 0.1);
+}

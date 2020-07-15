@@ -3,8 +3,9 @@ import { Router, Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import Dashboard from "./dashboard/Dashboard";
-import Home from "./Home";
+import Home from "./home/Home";
 import history from "../history";
+
 class App extends React.Component {
   render() {
     return (
