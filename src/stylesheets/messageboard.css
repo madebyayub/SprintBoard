@@ -324,10 +324,24 @@
 /* CSS For Create Channel Modal */
 
 .createChannelHeader {
+  display: flex;
   margin-left: 1em;
   margin-top: 1em;
 }
-
+.createChannelclose{
+  margin-left: auto;
+  margin-right: 1em;
+  background-color: transparent;
+  outline: transparent;
+  border: none;
+  border-radius: 5px;
+  color: rgba(0,0,0,0.4);
+  transition: all 0.2s ease-in-out;
+}
+.createChannelclose:hover{
+  background-color: rgba(0,0,0,0.2);
+  color: whitesmoke;
+}
 .createChannelDescription{
   margin-top: 1.5em;
   padding: 0 1em;
