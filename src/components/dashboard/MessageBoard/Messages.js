@@ -86,9 +86,17 @@ export default class Messages extends Component {
 
   render() {
     return (
-      <div className="mainChatSection">
+      <div className={`${this.props.showChannelDetail ? "displayChatDetail" : "mainChatSection"}`}>
         <div className="mainChatHeader">
+          <div className="mainChatHeaderDetail">
           <h2># {this.props.currentChannel.name}</h2>
+          <button
+              className="mainChatDetailSection px-2"
+              onClick={this.props.showChatDetail}
+            >
+              <i className="fa fa-info-circle" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
         <div className="mainChat">
           <div className="MessageBoxContainer">
