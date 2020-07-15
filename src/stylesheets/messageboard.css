@@ -109,6 +109,9 @@
 .mainChatSection{
     width: 75%;
 }
+.displayChatDetail{
+  width: 50%;
+}
 .mainChatHeader{
   background-color: #fafafa;
     height: 50px;
@@ -121,6 +124,20 @@
   margin-left: 0.5em;
   font-weight: 600;
   font-size: x-large;
+}
+.mainChatHeaderDetail{
+  display: flex;
+  height: 100%;
+}
+.mainChatDetailSection{
+  margin: auto auto;
+  margin-left: auto;
+  margin-right: 2em;
+  background-color: transparent;
+  outline: transparent;
+  border: none;
+  border-radius: 5px;
+  color: rgba(0,0,0,0.4);
 }
 .mainChat{
     float: left;
@@ -324,10 +341,24 @@
 /* CSS For Create Channel Modal */
 
 .createChannelHeader {
+  display: flex;
   margin-left: 1em;
   margin-top: 1em;
 }
-
+.createChannelclose{
+  margin-left: auto;
+  margin-right: 1em;
+  background-color: transparent;
+  outline: transparent;
+  border: none;
+  border-radius: 5px;
+  color: rgba(0,0,0,0.4);
+  transition: all 0.2s ease-in-out;
+}
+.createChannelclose:hover{
+  background-color: rgba(0,0,0,0.2);
+  color: whitesmoke;
+}
 .createChannelDescription{
   margin-top: 1.5em;
   padding: 0 1em;
@@ -381,7 +412,6 @@
   padding-right: 1.5em;
   color: rgba(75, 75, 75, 0.9);
 }
-
 /* CSS For right side */
 
 .right-side{
@@ -389,4 +419,16 @@
   height: 100%;
   width: 32%;
   border-left: 1px solid rgba(75, 75, 75, 0.1);
+}
+
+/* CSS for Channel Detail (right side)*/
+.ChatDetailContainer{
+  width:25%;
+  background-color: #fafafa;
+}
+.ChatDetailHeader{
+  display: flex;
+  background-color: #fafafa;
+  height: 50px;
+  border-bottom: 1px solid rgba(75, 75, 75, 0.1);
 }

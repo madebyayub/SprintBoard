@@ -7,7 +7,7 @@ import Channels from "./Channels";
 import Messages from "./Messages";
 import ChannelBrowser from "./ChannelBrowser";
 import CreateChannelModal from "./CreateChannelModal";
-
+import ChatDetail from "./ChatDetail";
 import { updateUserChannels } from "../../../actions";
 import "../../../stylesheets/messageboard.css";
 
@@ -19,6 +19,7 @@ class MessageBoard extends React.Component {
     channelResults: this.props.currentUser.channels,
     loading: true,
     showCreateChannel: false,
+    showChannelDetail: false,
   };
 
   componentDidMount() {
@@ -102,7 +103,11 @@ class MessageBoard extends React.Component {
       name: channelName,
     });
   };
-
+  showChatDetail = () => {
+    this.setState({
+      showChannelDetail: !this.state.showChannelDetail
+    });
+  }
   sendMessage = (msg) => {
     const newMessage = {
       author: {
@@ -151,8 +156,13 @@ class MessageBoard extends React.Component {
               socket={this.socket}
               currentUser={this.props.currentUser}
               sendMessage={this.sendMessage}
+              showChatDetail={this.showChatDetail}
+              showChannelDetail={this.state.showChannelDetail}
             />
           )}
+          {this.state.showChannelDetail ? (
+            <ChatDetail showChannelDetail={this.state.showChannelDetail} showChatDetail={this.showChatDetail} /> 
+            ): "" }
         </div>
         /
         <CreateChannelModal
