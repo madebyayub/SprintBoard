@@ -185,6 +185,8 @@ export default class Messages extends Component {
         </div>
         {this.props.showChannelDetail ? (
           <ChatDetail
+            currentUser={this.props.currentUser}
+            leaveChannel={this.props.leaveChannel}
             channel={this.props.currentChannel}
             showChannelDetail={this.props.showChannelDetail}
             showChatDetail={this.props.toggleChatDetail}

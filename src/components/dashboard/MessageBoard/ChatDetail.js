@@ -49,7 +49,19 @@ class ChatDetail extends Component {
           </button>
           <div class="collapse" id="actionSection">
             <div className="chatContainerList">
-              <button className="leave-channel">Leave Channel</button>
+              {this.props.channel._id ===
+              this.props.currentUser.team.channel._id ? (
+                <button disabled className="team-channel-leave">
+                  Cannot Leave Team Channel
+                </button>
+              ) : (
+                <button
+                  className="leave-channel"
+                  onClick={() => this.props.leaveChannel(this.props.channel)}
+                >
+                  Leave Channel
+                </button>
+              )}
             </div>
           </div>
         </div>

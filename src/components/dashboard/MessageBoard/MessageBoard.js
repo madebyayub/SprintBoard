@@ -102,6 +102,17 @@ class MessageBoard extends React.Component {
     });
   };
 
+  leaveChannel = (channel) => {
+    this.socket.emit("leaveChannel", {
+      channel: channel._id,
+      user: this.props.currentUser._id,
+    });
+    this.setState({
+      showChannelDetail: false,
+      channel: this.props.currentUser.team.channel,
+    });
+  };
+
   searchChannel = (channelName) => {
     this.socket.emit("searchChannel", {
       name: channelName,
@@ -156,6 +167,7 @@ class MessageBoard extends React.Component {
             />
           ) : (
             <Messages
+              leaveChannel={this.leaveChannel}
               showChannelDetail={this.state.showChannelDetail}
               loading={this.state.loading}
               currentChannel={this.state.channel}
