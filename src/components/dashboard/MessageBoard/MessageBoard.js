@@ -7,7 +7,6 @@ import Channels from "./Channels";
 import Messages from "./Messages";
 import ChannelBrowser from "./ChannelBrowser";
 import CreateChannelModal from "./CreateChannelModal";
-import ChatDetail from "./ChatDetail";
 import { updateUserChannels } from "../../../actions";
 import "../../../stylesheets/messageboard.css";
 
@@ -33,6 +32,7 @@ class MessageBoard extends React.Component {
     });
     this.socket.on("receiveChannel", (populatedChannel) => {
       this.setState({
+        channel: populatedChannel.channel,
         channelMessages: populatedChannel.channel.messages,
         loading: false,
       });
@@ -76,7 +76,11 @@ class MessageBoard extends React.Component {
   };
 
   showBrowseChannel = () => {
-    this.setState({ channel: null, browseChannels: true });
+    this.setState({
+      channel: null,
+      browseChannels: true,
+      showChannelDetail: false,
+    });
   };
 
   toggleCreateChannelModal = () => {
@@ -103,11 +107,13 @@ class MessageBoard extends React.Component {
       name: channelName,
     });
   };
-  showChatDetail = () => {
+
+  toggleChatDetail = () => {
     this.setState({
-      showChannelDetail: !this.state.showChannelDetail
+      showChannelDetail: !this.state.showChannelDetail,
     });
-  }
+  };
+
   sendMessage = (msg) => {
     const newMessage = {
       author: {
@@ -150,19 +156,17 @@ class MessageBoard extends React.Component {
             />
           ) : (
             <Messages
+              showChannelDetail={this.state.showChannelDetail}
               loading={this.state.loading}
               currentChannel={this.state.channel}
               channelMessages={this.state.channelMessages}
               socket={this.socket}
               currentUser={this.props.currentUser}
               sendMessage={this.sendMessage}
-              showChatDetail={this.showChatDetail}
+              toggleChatDetail={this.toggleChatDetail}
               showChannelDetail={this.state.showChannelDetail}
             />
           )}
-          {this.state.showChannelDetail ? (
-            <ChatDetail showChannelDetail={this.state.showChannelDetail} showChatDetail={this.showChatDetail} /> 
-            ): "" }
         </div>
         /
         <CreateChannelModal

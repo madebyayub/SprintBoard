@@ -22,6 +22,7 @@ class MemberView extends React.Component {
       const count = this.storiesCreatedAndAssigned(member);
       return (
         <tr
+          key={member._id}
           className={`member-row ${
             member.userID === this.props.currentUser.userID ? "current" : ""
           }`}
