@@ -4,7 +4,11 @@ class Channels extends React.Component {
   renderChannels() {
     return this.props.currentUser.channels.map((channel) => {
       if (channel._id === this.props.currentUser.team.channel._id) {
-        return <></>;
+        return (
+          <React.Fragment
+            key={this.props.currentUser.team.channel._id}
+          ></React.Fragment>
+        );
       } else {
         return (
           <div className="channel-container" key={channel._id}>
@@ -17,7 +21,7 @@ class Channels extends React.Component {
               }`}
               onClick={() => this.props.changeChannel(channel)}
             >
-              # {channel.name}
+              <i className="fas fa-hashtag"></i> {channel.name}
             </button>
           </div>
         );
@@ -43,7 +47,9 @@ class Channels extends React.Component {
             this.props.changeChannel(this.props.currentUser.team.channel)
           }
         >
-          # {this.props.currentUser.team.channel.name}
+          <i className="fas fa-thumbtack pinned"></i>{" "}
+          <i className="fas fa-hashtag"></i>{" "}
+          {this.props.currentUser.team.channel.name}
         </button>
       </div>
     );

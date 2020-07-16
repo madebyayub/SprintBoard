@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import ChatDetail from "./ChatDetail";
+import ReactTooltip from "react-tooltip";
+import moment from "moment";
 
 export default class Messages extends Component {
   state = { userMessage: "", scroll: true };
@@ -19,8 +22,10 @@ export default class Messages extends Component {
 
   handleSendMessage(e) {
     e.preventDefault();
-    this.props.sendMessage(this.state.userMessage);
-    this.setState({ userMessage: "", scroll: true });
+    if (this.state.userMessage !== "") {
+      this.props.sendMessage(this.state.userMessage);
+      this.setState({ userMessage: "", scroll: true });
+    }
   }
 
   renderChannelMessages() {
@@ -29,9 +34,21 @@ export default class Messages extends Component {
         return (
           <React.Fragment key={message._id}>
             <div className="messageContainer author">
-              <div className="messageContent py-1 px-2">
+              <div
+                className="messageContent py-1 px-2"
+                data-tip
+                data-for={message._id}
+              >
                 <span>{message.content}</span>
               </div>
+              <ReactTooltip
+                id={message._id}
+                type="dark"
+                effect="solid"
+                place="left"
+              >
+                <span>{moment(message.date).fromNow()}</span>
+              </ReactTooltip>
             </div>
           </React.Fragment>
         );
@@ -50,11 +67,31 @@ export default class Messages extends Component {
                       {message.author.name}
                     </p>
                   ) : (
-                    <></>
+                    <>
+                      {index === 0 ? (
+                        <p className="message-author-label">
+                          {message.author.name}
+                        </p>
+                      ) : (
+                        <></>
+                      )}
+                    </>
                   )}
-                  <div className="messageContent no-picture py-1 px-2">
+                  <div
+                    className="messageContent no-picture py-1 px-2"
+                    data-tip
+                    data-for={message._id}
+                  >
                     <span>{message.content}</span>
                   </div>
+                  <ReactTooltip
+                    id={message._id}
+                    type="dark"
+                    effect="solid"
+                    place="left"
+                  >
+                    <span>{moment(message.date).fromNow()}</span>
+                  </ReactTooltip>
                 </>
               ) : (
                 <>
@@ -65,16 +102,36 @@ export default class Messages extends Component {
                       {message.author.name}
                     </p>
                   ) : (
-                    <></>
+                    <>
+                      {index === 0 ? (
+                        <p className="message-author-label">
+                          {message.author.name}
+                        </p>
+                      ) : (
+                        <></>
+                      )}
+                    </>
                   )}
                   <img
                     className="messageProfilePic"
                     src={message.author.profilePic}
                     alt="sender profile"
                   ></img>
-                  <div className="messageContent py-1 px-2">
+                  <div
+                    className="messageContent py-1 px-2"
+                    data-tip
+                    data-for={message._id}
+                  >
                     <span>{message.content}</span>
                   </div>
+                  <ReactTooltip
+                    id={message._id}
+                    type="dark"
+                    effect="solid"
+                    place="left"
+                  >
+                    <span>{moment(message.date).fromNow()}</span>
+                  </ReactTooltip>
                 </>
               )}
             </div>
@@ -86,20 +143,23 @@ export default class Messages extends Component {
 
   render() {
     return (
-      <div className={`${this.props.showChannelDetail ? "displayChatDetail" : "mainChatSection"}`}>
+      <div className="mainChatSection">
         <div className="mainChatHeader">
           <div className="mainChatHeaderDetail">
-          <h2># {this.props.currentChannel.name}</h2>
-          {this.props.showChannelDetail ? "" : 
-            <button
-              className="mainChatDetailSection px-2"
-              onClick={this.props.showChatDetail}
-            >
+            <h2># {this.props.currentChannel.name}</h2>
+
+            <button className="px-2" onClick={this.props.toggleChatDetail}>
               <i className="fa fa-info-circle" aria-hidden="true"></i>
-            </button>}
+            </button>
           </div>
         </div>
-        <div className="mainChat">
+        <div
+          className={
+            this.props.showChannelDetail
+              ? "mainChat displayChannelDetail"
+              : "mainChat"
+          }
+        >
           <div className="MessageBoxContainer">
             <div className="messageSection px-1">
               {this.props.loading ? (
@@ -123,6 +183,15 @@ export default class Messages extends Component {
             </form>
           </div>
         </div>
+        {this.props.showChannelDetail ? (
+          <ChatDetail
+            channel={this.props.currentChannel}
+            showChannelDetail={this.props.showChannelDetail}
+            showChatDetail={this.props.toggleChatDetail}
+          />
+        ) : (
+          <></>
+        )}
       </div>
     );
   }

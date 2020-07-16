@@ -70,7 +70,7 @@ export default class CreateChannelModal extends Component {
                 When a channel is set to private it can only be viewed or joined
                 by invitation.
               </p>
-              <div class="custom-control custom-switch">
+              <div className="custom-control custom-switch">
                 <input
                   type="checkbox"
                   className="custom-control-input"
