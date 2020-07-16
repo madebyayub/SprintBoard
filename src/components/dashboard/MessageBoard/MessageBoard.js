@@ -164,7 +164,6 @@ class MessageBoard extends React.Component {
               currentUser={this.props.currentUser}
               sendMessage={this.sendMessage}
               toggleChatDetail={this.toggleChatDetail}
-              showChannelDetail={this.state.showChannelDetail}
             />
           )}
         </div>
