@@ -1,4 +1,15 @@
+.locked-channel{
+  font-size: medium;
+  color: rgba(72, 72, 72, 0.5);
+}
+
+.locked-channel.large{
+  font-size: x-large;
+}
+
+
 /* CSS For Main Container */
+
 .messageBoardContainer {
   display: flex;
   height: 100%;

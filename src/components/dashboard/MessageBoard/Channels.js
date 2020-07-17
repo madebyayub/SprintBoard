@@ -21,7 +21,14 @@ class Channels extends React.Component {
               }`}
               onClick={() => this.props.changeChannel(channel)}
             >
-              <i className="fas fa-hashtag"></i> {channel.name}
+              <i className="fas fa-hashtag"></i> {channel.name}{" "}
+              {channel.private ? (
+                <span className="locked-channel ml-2">
+                  <i class="fas fa-lock"></i>
+                </span>
+              ) : (
+                ""
+              )}
             </button>
           </div>
         );
@@ -50,6 +57,9 @@ class Channels extends React.Component {
           <i className="fas fa-thumbtack pinned"></i>{" "}
           <i className="fas fa-hashtag"></i>{" "}
           {this.props.currentUser.team.channel.name}
+          <span className="locked-channel ml-2">
+            <i class="fas fa-lock"></i>
+          </span>
         </button>
       </div>
     );

@@ -46,7 +46,17 @@ class ChannelBrowser extends Component {
             }`}
           >
             <p>
-              <span className="channel-result-name"># {channel.name}</span> · 
+              <span className="channel-result-name">
+                # {channel.name}
+                {channel.private ? (
+                  <span className="locked-channel ml-2">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                ) : (
+                  ""
+                )}
+              </span>
+               · 
               <span className="channel-result-members">
                 {channel.members.length} members
               </span>

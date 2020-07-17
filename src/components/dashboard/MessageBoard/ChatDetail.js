@@ -20,7 +20,14 @@ class ChatDetail extends Component {
       <div className="ChatDetailContainer">
         <div className="ChatDetailHeader">
           <h3>
-            <i className="fas fa-hashtag"></i> {this.props.channel.name}
+            <i className="fas fa-hashtag"></i> {this.props.channel.name}{" "}
+            {this.props.channel.private ? (
+              <span className="locked-channel large ml-2">
+                <i class="fas fa-lock"></i>
+              </span>
+            ) : (
+              ""
+            )}
           </h3>
           {this.props.channel.messages.length > 0 ? (
             <p>

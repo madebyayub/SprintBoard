@@ -146,7 +146,16 @@ export default class Messages extends Component {
       <div className="mainChatSection">
         <div className="mainChatHeader">
           <div className="mainChatHeaderDetail">
-            <h2># {this.props.currentChannel.name}</h2>
+            <h2>
+              # {this.props.currentChannel.name}{" "}
+              {this.props.currentChannel.private ? (
+                <span className="locked-channel ml-2">
+                  <i class="fas fa-lock"></i>
+                </span>
+              ) : (
+                ""
+              )}{" "}
+            </h2>
 
             <button className="px-2" onClick={this.props.toggleChatDetail}>
               <i className="fa fa-info-circle" aria-hidden="true"></i>
