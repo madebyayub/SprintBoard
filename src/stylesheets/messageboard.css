@@ -1,9 +1,9 @@
-.locked-channel{
+.locked-channel {
   font-size: medium;
   color: rgba(72, 72, 72, 0.5);
 }
 
-.locked-channel.large{
+.locked-channel.large {
   font-size: x-large;
 }
 
@@ -116,10 +116,9 @@
 }
 
 /* CSS For Main Message Section  */
-.spinner-border{
-  top:35%;
+.spinner-border {
+  top: 35%;
 }
-
 
 .mainChatSection {
   width: 74%;
@@ -478,14 +477,14 @@
 }
 
 .team-channel-leave {
-  cursor: default!important;
+  cursor: default !important;
   padding: 0.5em 0em;
   display: block;
   border-radius: 0px;
   margin: auto;
   width: 90%;
   font-size: small;
-  color: rgba(72,72,72,0.9);
+  color: rgba(72, 72, 72, 0.9);
   background-color: rgba(72, 72, 72, 0.1);
   border-color: transparent;
 }
@@ -537,14 +536,59 @@
   height: 10%;
 }
 
+.addMember {
+  border-radius: 0;
+  width: 100%;
+  background: transparent;
+  border-color: transparent !important;
+  color: rgb(26, 115, 232) !important;
+  outline: transparent;
+}
+
+.addMember:hover {
+  background: rgba(72, 72, 72, 0.075);
+  border-color: transparent;
+  color: rgb(26, 115, 232) !important;
+}
+
+.addMember:active {
+  background: rgba(72, 72, 72, 0.1) !important;
+  border-color: transparent;
+  outline: transparent !important;
+}
+
+.addMember:focus {
+  background: transparent;
+  border-color: transparent;
+  outline: 0 !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.addMember {
+  padding-left: 1em;
+  text-align: left;
+}
+
+.addMember i {
+  width: 35px;
+  text-align: center;
+  margin-right: 1em;
+}
+
 .teamMember {
   padding-left: 1em;
 }
+
 .teamMember img {
   width: 35px;
   border-radius: 50%;
 }
-
+.teamMember i {
+  vertical-align: sub;
+  text-align: center;
+  width: 35px;
+}
 .teamMember p {
   display: inline-block;
   line-height: 35px;
