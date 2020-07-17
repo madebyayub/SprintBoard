@@ -1,0 +1,38 @@
+.addTeamMemberHeader {
+  display: flex;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.addTeamMemberHeader button {
+  background-color: transparent;
+  border: transparent;
+  color: rgb(26, 115, 232);
+}
+.addTeamMemberHeader button:hover {
+  border-radius: 5%;
+  background-color: rgba(158, 155, 155, 0.2);
+  outline: none;
+}
+.addTeamMemberHeader button:focus {
+  background-color: transparent;
+  outline: none;
+}
+#closeButton {
+  margin-left: 0.4em;
+  margin-right: auto;
+}
+
+#addMemberButton {
+  margin-right: 0.4em;
+  margin-left: auto;
+}
+.addMemberSearchContainer {
+  width: 100%;
+}
+.memberInput {
+  border: 0.5px solid rgb(158, 155, 155, 0.2) !important;
+  border-radius: 0% !important;
+}
+.addMemberTitle {
+  font-weight: 500;
+}

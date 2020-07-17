@@ -58,7 +58,7 @@ class Channels extends React.Component {
           <i className="fas fa-hashtag"></i>{" "}
           {this.props.currentUser.team.channel.name}
           <span className="locked-channel ml-2">
-            <i class="fas fa-lock"></i>
+            <i className="fas fa-lock"></i>
           </span>
         </button>
       </div>

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import ChatDetail from "./ChatDetail";
+import AddChannelMemberModal from "./AddChannelMemberModal";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
 
 export default class Messages extends Component {
-  state = { userMessage: "", scroll: true };
+  state = { userMessage: "", scroll: true, showAddMemberModal: false };
 
   componentDidMount() {
     this.messageContainer = document.querySelector(".messageSection");
@@ -19,6 +20,10 @@ export default class Messages extends Component {
       this.setState({ scroll: false });
     }
   }
+
+  onAddMember = () => {
+    this.setState({ showAddMemberModal: !this.state.showAddMemberModal });
+  };
 
   handleSendMessage(e) {
     e.preventDefault();
@@ -143,67 +148,79 @@ export default class Messages extends Component {
 
   render() {
     return (
-      <div className="mainChatSection">
-        <div className="mainChatHeader">
-          <div className="mainChatHeaderDetail">
-            <h2>
-              # {this.props.currentChannel.name}{" "}
-              {this.props.currentChannel.private ? (
-                <span className="locked-channel ml-2">
-                  <i class="fas fa-lock"></i>
-                </span>
-              ) : (
-                ""
-              )}{" "}
-            </h2>
+      <>
+        <div className="mainChatSection">
+          <div className="mainChatHeader">
+            <div className="mainChatHeaderDetail">
+              <h2>
+                # {this.props.currentChannel.name}{" "}
+                {this.props.currentChannel.private ? (
+                  <span className="locked-channel ml-2">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                ) : (
+                  ""
+                )}{" "}
+              </h2>
 
-            <button className="px-2" onClick={this.props.toggleChatDetail}>
-              <i className="fa fa-info-circle" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-        <div
-          className={
-            this.props.showChannelDetail
-              ? "mainChat displayChannelDetail"
-              : "mainChat"
-          }
-        >
-          <div className="MessageBoxContainer">
-            <div className="messageSection px-1">
-              {this.props.loading ? (
-                <div className="spinner-border text-primary mt-5" role="status">
-                  <span className="sr-only">Loading...</span>
-                </div>
-              ) : (
-                this.renderChannelMessages()
-              )}
+              <button className="px-2" onClick={this.props.toggleChatDetail}>
+                <i className="fa fa-info-circle" aria-hidden="true"></i>
+              </button>
             </div>
           </div>
-          <div className="inputContainer">
-            <form onSubmit={(e) => this.handleSendMessage(e)}>
-              <input
-                onChange={(e) => this.setState({ userMessage: e.target.value })}
-                value={this.state.userMessage}
-                autoFocus
-                className="form-control inputMessage mt-2 px-2"
-                placeholder="Send a message here..."
-              />
-            </form>
+          <div
+            className={
+              this.props.showChannelDetail
+                ? "mainChat displayChannelDetail"
+                : "mainChat"
+            }
+          >
+            <div className="MessageBoxContainer">
+              <div className="messageSection px-1">
+                {this.props.loading ? (
+                  <div
+                    className="spinner-border text-primary mt-5"
+                    role="status"
+                  >
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                ) : (
+                  this.renderChannelMessages()
+                )}
+              </div>
+            </div>
+            <div className="inputContainer">
+              <form onSubmit={(e) => this.handleSendMessage(e)}>
+                <input
+                  onChange={(e) =>
+                    this.setState({ userMessage: e.target.value })
+                  }
+                  value={this.state.userMessage}
+                  autoFocus
+                  className="form-control inputMessage mt-2 px-2"
+                  placeholder="Send a message here..."
+                />
+              </form>
+            </div>
           </div>
+          {this.props.showChannelDetail ? (
+            <ChatDetail
+              onAddMember={this.onAddMember}
+              currentUser={this.props.currentUser}
+              leaveChannel={this.props.leaveChannel}
+              channel={this.props.currentChannel}
+              showChannelDetail={this.props.showChannelDetail}
+              showChatDetail={this.props.toggleChatDetail}
+            />
+          ) : (
+            <></>
+          )}
         </div>
-        {this.props.showChannelDetail ? (
-          <ChatDetail
-            currentUser={this.props.currentUser}
-            leaveChannel={this.props.leaveChannel}
-            channel={this.props.currentChannel}
-            showChannelDetail={this.props.showChannelDetail}
-            showChatDetail={this.props.toggleChatDetail}
-          />
-        ) : (
-          <></>
-        )}
-      </div>
+        <AddChannelMemberModal
+          showAddMember={this.state.showAddMemberModal}
+          closeModal={this.onAddMember}
+        />
+      </>
     );
   }
 }

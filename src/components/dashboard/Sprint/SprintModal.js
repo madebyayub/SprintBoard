@@ -193,11 +193,13 @@ class SprintModal extends React.Component {
               } modalInput py-4 form-control`}
               value={this.state.title}
               onChange={(e) => this.validateTitle(e.target.value)}
+              disabled
             />
           </div>
           <select
             className="modalSelect form-control form-control-lg mt-3"
             onChange={(e) => this.dropdownUser(e)}
+            disabled
           >
             <option
               selected
@@ -219,6 +221,7 @@ class SprintModal extends React.Component {
           <select
             className="modalSelect form-control form-control-lg mt-3"
             onChange={(e) => this.dropdownState(e)}
+            disabled
           >
             <option value="To-do">To-do</option>
             <option value="In Progress">In Progress</option>
@@ -227,6 +230,7 @@ class SprintModal extends React.Component {
           <select
             className="modalSelect form-control form-control-lg mt-3"
             onChange={(e) => this.dropdownValue(e)}
+            disabled
           >
             <option
               selected
@@ -247,6 +251,7 @@ class SprintModal extends React.Component {
             value={this.state.point}
             placeholder="Points"
             onChange={(e) => this.validatePoint(e.target.value)}
+            disabled
           />
           <div className="ModalDescription mt-3">
             <textarea
@@ -254,10 +259,8 @@ class SprintModal extends React.Component {
               onChange={(e) => this.setState({ description: e.target.value })}
               className="form-control modalTextArea"
               rows="5"
+              disabled
             ></textarea>
-          </div>
-          <div className="modalActions mt-4 mb-1">
-            {this.renderSaveButton()}
           </div>
         </div>
       );

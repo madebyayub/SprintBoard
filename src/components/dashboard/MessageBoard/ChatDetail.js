@@ -9,8 +9,10 @@ class ChatDetail extends Component {
     return this.props.channel.members.map((member) => {
       return (
         <div key={member._id} className="teamMember">
-          <img src={member.profilePic} alt="Member-profile"></img>
-          <p>{member.name}</p>
+          <div>
+            <img src={member.profilePic} alt="Member-profile"></img>
+            <p>{member.name}</p>
+          </div>
         </div>
       );
     });
@@ -85,6 +87,13 @@ class ChatDetail extends Component {
           </button>
           <div class="collapse" id="membersSection">
             <div id="membersSection" className="chatContainerList">
+              <button
+                onClick={this.props.onAddMember}
+                className="btn btn-primary addMember py-2 mb-2"
+              >
+                <i className="fas fa-plus"></i>
+                Add Member
+              </button>
               {this.renderMembers()}
             </div>
           </div>
