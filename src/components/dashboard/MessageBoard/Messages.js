@@ -162,10 +162,17 @@ export default class Messages extends Component {
                   ""
                 )}{" "}
               </h2>
-
-              <button className="px-2" onClick={this.props.toggleChatDetail}>
-                <i className="fa fa-info-circle" aria-hidden="true"></i>
-              </button>
+              <div>
+                <button className="px-2" onClick={() => this.onAddMember()}>
+                  <i className="fas fa-plus"></i>
+                </button>
+                <button
+                  className="px-2 mr-4"
+                  onClick={this.props.toggleChatDetail}
+                >
+                  <i className="fa fa-info-circle" aria-hidden="true"></i>
+                </button>
+              </div>
             </div>
           </div>
           <div
@@ -217,6 +224,10 @@ export default class Messages extends Component {
           )}
         </div>
         <AddChannelMemberModal
+          channel={this.props.currentChannel}
+          resetMemberResults={this.props.resetMemberResults}
+          searchMembers={this.props.searchMembers}
+          memberSearchResults={this.props.memberSearchResults}
           showAddMember={this.state.showAddMemberModal}
           closeModal={this.onAddMember}
         />

@@ -16,6 +16,7 @@ class MessageBoard extends React.Component {
     channelMessages: [],
     browseChannels: false,
     channelResults: this.props.currentUser.channels,
+    memberResults: this.props.currentUser.team.members,
     loading: true,
     showCreateChannel: false,
     showChannelDetail: false,
@@ -50,6 +51,10 @@ class MessageBoard extends React.Component {
       this.setState({ channelResults: channels });
     });
 
+    this.socket.on("searchMemberResults", ({ results }) => {
+      this.setState({ memberResults: results });
+    });
+
     this.socket.on("message", (msg) => {
       if (msg.author.userID !== this.props.currentUser.userID) {
         this.setState({
@@ -61,6 +66,10 @@ class MessageBoard extends React.Component {
 
   resetChannelResults = () => {
     this.setState({ channelResults: this.props.currentUser.channels });
+  };
+
+  resetMemberResults = () => {
+    this.setState({ memberResults: this.props.currentUser.team.members });
   };
 
   changeChannel = (channel) => {
@@ -110,6 +119,12 @@ class MessageBoard extends React.Component {
     this.setState({
       showChannelDetail: false,
       channel: this.props.currentUser.team.channel,
+    });
+  };
+
+  searchMembers = (member) => {
+    this.socket.emit("searchMember", {
+      search: member,
     });
   };
 
@@ -167,6 +182,9 @@ class MessageBoard extends React.Component {
             />
           ) : (
             <Messages
+              searchMembers={this.searchMembers}
+              resetMemberResults={this.resetMemberResults}
+              memberSearchResults={this.state.memberResults}
               leaveChannel={this.leaveChannel}
               showChannelDetail={this.state.showChannelDetail}
               loading={this.state.loading}

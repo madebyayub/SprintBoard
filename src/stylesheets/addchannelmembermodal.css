@@ -1,5 +1,6 @@
 .addTeamMemberHeader {
   display: flex;
+  height: 10%;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
@@ -35,4 +36,41 @@
 }
 .addMemberTitle {
   font-weight: 500;
+}
+
+.memberResultsContainer {
+  overflow: auto;
+}
+
+.memberResultsContainer label {
+  margin-left: 1em;
+  font-size: small;
+  color: rgba(72, 72, 72, 0.6);
+  font-weight: 600;
+}
+
+.userSearchResult button {
+  background-color: transparent;
+  border-color: transparent;
+  font-size: small;
+  width: 100%;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.userSearchResult button:hover {
+  background-color: rgba(72, 72, 72, 0.05);
+}
+
+.userSearchResult button span {
+  float: right;
+  margin-right: 1em;
+  margin-top: 0.2em;
+  color: rgba(72, 72, 72, 0.6);
+  font-size: 12px;
+}
+
+.userSearchResult img {
+  width: 25px;
+  border-radius: 50%;
 }

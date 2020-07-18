@@ -144,7 +144,7 @@ class Backlog extends React.Component {
       <>
         <div className="container-fluid">
           <div className="main-container">
-            <div className="tab-container pl-2 ml-3 mt-2">
+            <div className="tab-container pl-2 ml-3 pt-1">
               <button
                 className={`backlog-tab py-1 px-3 ${
                   this.state.activeTab === "Backlog" ? "active" : ""

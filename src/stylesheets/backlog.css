@@ -1,152 +1,189 @@
-.container-fluid{
-  padding:0;
-  background-color:white;
+.container-fluid {
+  padding: 0;
+  background-color: white;
   overflow: hidden;
   width: auto;
   height: 100vh;
   margin-top: 0px;
-  margin-left: 65px;}
-  .main-container{
-    width: 100%;
-    margin: auto;
-    height: 88%;
-    margin-top: 60px;}
-    .tab-container{
-      background-color: #fafafa;
-      height: 50px;
-      max-height: 50px;
-      border-bottom: 1.1px solid rgba(0,0,0,.12);}
-      #create-story{
-        float: right;
-        cursor: pointer;
-        border-radius: 5px;
-        font-size: small;
-        font-weight: 600;
-        background-color: transparent;
-        transition: all 0.2s ease-in-out;
-        color: #1a73e8 !important;}
-        #create-story:hover{
-          background-color: #dedede;
-          color: white;}
-      #create-sprint{
-        border:none;
-        float: right;
-        cursor: pointer;
-        border-radius: 5px;
-        font-size: small;
-        font-weight: 600;
-        background-color: rgba(12, 48, 101, 1);
-        transition: all 0.2s ease-in-out;
-        color: white;}
-        #create-sprint:hover{
-          box-shadow: 0 0 8px rgba(71,71,71,0.8);}
-        #create-sprint:focus{
-          outline:0;}
-        #create-sprint.disabled{
-          cursor: default;
-          background-color: rgba(12, 48, 101, 0.8);}
-          #create-sprint.disabled:hover{
-            box-shadow: none}
-      .backlog-tab{
-        width:86px;
-        min-width: 86px;
-        font-size: small;
-        font-weight: 500;
-        background-color: transparent;
-        color:rgba(75, 75, 75, 0.8);
-        border:none;
-        height: 100%;
-        transition: all 0.1s ease-in;}
-        .backlog-tab:hover{
-          color: #1a73e8;}
-        .backlog-tab:focus{
-          outline: 0;}
-        .backlog-tab.active{
-          font-weight: 800;
-          border-bottom: 3px solid #1a73e8;
-          color: #1a73e8 !important;
-          background-color: transparent;}
-    #backlog-list-container{
-      margin: auto;
-      display: block;
-      width: 93%;
-      height: 85%;}
-      #backlog-list-container .table{
-        overflow: auto;
-        height: 100%;
-        display: block;
-        width: 100%;}
-        .table.sprint{
-          height: 89.5%!important;}
-      #backlog-list-container .table > thead > tr > th{
-        border-radius: 0;
-        z-index: 60;
-        border-bottom: 1px solid rgba(75, 75, 75, 0.2);
-        background-color: rgb(238, 238, 238);
-        position: sticky;
-        top: 0px;}
-        #backlog-list-container .table th{
-        max-width: 50px;
-        color: rgba(0, 0, 0, 0.7);
-        padding: 5px;}
-        #backlog-list-container .table .check-col{
-          width: 1%;}
-        #backlog-list-container .table .title-col{
-          width: 15%;}
-        #backlog-list-container .table .person-col{
-          width: 10%;}
-        #backlog-list-container .table .status-col{
-          width: 5%;}
-        #backlog-list-container .table .points-col{
-          width: 5%;}
-        #backlog-list-container .table .actions-col{
-          text-align: right;
-          width: 5%;}
-        #backlog-list-container .table td{
-        color: rgba(75, 75, 75, 0.8);
-        cursor: pointer;
-        padding: 3px;}
-      #backlog-list-header{
-        font-size: 12px;
-        text-align: center;
-        background-color: rgba(75, 75, 75, 0.09);}
-      .empty-row{
-        font-weight: 600;
-        font-size: 11px;
-        text-align:center;
-        border-top: 1px solid rgba(75, 75, 75, 0.2);
-        border-bottom: 1px solid rgba(75, 75, 75, 0.2);}
-      .story-row{
-        border-top: 1px solid rgba(75, 75, 75, 0.2);
-        border-bottom: 1px solid rgba(75, 75, 75, 0.2);
-        font-weight: 500;
-        font-size: 12px;
-        text-align: center;}
-        .story-row:hover{
-          background-color: rgba(75, 75, 75, 0.05);}
-        .title-col{
-          font-weight: 800;}
-        .sprint-num-label{
-          text-align: center;
-          font-weight: 700;}
-        .story-row-profile{
-          border-radius: 50%;
-          width: 20px;}
-        .remove-story{
-          border-radius:5px;
-          border: none;
-          background-color: transparent;
-          color: rgba(75,75,75,0.8);
-          transition: all 0.2s ease-out;}
-          .remove-story:hover{
-            color: rgba(240, 33, 33, 0.85);
-            background-color: rgba(75,75,75,0.1);}
-          .remove-story:focus{
-            outline:0;}
-    #numStories{
-      border-top: 1px solid rgba(75, 75, 75, 0.09);
-      display: block;
-      text-align: right;
-      font-weight: 600;
-      font-size: small;
-      color: rgba(0, 0, 0, 0.4);}
+  margin-left: 65px;
+}
+.main-container {
+  width: 100%;
+  margin: auto;
+  height: 88%;
+  margin-top: 60px;
+}
+.tab-container {
+  background-color: #fafafa;
+  height: 50px;
+  max-height: 50px;
+  border-bottom: 1.1px solid rgba(0, 0, 0, 0.12);
+}
+#create-story {
+  float: right;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: small;
+  font-weight: 600;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+  color: #1a73e8 !important;
+}
+#create-story:hover {
+  background-color: rgba(72, 72, 72, 0.1);
+  color: white;
+}
+#create-sprint {
+  border: none;
+  float: right;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: small;
+  font-weight: 600;
+  background-color: rgba(12, 48, 101, 1);
+  transition: all 0.2s ease-in-out;
+  color: white;
+}
+#create-sprint:hover {
+  box-shadow: 0 0 8px rgba(71, 71, 71, 0.8);
+}
+#create-sprint:focus {
+  outline: 0;
+}
+#create-sprint.disabled {
+  cursor: default;
+  background-color: rgba(12, 48, 101, 0.8);
+}
+#create-sprint.disabled:hover {
+  box-shadow: none;
+}
+.backlog-tab {
+  width: 86px;
+  min-width: 86px;
+  font-size: small;
+  font-weight: 500;
+  background-color: transparent;
+  color: rgba(75, 75, 75, 0.8);
+  border: none;
+  height: 100%;
+  transition: all 0.1s ease-in;
+}
+.backlog-tab:hover {
+  color: #1a73e8;
+}
+.backlog-tab:focus {
+  outline: 0;
+}
+.backlog-tab.active {
+  font-weight: 800;
+  border-bottom: 3px solid #1a73e8;
+  color: #1a73e8 !important;
+  background-color: transparent;
+}
+#backlog-list-container {
+  margin: auto;
+  display: block;
+  width: 93%;
+  height: 85%;
+}
+#backlog-list-container .table {
+  overflow: auto;
+  height: 100%;
+  display: block;
+  width: 100%;
+}
+.table.sprint {
+  height: 89.5% !important;
+}
+#backlog-list-container .table > thead > tr > th {
+  border-radius: 0;
+  z-index: 60;
+  border-bottom: 1px solid rgba(75, 75, 75, 0.2);
+  background-color: rgb(238, 238, 238);
+  position: sticky;
+  top: 0px;
+}
+#backlog-list-container .table th {
+  max-width: 50px;
+  color: rgba(0, 0, 0, 0.7);
+  padding: 5px;
+}
+#backlog-list-container .table .check-col {
+  width: 1%;
+}
+#backlog-list-container .table .title-col {
+  width: 15%;
+}
+#backlog-list-container .table .person-col {
+  width: 10%;
+}
+#backlog-list-container .table .status-col {
+  width: 5%;
+}
+#backlog-list-container .table .points-col {
+  width: 5%;
+}
+#backlog-list-container .table .actions-col {
+  text-align: right;
+  width: 5%;
+}
+#backlog-list-container .table td {
+  color: rgba(75, 75, 75, 0.8);
+  cursor: pointer;
+  padding: 3px;
+}
+#backlog-list-header {
+  font-size: 12px;
+  text-align: center;
+  background-color: rgba(75, 75, 75, 0.09);
+}
+.empty-row {
+  font-weight: 600;
+  font-size: 11px;
+  text-align: center;
+  border-top: 1px solid rgba(75, 75, 75, 0.2);
+  border-bottom: 1px solid rgba(75, 75, 75, 0.2);
+}
+.story-row {
+  border-top: 1px solid rgba(75, 75, 75, 0.2);
+  border-bottom: 1px solid rgba(75, 75, 75, 0.2);
+  font-weight: 500;
+  font-size: 12px;
+  text-align: center;
+}
+.story-row:hover {
+  background-color: rgba(75, 75, 75, 0.05);
+}
+.title-col {
+  font-weight: 800;
+}
+.sprint-num-label {
+  text-align: center;
+  font-weight: 700;
+}
+.story-row-profile {
+  border-radius: 50%;
+  width: 20px;
+}
+.remove-story {
+  border-radius: 5px;
+  border: none;
+  background-color: transparent;
+  color: rgba(75, 75, 75, 0.8);
+  transition: all 0.2s ease-out;
+}
+.remove-story:hover {
+  color: rgba(240, 33, 33, 0.85);
+  background-color: rgba(75, 75, 75, 0.1);
+}
+.remove-story:focus {
+  outline: 0;
+}
+#numStories {
+  border-top: 1px solid rgba(75, 75, 75, 0.09);
+  display: block;
+  text-align: right;
+  font-weight: 600;
+  font-size: small;
+  color: rgba(0, 0, 0, 0.4);
+}

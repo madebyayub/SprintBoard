@@ -3,6 +3,44 @@ import Modal from "react-modal";
 import "../../../stylesheets/addchannelmembermodal.css";
 
 class AddChannelMemberModal extends Component {
+  state = { name: "", addedMembers: [] };
+
+  isMemberOf(user) {
+    for (let i = 0; i < this.props.channel.members.length; i++) {
+      if (this.props.channel.members[i]._id === user._id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  handleNameChange = (e) => {
+    if (e.target.value !== "") {
+      this.props.searchMembers(e.target.value);
+    } else {
+      this.props.resetMemberResults();
+    }
+    this.setState({ name: e.target.value });
+  };
+
+  renderResults() {
+    return this.props.memberSearchResults.map((user) => {
+      return (
+        <div className="userSearchResult">
+          <button className="py-1">
+            <img
+              className="mx-2"
+              src={user.profilePic}
+              alt="member-searhc-profile"
+            ></img>
+            {user.name}
+            {this.isMemberOf(user) ? <span>Joined</span> : ""}
+          </button>
+        </div>
+      );
+    });
+  }
+
   render() {
     return (
       <Modal
@@ -10,7 +48,7 @@ class AddChannelMemberModal extends Component {
         onRequestClose={() => this.props.closeModal()}
         style={{
           overlay: {
-            backgroundColor: "rgba(0,0,0,0.5)",
+            backgroundColor: "rgba(0,0,0,0.2)",
             zIndex: 1031,
           },
           content: {
@@ -42,10 +80,14 @@ class AddChannelMemberModal extends Component {
           <div className="addMemberSearchContainer">
             <input
               className="memberInput form-control"
-              placeholder="e.g. general"
-              value=""
-              onChange={(e) => this.handleCreateChange(e)}
+              placeholder="Add a member"
+              value={this.state.name}
+              onChange={(e) => this.handleNameChange(e)}
             />
+          </div>
+          <div className="memberResultsContainer pt-2">
+            <label>Users</label>
+            <div className="memberResults">{this.renderResults()}</div>
           </div>
         </div>
       </Modal>

@@ -89,7 +89,7 @@ class ChatDetail extends Component {
             <div id="membersSection" className="chatContainerList">
               <button
                 onClick={this.props.onAddMember}
-                className="btn btn-primary addMember py-2 mb-2"
+                className="btn btn-primary addMember py-2"
               >
                 <i className="fas fa-plus"></i>
                 Add Member

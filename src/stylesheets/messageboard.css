@@ -140,11 +140,12 @@
   display: flex;
   height: 100%;
 }
-.mainChatHeaderDetail button {
-  margin: auto auto;
+.mainChatHeaderDetail div {
   margin-left: auto;
+  width: fit-content;
+}
+.mainChatHeaderDetail button {
   margin-top: 0.6em;
-  margin-right: 1em;
   font-size: larger;
   background-color: transparent;
   outline: transparent;
@@ -464,6 +465,11 @@
   color: rgba(0, 0, 0, 0.4);
 }
 
+#actionSection {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
 .ChatActionContainer,
 .ChatMemberContainer {
   width: 100%;
@@ -472,8 +478,6 @@
 
 .chatContainerList {
   width: 100%;
-  padding-top: 1em;
-  padding-bottom: 1em;
 }
 
 .team-channel-leave {
@@ -568,20 +572,23 @@
 .addMember {
   padding-left: 1em;
   text-align: left;
+  font-size: small;
 }
 
 .addMember i {
-  width: 35px;
+  width: 25px;
   text-align: center;
   margin-right: 1em;
 }
 
 .teamMember {
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
   padding-left: 1em;
 }
 
 .teamMember img {
-  width: 35px;
+  width: 25px;
   border-radius: 50%;
 }
 .teamMember i {
@@ -592,9 +599,9 @@
 .teamMember p {
   display: inline-block;
   line-height: 35px;
-  vertical-align: top;
   margin-left: 1em;
+  margin-bottom: 0;
   font-weight: 400;
-  font-size: 15px;
+  font-size: small;
   color: rgba(0, 0, 0, 0.8);
 }
