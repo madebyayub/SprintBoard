@@ -24,10 +24,6 @@ class MessageBoard extends React.Component {
 
   componentDidMount() {
     this.socket = io("localhost:3001");
-    this.socket.emit("join", {
-      user: this.props.currentUser,
-      channel: this.state.channel,
-    });
     this.socket.emit("populateChannel", {
       channel: this.state.channel,
     });
@@ -72,6 +68,31 @@ class MessageBoard extends React.Component {
     this.setState({ memberResults: this.props.currentUser.team.members });
   };
 
+  showBrowseChannel = () => {
+    this.setState({
+      channel: null,
+      browseChannels: true,
+      showChannelDetail: false,
+    });
+  };
+
+  toggleChatDetail = () => {
+    this.setState({
+      showChannelDetail: !this.state.showChannelDetail,
+    });
+  };
+
+  toggleCreateChannelModal = () => {
+    this.setState({ showCreateChannel: !this.state.showCreateChannel });
+  };
+
+  addMembers = (members, channel) => {
+    this.socket.emit("addMembers", {
+      members: members,
+      channel: channel,
+    });
+  };
+
   changeChannel = (channel) => {
     this.socket.emit("populateChannel", {
       channel: channel,
@@ -82,18 +103,6 @@ class MessageBoard extends React.Component {
       browseChannels: false,
       loading: true,
     });
-  };
-
-  showBrowseChannel = () => {
-    this.setState({
-      channel: null,
-      browseChannels: true,
-      showChannelDetail: false,
-    });
-  };
-
-  toggleCreateChannelModal = () => {
-    this.setState({ showCreateChannel: !this.state.showCreateChannel });
   };
 
   createChannel = (name, isPrivate) => {
@@ -131,12 +140,6 @@ class MessageBoard extends React.Component {
   searchChannel = (channelName) => {
     this.socket.emit("searchChannel", {
       name: channelName,
-    });
-  };
-
-  toggleChatDetail = () => {
-    this.setState({
-      showChannelDetail: !this.state.showChannelDetail,
     });
   };
 
@@ -182,6 +185,7 @@ class MessageBoard extends React.Component {
             />
           ) : (
             <Messages
+              addMembers={this.addMembers}
               searchMembers={this.searchMembers}
               resetMemberResults={this.resetMemberResults}
               memberSearchResults={this.state.memberResults}
@@ -190,7 +194,6 @@ class MessageBoard extends React.Component {
               loading={this.state.loading}
               currentChannel={this.state.channel}
               channelMessages={this.state.channelMessages}
-              socket={this.socket}
               currentUser={this.props.currentUser}
               sendMessage={this.sendMessage}
               toggleChatDetail={this.toggleChatDetail}

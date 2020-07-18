@@ -37,110 +37,102 @@ export default class Messages extends Component {
     return this.props.channelMessages.map((message, index) => {
       if (message.author.userID === this.props.currentUser.userID) {
         return (
-          <React.Fragment key={message._id}>
-            <div className="messageContainer author">
-              <div
-                className="messageContent py-1 px-2"
-                data-tip
-                data-for={message._id}
-              >
-                <span>{message.content}</span>
-              </div>
-              <ReactTooltip
-                id={message._id}
-                type="dark"
-                effect="solid"
-                place="left"
-              >
-                <span>{moment(message.date).fromNow()}</span>
-              </ReactTooltip>
+          <div key={message._id} className="messageContainer author">
+            <div
+              className="messageContent py-1 px-2"
+              data-tip
+              data-for={message._id}
+            >
+              <span>{message.content}</span>
             </div>
-          </React.Fragment>
+            <ReactTooltip
+              id={message._id}
+              type="dark"
+              effect="solid"
+              place="left"
+            >
+              <span>{moment(message.date).fromNow()}</span>
+            </ReactTooltip>
+          </div>
         );
       } else {
         return (
-          <React.Fragment key={message._id}>
-            <div className="messageContainer">
-              {index < this.props.channelMessages.length - 1 &&
-              this.props.channelMessages[index + 1].author.userID ===
-                message.author.userID ? (
-                <>
-                  {index > 0 &&
-                  this.props.channelMessages[index - 1].author.userID !==
-                    message.author.userID ? (
-                    <p className="message-author-label">
-                      {message.author.name}
-                    </p>
-                  ) : (
-                    <>
-                      {index === 0 ? (
-                        <p className="message-author-label">
-                          {message.author.name}
-                        </p>
-                      ) : (
-                        <></>
-                      )}
-                    </>
-                  )}
-                  <div
-                    className="messageContent no-picture py-1 px-2"
-                    data-tip
-                    data-for={message._id}
-                  >
-                    <span>{message.content}</span>
-                  </div>
-                  <ReactTooltip
-                    id={message._id}
-                    type="dark"
-                    effect="solid"
-                    place="left"
-                  >
-                    <span>{moment(message.date).fromNow()}</span>
-                  </ReactTooltip>
-                </>
-              ) : (
-                <>
-                  {index > 0 &&
-                  this.props.channelMessages[index - 1].author.userID !==
-                    message.author.userID ? (
-                    <p className="message-author-label">
-                      {message.author.name}
-                    </p>
-                  ) : (
-                    <>
-                      {index === 0 ? (
-                        <p className="message-author-label">
-                          {message.author.name}
-                        </p>
-                      ) : (
-                        <></>
-                      )}
-                    </>
-                  )}
-                  <img
-                    className="messageProfilePic"
-                    src={message.author.profilePic}
-                    alt="sender profile"
-                  ></img>
-                  <div
-                    className="messageContent py-1 px-2"
-                    data-tip
-                    data-for={message._id}
-                  >
-                    <span>{message.content}</span>
-                  </div>
-                  <ReactTooltip
-                    id={message._id}
-                    type="dark"
-                    effect="solid"
-                    place="left"
-                  >
-                    <span>{moment(message.date).fromNow()}</span>
-                  </ReactTooltip>
-                </>
-              )}
-            </div>
-          </React.Fragment>
+          <div key={message._id} className="messageContainer">
+            {index < this.props.channelMessages.length - 1 &&
+            this.props.channelMessages[index + 1].author.userID ===
+              message.author.userID ? (
+              <>
+                {index > 0 &&
+                this.props.channelMessages[index - 1].author.userID !==
+                  message.author.userID ? (
+                  <p className="message-author-label">{message.author.name}</p>
+                ) : (
+                  <>
+                    {index === 0 ? (
+                      <p className="message-author-label">
+                        {message.author.name}
+                      </p>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+                <div
+                  className="messageContent no-picture py-1 px-2"
+                  data-tip
+                  data-for={message._id}
+                >
+                  <span>{message.content}</span>
+                </div>
+                <ReactTooltip
+                  id={message._id}
+                  type="dark"
+                  effect="solid"
+                  place="left"
+                >
+                  <span>{moment(message.date).fromNow()}</span>
+                </ReactTooltip>
+              </>
+            ) : (
+              <>
+                {index > 0 &&
+                this.props.channelMessages[index - 1].author.userID !==
+                  message.author.userID ? (
+                  <p className="message-author-label">{message.author.name}</p>
+                ) : (
+                  <>
+                    {index === 0 ? (
+                      <p className="message-author-label">
+                        {message.author.name}
+                      </p>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+                <img
+                  className="messageProfilePic"
+                  src={message.author.profilePic}
+                  alt="sender profile"
+                ></img>
+                <div
+                  className="messageContent py-1 px-2"
+                  data-tip
+                  data-for={message._id}
+                >
+                  <span>{message.content}</span>
+                </div>
+                <ReactTooltip
+                  id={message._id}
+                  type="dark"
+                  effect="solid"
+                  place="left"
+                >
+                  <span>{moment(message.date).fromNow()}</span>
+                </ReactTooltip>
+              </>
+            )}
+          </div>
         );
       }
     });
@@ -156,7 +148,7 @@ export default class Messages extends Component {
                 # {this.props.currentChannel.name}{" "}
                 {this.props.currentChannel.private ? (
                   <span className="locked-channel ml-2">
-                    <i class="fas fa-lock"></i>
+                    <i className="fas fa-lock"></i>
                   </span>
                 ) : (
                   ""
@@ -230,6 +222,7 @@ export default class Messages extends Component {
           memberSearchResults={this.props.memberSearchResults}
           showAddMember={this.state.showAddMemberModal}
           closeModal={this.onAddMember}
+          addMembers={this.props.addMembers}
         />
       </>
     );

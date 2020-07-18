@@ -13,6 +13,32 @@ class AddChannelMemberModal extends Component {
     }
     return false;
   }
+  isInState(user) {
+    for (let i = 0; i < this.state.addedMembers.length; i++) {
+      if (this.state.addedMembers[i]._id === user._id) {
+        return true;
+      }
+    }
+    return false;
+  }
+  handleCloseModal = () => {
+    this.setState({ addedMembers: [], name: "" });
+    this.props.resetMemberResults();
+    this.props.closeModal();
+  };
+
+  handleAddMember = (user) => {
+    const isInState = this.isInState(user);
+    const isMemberOf = this.isMemberOf(user);
+    if (!isMemberOf && !isInState) {
+      this.setState({ addedMembers: [...this.state.addedMembers, user] });
+    } else if (isInState) {
+      const newAddedMembers = this.state.addedMembers.filter((member) => {
+        return member._id !== user._id;
+      });
+      this.setState({ addedMembers: newAddedMembers });
+    }
+  };
 
   handleNameChange = (e) => {
     if (e.target.value !== "") {
@@ -23,18 +49,30 @@ class AddChannelMemberModal extends Component {
     this.setState({ name: e.target.value });
   };
 
+  handleDoneAddingMembers = (e) => {
+    this.props.addMembers(this.state.addedMembers, this.props.channel);
+    this.handleCloseModal();
+  };
+
   renderResults() {
     return this.props.memberSearchResults.map((user) => {
       return (
-        <div className="userSearchResult">
-          <button className="py-1">
+        <div className="userSearchResult" key={user._id}>
+          <button className="py-1" onClick={() => this.handleAddMember(user)}>
             <img
               className="mx-2"
               src={user.profilePic}
               alt="member-searhc-profile"
             ></img>
             {user.name}
-            {this.isMemberOf(user) ? <span>Joined</span> : ""}
+            {this.isInState(user) ? <span>Added</span> : ""}
+            {this.isMemberOf(user) ? (
+              <span>
+                <i className="fas fa-check added-check"></i>
+              </span>
+            ) : (
+              ""
+            )}
           </button>
         </div>
       );
@@ -45,7 +83,7 @@ class AddChannelMemberModal extends Component {
     return (
       <Modal
         isOpen={this.props.showAddMember ? true : false}
-        onRequestClose={() => this.props.closeModal()}
+        onRequestClose={this.handleCloseModal}
         style={{
           overlay: {
             backgroundColor: "rgba(0,0,0,0.2)",
@@ -68,13 +106,17 @@ class AddChannelMemberModal extends Component {
             <button
               className="px-2"
               id="closeButton"
-              onClick={() => this.props.closeModal()}
+              onClick={this.handleCloseModal}
             >
               Cancel
             </button>
-            <h7 className="addMemberTitle">Add A Channel Member</h7>
-            <button className="px-2" id="addMemberButton">
-              Done
+            <h5 className="addMemberTitle">Add A Channel Member</h5>
+            <button
+              className="px-2"
+              id="addMemberButton"
+              onClick={this.handleDoneAddingMembers}
+            >
+              Add
             </button>
           </div>
           <div className="addMemberSearchContainer">

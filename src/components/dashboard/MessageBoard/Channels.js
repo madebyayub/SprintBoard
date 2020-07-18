@@ -24,7 +24,7 @@ class Channels extends React.Component {
               <i className="fas fa-hashtag"></i> {channel.name}{" "}
               {channel.private ? (
                 <span className="locked-channel ml-2">
-                  <i class="fas fa-lock"></i>
+                  <i className="fas fa-lock"></i>
                 </span>
               ) : (
                 ""
