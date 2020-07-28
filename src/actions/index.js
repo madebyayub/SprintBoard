@@ -13,9 +13,18 @@ export const signIn = (userID, profilePic, name) => {
     if (response.data.user) {
       dispatch({ type: "SIGN_IN", payload: response.data });
     } else {
+      const secondResponse = await ServerAPI({
+        method: "post",
+        url: `/user`,
+        data: {
+          userID,
+          name,
+          profilePic,
+        },
+      });
       dispatch({
         type: "SIGN_IN",
-        payload: { user: { team: null, profilePic, name, userID } },
+        payload: secondResponse.data,
       });
     }
   };
