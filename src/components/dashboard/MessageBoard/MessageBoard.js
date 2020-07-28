@@ -23,7 +23,7 @@ class MessageBoard extends React.Component {
   };
 
   componentDidMount() {
-    this.socket = io("localhost:3001");
+    this.socket = io("http://api.sprintboard.ca");
     this.socket.emit("populateChannel", {
       channel: this.state.channel,
     });
