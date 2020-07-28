@@ -22,7 +22,7 @@ class Home extends React.Component {
       window.gapi.client
         .init({
           clientId:
-            "1081400884742-gfbkgjc37s6t38qbtgt936jpfmf62ekt.apps.googleusercontent.com",
+            "1081400884742-fm0dpemaradabmeih7rnn31on8a2lmjn.apps.googleusercontent.com",
           scope: "email",
           ux_mode: "redirect",
         })
