@@ -7,7 +7,6 @@ class SprintView extends React.Component {
       todo = 0;
     for (let i = 0; i < sprint.stories.length; i++) {
       if (sprint.stories[i].status === "In Progress") {
-        console.log("inprogress");
         inprogress += 1;
       } else if (sprint.stories[i].status === "Completed") {
         completed += 1;
@@ -24,8 +23,26 @@ class SprintView extends React.Component {
       return (
         <tr className={`member-row ${sprint.current ? "current" : ""}`}>
           <td className="profile-picture-member">Sprint {sprint.number}</td>
-          <td className="leader-member">
-            {sprint.current ? <i className="fas fa-star"></i> : <></>}
+          <td className="nextsprint-col">
+            {sprint.current ? (
+              <i className="fas fa-star active-sprint-star"></i>
+            ) : (
+              <>
+                {this.props.currentUser.leader ? (
+                  <i
+                    className="fas fa-play next-sprint"
+                    onClick={() =>
+                      this.props.setCurrentSprint(
+                        this.props.currentUser.team._id,
+                        sprint
+                      )
+                    }
+                  ></i>
+                ) : (
+                  <></>
+                )}
+              </>
+            )}
           </td>
           <td className="name-member sprintview">{count.inprogress}</td>
           <td className="created-member">{count.todo}</td>
@@ -58,7 +75,9 @@ class SprintView extends React.Component {
               <th className="picture-col" scope="col">
                 Sprint
               </th>
-              <th className="leader-col" scole="col"></th>
+              <th className="nextsprint-col" scole="col">
+                Active Sprint
+              </th>
               <th className="name-col sprintview" scope="col">
                 In Progress
               </th>

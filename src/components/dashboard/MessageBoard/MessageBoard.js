@@ -34,7 +34,6 @@ class MessageBoard extends React.Component {
         loading: false,
       });
     });
-
     this.socket.on("channelListUpdate", ({ user, channel }) => {
       this.props.updateUserChannels(user.channels);
       this.setState({ channel: channel, browseChannels: false, loading: true });
@@ -52,10 +51,12 @@ class MessageBoard extends React.Component {
     });
 
     this.socket.on("message", (msg) => {
-      if (msg.author.userID !== this.props.currentUser.userID) {
-        this.setState({
-          channelMessages: [...this.state.channelMessages, msg],
-        });
+      if (this.state.channel._id.toString() === msg.channelID) {
+        if (msg.author.userID !== this.props.currentUser.userID) {
+          this.setState({
+            channelMessages: [...this.state.channelMessages, msg],
+          });
+        }
       }
     });
   }

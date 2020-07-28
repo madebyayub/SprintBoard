@@ -126,6 +126,14 @@ export default (state = INITIAL_STATE, action) => {
           },
         },
       };
+    case "SET_CURRENT":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          team: action.payload.team,
+        },
+      };
     default:
       return state;
   }
