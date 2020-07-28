@@ -28,7 +28,7 @@ class ChannelBrowser extends Component {
           <button
             onClick={this.props.resetChannelResults}
             type="button"
-            class="btn btn-outline-secondary"
+            className="btn btn-outline-secondary"
           >
             Show Me My Channels
           </button>
@@ -46,19 +46,29 @@ class ChannelBrowser extends Component {
             }`}
           >
             <p>
-              <span className="channel-result-name"># {channel.name}</span> · 
+              <span className="channel-result-name">
+                # {channel.name}
+                {channel.private ? (
+                  <span className="locked-channel ml-2">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                ) : (
+                  ""
+                )}
+              </span>
+               · 
               <span className="channel-result-members">
                 {channel.members.length} members
               </span>
             </p>
             {channel.members.indexOf(this.props.currentUser._id) >= 0 ? (
-              <button disabled class="joined-btn">
+              <button disabled className="joined-btn">
                 Joined
               </button>
             ) : (
               <button
                 onClick={() => this.props.joinChannel(channel)}
-                class="joined-btn not-joined"
+                className="joined-btn not-joined"
               >
                 Join
               </button>

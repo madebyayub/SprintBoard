@@ -7,7 +7,6 @@ import Channels from "./Channels";
 import Messages from "./Messages";
 import ChannelBrowser from "./ChannelBrowser";
 import CreateChannelModal from "./CreateChannelModal";
-
 import { updateUserChannels } from "../../../actions";
 import "../../../stylesheets/messageboard.css";
 
@@ -17,26 +16,24 @@ class MessageBoard extends React.Component {
     channelMessages: [],
     browseChannels: false,
     channelResults: this.props.currentUser.channels,
+    memberResults: this.props.currentUser.team.members,
     loading: true,
     showCreateChannel: false,
+    showChannelDetail: false,
   };
 
   componentDidMount() {
     this.socket = io("localhost:3001");
-    this.socket.emit("join", {
-      user: this.props.currentUser,
-      channel: this.state.channel,
-    });
     this.socket.emit("populateChannel", {
       channel: this.state.channel,
     });
     this.socket.on("receiveChannel", (populatedChannel) => {
       this.setState({
+        channel: populatedChannel.channel,
         channelMessages: populatedChannel.channel.messages,
         loading: false,
       });
     });
-
     this.socket.on("channelListUpdate", ({ user, channel }) => {
       this.props.updateUserChannels(user.channels);
       this.setState({ channel: channel, browseChannels: false, loading: true });
@@ -49,17 +46,52 @@ class MessageBoard extends React.Component {
       this.setState({ channelResults: channels });
     });
 
+    this.socket.on("searchMemberResults", ({ results }) => {
+      this.setState({ memberResults: results });
+    });
+
     this.socket.on("message", (msg) => {
-      if (msg.author.userID !== this.props.currentUser.userID) {
-        this.setState({
-          channelMessages: [...this.state.channelMessages, msg],
-        });
+      if (this.state.channel._id.toString() === msg.channelID) {
+        if (msg.author.userID !== this.props.currentUser.userID) {
+          this.setState({
+            channelMessages: [...this.state.channelMessages, msg],
+          });
+        }
       }
     });
   }
 
   resetChannelResults = () => {
     this.setState({ channelResults: this.props.currentUser.channels });
+  };
+
+  resetMemberResults = () => {
+    this.setState({ memberResults: this.props.currentUser.team.members });
+  };
+
+  showBrowseChannel = () => {
+    this.setState({
+      channel: null,
+      browseChannels: true,
+      showChannelDetail: false,
+    });
+  };
+
+  toggleChatDetail = () => {
+    this.setState({
+      showChannelDetail: !this.state.showChannelDetail,
+    });
+  };
+
+  toggleCreateChannelModal = () => {
+    this.setState({ showCreateChannel: !this.state.showCreateChannel });
+  };
+
+  addMembers = (members, channel) => {
+    this.socket.emit("addMembers", {
+      members: members,
+      channel: channel,
+    });
   };
 
   changeChannel = (channel) => {
@@ -74,14 +106,6 @@ class MessageBoard extends React.Component {
     });
   };
 
-  showBrowseChannel = () => {
-    this.setState({ channel: null, browseChannels: true });
-  };
-
-  toggleCreateChannelModal = () => {
-    this.setState({ showCreateChannel: !this.state.showCreateChannel });
-  };
-
   createChannel = (name, isPrivate) => {
     this.socket.emit("createChannel", {
       name,
@@ -94,6 +118,23 @@ class MessageBoard extends React.Component {
     this.socket.emit("joinChannel", {
       channel: channel._id,
       user: this.props.currentUser._id,
+    });
+  };
+
+  leaveChannel = (channel) => {
+    this.socket.emit("leaveChannel", {
+      channel: channel._id,
+      user: this.props.currentUser._id,
+    });
+    this.setState({
+      showChannelDetail: false,
+      channel: this.props.currentUser.team.channel,
+    });
+  };
+
+  searchMembers = (member) => {
+    this.socket.emit("searchMember", {
+      search: member,
     });
   };
 
@@ -145,12 +186,18 @@ class MessageBoard extends React.Component {
             />
           ) : (
             <Messages
+              addMembers={this.addMembers}
+              searchMembers={this.searchMembers}
+              resetMemberResults={this.resetMemberResults}
+              memberSearchResults={this.state.memberResults}
+              leaveChannel={this.leaveChannel}
+              showChannelDetail={this.state.showChannelDetail}
               loading={this.state.loading}
               currentChannel={this.state.channel}
               channelMessages={this.state.channelMessages}
-              socket={this.socket}
               currentUser={this.props.currentUser}
               sendMessage={this.sendMessage}
+              toggleChatDetail={this.toggleChatDetail}
             />
           )}
         </div>

@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { DragDropContext } from "react-beautiful-dnd";
-import SprintModal from "./SprintModal";
 import StatusGroup from "./StatusGroup";
 import { getStories, getSprints, editUserStory } from "../../../actions";
 
@@ -10,7 +9,6 @@ import "../../../stylesheets/active.css";
 class ActiveSprint extends React.Component {
   state = {
     activeSprint: null,
-    activeStory: null,
     todo: [],
     inprogress: [],
     completed: [],
@@ -125,9 +123,6 @@ class ActiveSprint extends React.Component {
     }
   };
 
-  changeStory = (story) => {
-    this.setState({ activeStory: story });
-  };
   render() {
     return (
       <>
@@ -138,29 +133,22 @@ class ActiveSprint extends React.Component {
             >
               <StatusGroup
                 activeSprint={this.state.activeSprint}
-                changeStory={this.changeStory}
                 stories={this.state.todo}
                 status={"To-do"}
               />
               <StatusGroup
                 activeSprint={this.state.activeSprint}
-                changeStory={this.changeStory}
                 stories={this.state.inprogress}
                 status={"In Progress"}
               />
               <StatusGroup
                 activeSprint={this.state.activeSprint}
-                changeStory={this.changeStory}
                 stories={this.state.completed}
                 status={"Completed"}
               />
             </DragDropContext>
           </div>
         </div>
-        <SprintModal
-          changeStory={this.changeStory}
-          story={this.state.activeStory}
-        />
       </>
     );
   }

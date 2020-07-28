@@ -41,6 +41,12 @@ export default class CreateChannelModal extends Component {
         <div className="createChannelContainer">
           <div className="createChannelHeader">
             <h4>Create Channel</h4>
+            <button
+              className="createChannelclose px-3"
+              onClick={() => this.props.closeModal()}
+            >
+              <i className="fa fa-times" aria-hidden="true"></i>
+            </button>
           </div>
           <div className="createChannelDescription">
             <p>
@@ -64,7 +70,7 @@ export default class CreateChannelModal extends Component {
                 When a channel is set to private it can only be viewed or joined
                 by invitation.
               </p>
-              <div class="custom-control custom-switch">
+              <div className="custom-control custom-switch">
                 <input
                   type="checkbox"
                   className="custom-control-input"

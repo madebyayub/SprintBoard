@@ -35,7 +35,6 @@ class StatusGroup extends React.Component {
                     opacity: snapshot.isDragging ? 0.5 : 1,
                     ...provided.draggableProps.style,
                   }}
-                  onClick={() => this.props.changeStory(story)}
                 >
                   <div className="col-10 story-title p-0">{story.title}</div>
                   <div className="row ml-0">

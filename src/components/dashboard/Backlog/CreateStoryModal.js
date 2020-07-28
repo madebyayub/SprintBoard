@@ -22,17 +22,30 @@ class CreateStoryModal extends React.Component {
       this.props.getSprints(this.props.team._id);
     }
   }
-
+  /* 
+    this function set the state to selected sprint value from 
+     the user.
+  */
   dropdownValue = (e) => {
     this.setState({ sprintValue: e.target.value });
   };
+  /* 
+    this function set the state to selected user value from 
+     the user.
+  */
   dropdownUser = (e) => {
     this.setState({ assignedUser: e.target.value });
   };
+  /* 
+    this function set the state to selected status value from 
+     the user.
+  */
   dropdownState = (e) => {
     this.setState({ stateValue: e.target.value });
   };
-
+  /* 
+    this function validate the title input that user has entered.
+  */
   validateTitle(title) {
     this.setState({ titleHasChanged: true });
 
@@ -47,6 +60,9 @@ class CreateStoryModal extends React.Component {
     }
   }
 
+  /* 
+    this function validate the point input that user has entered.
+  */
   validatePoint(point) {
     this.setState({ pointsHasChanged: true });
     const digits_only = (string) =>
@@ -63,6 +79,11 @@ class CreateStoryModal extends React.Component {
     }
   }
 
+  /* 
+    this function is to create the user story based on the 
+    information user has given. it make a api request to add
+    the user story information to the database.
+  */
   createUserStory(e) {
     e.preventDefault();
     const storyData = {
@@ -116,7 +137,10 @@ class CreateStoryModal extends React.Component {
       });
     }
   }
-
+  /*
+    this function is to render a create story button based on 
+    the condition. 
+  */
   renderCreateStory() {
     if (
       !this.state.titleHasChanged ||

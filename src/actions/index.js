@@ -341,3 +341,22 @@ export const getSprints = (teamId) => {
     dispatch({ type: "GET_SPRINTS", payload: response.data });
   };
 };
+/* Set the provided sprint as the current sprint 
+   PARAMS: 
+      sprint: The sprint object */
+export const setCurrentSprint = (teamID, sprint) => {
+  return async (dispatch) => {
+    const response = await ServerAPI({
+      method: "patch",
+      url: "/sprint",
+      data: {
+        sprint,
+        teamID: teamID,
+      },
+    });
+    if (response.status !== 404 || response.status !== 500) {
+      notifySuccess("Sprint " + sprint.number + " is now active sprint.");
+    }
+    dispatch({ type: "SET_CURRENT", payload: response.data });
+  };
+};

@@ -11,6 +11,7 @@ import {
   leaveTeam,
   editTeamName,
   deleteSprint,
+  setCurrentSprint,
 } from "../../actions";
 import ServerAPI from "../../api/ServerAPI";
 
@@ -172,6 +173,7 @@ class TeamModal extends React.Component {
             <SprintView
               deleteSprint={this.props.deleteSprint}
               currentUser={this.props.currentUser}
+              setCurrentSprint={this.props.setCurrentSprint}
             />
           )}
         </Modal>
@@ -195,4 +197,5 @@ export default connect(mapStateToProps, {
   kickTeam,
   editTeamName,
   deleteSprint,
+  setCurrentSprint,
 })(TeamModal);
