@@ -7,13 +7,19 @@ import { notifySuccess } from "../utils/utils";
     userID: The google ID of the current user
     profilePic: The google profile picture of the current user
     name: The google profile name of the current user */
-export const signIn = (userID) => {
+export const signIn = (userID, profilePic, name) => {
   return async (dispatch) => {
     const response = await ServerAPI.get(`/user/${userID}`);
-    dispatch({ type: "SIGN_IN", payload: response.data });
+    if (response.data.user) {
+      dispatch({ type: "SIGN_IN", payload: response.data });
+    } else {
+      dispatch({
+        type: "SIGN_IN",
+        payload: { user: { team: null, profilePic, name, userID } },
+      });
+    }
   };
 };
-
 /* Sign out action, pushes the user to the home page */
 export const signOut = () => {
   history.push("/");
