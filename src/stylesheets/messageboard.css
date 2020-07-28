@@ -1,0 +1,607 @@
+.locked-channel {
+  font-size: medium;
+  color: rgba(72, 72, 72, 0.5);
+}
+
+.locked-channel.large {
+  font-size: x-large;
+}
+
+/* CSS For Main Container */
+
+.messageBoardContainer {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  margin-left: 15px;
+  margin-top: 56px;
+}
+
+/* CSS For Channels Left side bar */
+
+.channels {
+  background-color: #fafafa;
+  width: 25%;
+  border-right: 1px solid rgba(75, 75, 75, 0.1);
+}
+
+.channels-header {
+  padding-bottom: 6px;
+  padding-top: 12px;
+  border-bottom: 1px solid rgba(72, 72, 72, 0.1);
+  display: flex;
+  width: 100%;
+}
+
+.channels-header img {
+  margin-bottom: 0.3em;
+  width: 25px;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(75, 75, 75, 0.9);
+}
+.channels-header p {
+  height: 100%;
+  display: inline-block;
+  font-family: "Noto Sans", sans-serif;
+  font-size: large;
+  color: rgba(75, 75, 75, 0.8);
+}
+
+.channels-header button {
+  margin-left: auto;
+  font-size: small;
+  border-color: transparent;
+  background-color: transparent;
+  color: rgba(26, 115, 232, 0.8);
+  transition: all 0.2s ease-out;
+  border-radius: 10%;
+}
+
+.channels-header button:hover {
+  background-color: rgba(75, 75, 75, 0.05);
+}
+
+.channels-header button:focus {
+  outline: transparent;
+}
+
+.pinned {
+  font-size: x-large;
+  float: right;
+  color: rgb(26, 115, 232);
+}
+
+.channels-container {
+  max-height: 80%;
+  overflow: auto;
+}
+
+.channel-button {
+  padding: 10px 20px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: rgba(75, 75, 75, 0.8);
+  border: none;
+  transition: all 0.1s ease-out;
+}
+.channel-button:focus {
+  outline: transparent;
+}
+.channel-button.current {
+  background-color: rgba(75, 75, 75, 0.05);
+}
+.channel-button.current:hover {
+  text-indent: 0% !important;
+  background-color: rgba(75, 75, 75, 0.05) !important;
+}
+.channel-button.create {
+  font-size: 14px;
+  color: rgb(26, 115, 232);
+}
+.channel-button.create i {
+  margin-right: 0.5em;
+  line-height: 2.5em;
+  font-size: 11px;
+}
+.channel-button.create:hover {
+  background-color: rgba(75, 75, 75, 0.02);
+  text-indent: 2%;
+}
+
+.channel-button:hover {
+  text-indent: 0%;
+  background-color: rgba(75, 75, 75, 0.02);
+  text-indent: 2%;
+}
+
+/* CSS For Main Message Section  */
+.spinner-border {
+  top: 35%;
+}
+
+.mainChatSection {
+  width: 74%;
+}
+.mainChatHeader {
+  background-color: #fafafa;
+  height: 50px;
+  border-bottom: 1px solid rgba(75, 75, 75, 0.1);
+}
+.mainChatHeader h2 {
+  line-height: 2em;
+  vertical-align: middle;
+  height: 100%;
+  margin-left: 0.5em;
+  font-weight: 600;
+  font-size: x-large;
+}
+.mainChatHeaderDetail {
+  display: flex;
+  height: 100%;
+}
+.mainChatHeaderDetail div {
+  margin-left: auto;
+  width: fit-content;
+}
+.mainChatHeaderDetail button {
+  margin-top: 0.6em;
+  font-size: larger;
+  background-color: transparent;
+  outline: transparent;
+  border: none;
+  border-radius: 5px;
+  color: rgba(0, 0, 0, 0.3);
+  transition: all 0.2 ease-in-out;
+}
+
+.mainChatHeaderDetail button:hover {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.mainChatHeaderDetail button:active {
+  color: rgba(0, 0, 0, 0.1);
+}
+
+.mainChat {
+  float: left;
+  height: 100%;
+  width: 100%;
+}
+
+.MessageBoxContainer {
+  height: 74%;
+  width: 100%;
+}
+
+.messageSection {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.messageContainer {
+  text-align: left;
+  word-wrap: break-word;
+  margin-left: 0.4em;
+  margin-right: 0.4em;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  font-size: small;
+  max-width: 60%;
+  width: fit-content;
+  height: fit-content;
+}
+
+.message-author-label {
+  margin-top: 0;
+  margin-bottom: 0.25em;
+  font-size: 9px;
+  color: rgba(72, 72, 72, 0.5);
+  margin-left: 30px;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+}
+
+.messageContainer .messageContent {
+  margin-left: 0.25em;
+  background-color: rgba(75, 75, 75, 0.1);
+}
+
+.messageContainer.author {
+  text-align: right;
+  margin-left: auto;
+  color: white;
+}
+
+.messageContainer.author .messageContent {
+  max-width: 100%;
+  margin-right: 0.25em;
+  background-color: rgb(0, 153, 255);
+}
+
+.messageContent.no-picture {
+  margin-left: 22px;
+}
+.messageContent {
+  text-align: left;
+  max-width: 90%;
+  border-radius: 1.3em;
+  display: inline-block;
+}
+
+.messageProfilePic {
+  margin-top: 12px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+.inputMessage {
+  font-size: small;
+  width: 90%;
+  height: 6%;
+  border: 1px solid rgba(75, 75, 75, 0.1);
+  margin-right: auto;
+  border-radius: 30px;
+  margin-left: auto;
+  display: block;
+}
+.inputMessage:focus {
+  box-shadow: 0 0 3px rgba(26, 115, 232, 0.7);
+}
+.inputContainer {
+  justify-content: center;
+  background-color: #fafafa;
+  border-top: 1px solid rgba(75, 75, 75, 0.1);
+  height: 100%;
+  width: 100%;
+}
+.inputContainer form {
+  height: 100%;
+}
+
+.displayChannelDetail {
+  width: 70% !important;
+}
+
+/* CSS for Channel Browser */
+
+.mainChatHeader.channel-browser-header {
+  display: flex;
+}
+
+.mainChatHeader.channel-browser-header p {
+  line-height: 3.4em;
+  vertical-align: middle;
+  font-weight: 600;
+  display: inline-block;
+  margin-left: 1.75em;
+}
+
+.mainChatHeader.channel-browser-header button {
+  padding: 0.3em 1.3em;
+  width: fit-content;
+  border-radius: 5px;
+  margin: auto auto;
+  margin-left: auto;
+  font-size: 14px;
+  margin-right: 2em;
+  color: white;
+  border-color: transparent;
+  background: rgba(21, 62, 124, 0.95);
+}
+
+.searchChannelContainer {
+  margin-top: 1.5em;
+}
+
+.searchChannelInput {
+  display: block;
+  width: 90%;
+  margin: auto;
+  font-size: 15px;
+}
+
+.searchChannelResults {
+  width: 90%;
+  margin: auto;
+  margin-top: 1em;
+}
+
+.channelResultsLabel p {
+  font-size: small;
+  font-weight: 600;
+  color: rgba(75, 75, 75, 0.8);
+}
+
+.channel-result {
+  display: flex;
+  height: 3.5em;
+  line-height: 3em;
+  vertical-align: middle;
+  border-top: 1px solid rgba(75, 75, 75, 0.15);
+}
+
+.channel-result p {
+  display: inline-block;
+}
+
+.channel-result.last-channel {
+  border-bottom: 1px solid rgba(75, 75, 75, 0.15);
+}
+
+.channel-result-name {
+  font-weight: 500;
+}
+
+.channel-result-members {
+  font-weight: 400;
+  font-size: small;
+  color: rgba(75, 75, 75, 0.6);
+}
+
+.joined-btn {
+  margin: auto auto;
+  margin-left: auto;
+  margin-right: 1em;
+  padding: 0.2em 0.75em;
+  background: rgba(75, 75, 75, 0.1);
+  border-color: transparent;
+  color: rgba(75, 75, 75, 0.7);
+  font-weight: 500;
+  line-height: 1.5em;
+  height: fit-content;
+  transition: all 0.1s ease-out;
+}
+
+.joined-btn.not-joined {
+  color: #fff;
+  background: #28a745;
+}
+.joined-btn.not-joined:hover {
+  color: #fff;
+  background-color: #218838;
+}
+#emptyChannelResults {
+  margin-top: 3em;
+  text-align: center;
+}
+
+/* CSS For Create Channel Modal */
+
+.createChannelHeader {
+  display: flex;
+  margin-left: 1em;
+  margin-top: 1em;
+}
+.createChannelclose {
+  margin-left: auto;
+  margin-right: 1em;
+  background-color: transparent;
+  outline: transparent;
+  border: none;
+  border-radius: 5px;
+  color: rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease-in-out;
+}
+.createChannelclose:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: whitesmoke;
+}
+.createChannelDescription {
+  margin-top: 1.5em;
+  padding: 0 1em;
+}
+
+.createChannelDescription p {
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.createChannelName {
+  margin: 0 1em;
+}
+
+.createChannelName input {
+  background: transparent !important;
+}
+
+.createChannelDetail {
+  margin: 1em 1em;
+}
+
+.createChannelName label,
+.createChannelDetail label {
+  margin: 0;
+  font-size: small;
+  color: black;
+}
+
+.detailContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detailContent p {
+  width: 70%;
+  font-size: small;
+  font-weight: 500;
+  color: rgba(75, 75, 75, 0.7);
+}
+
+.createChannelAction {
+  margin: 2em 1em;
+}
+
+.createChannelAction button {
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  color: rgba(75, 75, 75, 0.9);
+}
+
+/* CSS for Channel Detail (right side)*/
+
+.ChatDetailContainer {
+  margin-left: auto;
+  height: 100%;
+  width: 30%;
+  background-color: #fafafa;
+  border-left: 1px solid rgba(72, 72, 72, 0.1);
+}
+
+.ChatDetailContainer hr {
+  margin-bottom: 0;
+}
+
+.ChatDetailHeader {
+  padding-top: 2em;
+  text-align: center;
+}
+
+.ChatDetailHeader p {
+  font-size: small;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+#actionSection {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.ChatActionContainer,
+.ChatMemberContainer {
+  width: 100%;
+  border-bottom: 1px solid rgba(72, 72, 72, 0.1);
+}
+
+.chatContainerList {
+  width: 100%;
+}
+
+.team-channel-leave {
+  cursor: default !important;
+  padding: 0.5em 0em;
+  display: block;
+  border-radius: 0px;
+  margin: auto;
+  width: 90%;
+  font-size: small;
+  color: rgba(72, 72, 72, 0.9);
+  background-color: rgba(72, 72, 72, 0.1);
+  border-color: transparent;
+}
+
+.leave-channel {
+  padding: 0.2em 0em;
+  display: block;
+  border-radius: 5px;
+  margin: auto;
+  width: 90%;
+  color: #fff;
+  background-color: #dc3545;
+  border-color: transparent;
+}
+
+.leave-channel:hover {
+  color: #fff;
+  background-color: #c82333;
+}
+
+.actionButton {
+  width: 100%;
+  text-align: left;
+  display: block;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-color: transparent;
+  background: transparent;
+  color: rgba(72, 72, 72, 0.9);
+  font-size: 14px;
+  transition: all 0.2s ease-out;
+}
+
+.actionButton:focus {
+  outline: transparent;
+}
+
+.actionButton:hover {
+  background: rgba(75, 75, 75, 0.07);
+}
+
+.actionButton span {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+}
+
+#membersSection {
+  overflow: auto;
+  height: 10%;
+}
+
+.addMember {
+  border-radius: 0;
+  width: 100%;
+  background: transparent;
+  border-color: transparent !important;
+  color: rgb(26, 115, 232) !important;
+  outline: transparent;
+}
+
+.addMember:hover {
+  background: rgba(72, 72, 72, 0.075);
+  border-color: transparent;
+  color: rgb(26, 115, 232) !important;
+}
+
+.addMember:active {
+  background: rgba(72, 72, 72, 0.1) !important;
+  border-color: transparent;
+  outline: transparent !important;
+}
+
+.addMember:focus {
+  background: transparent;
+  border-color: transparent;
+  outline: 0 !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.addMember {
+  padding-left: 1em;
+  text-align: left;
+  font-size: small;
+}
+
+.addMember i {
+  width: 25px;
+  text-align: center;
+  margin-right: 1em;
+}
+
+.teamMember {
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  padding-left: 1em;
+}
+
+.teamMember img {
+  width: 25px;
+  border-radius: 50%;
+}
+.teamMember i {
+  vertical-align: sub;
+  text-align: center;
+  width: 35px;
+}
+.teamMember p {
+  display: inline-block;
+  line-height: 35px;
+  margin-left: 1em;
+  margin-bottom: 0;
+  font-weight: 400;
+  font-size: small;
+  color: rgba(0, 0, 0, 0.8);
+}

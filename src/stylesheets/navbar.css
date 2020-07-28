@@ -1,0 +1,107 @@
+i.navbarIcon {
+    font-size: 30px;
+    color: whitesmoke;
+}
+span.badge {
+    position: relative;
+    top: -17px;
+    padding: 5px 7px;
+    border-radius: 100%;
+    background-color: red;
+    color: whitesmoke;
+    right: 6px;
+}
+.navBarbutton{
+    position: relative;
+    top:0px;
+    margin:0 9px;
+    padding:0px;
+    border: 0px;
+    color:whitesmoke;
+    background-color: transparent;
+    transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.searchBar{
+    width:30%; 
+    position:relative;
+}
+
+#dropdownnoti {
+    outline: none;
+}
+.navbar{
+    position: fixed;
+    left:0px;
+    z-index: 99;
+    background-color: rgb(26, 115, 232) !important;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+    color: whitesmoke;
+    width: auto;
+    right: 0;
+    transition:all 0.4s ease-in-out;
+}
+
+#navbar-labels{
+  z-index:100;
+}
+.navbar-left{
+  display: inline-block;}
+  #team-btn{
+    background-color: var(--background-color);
+    position: relative;
+    color: inherit;
+    border: none;
+    font-weight: 400;
+    border-radius: 4px;
+    transition: background-color, border-radius, 0.2s ease-in-out;
+    --background-color: rgba(255,255,255,.2);
+    --border-size: 2px;}
+    #team-btn::before{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      border-radius: 3px;
+      bottom: 0;
+      border: var(--border-size) solid transparent;
+      transition: top, left, right, bottom, border, 0.1s ease-in-out;}
+    #team-btn:hover::before{
+      border: 2px solid white;
+      top: calc(var(--border-size) * -1);
+      left: calc(var(--border-size) * -1);
+      right: calc(var(--border-size) * -1);
+      bottom: calc(var(--border-size) * -1);}
+    #team-btn:hover{
+      border-radius: 0px;
+      background-color: rgba(255,255,255,.3);}
+    #team-btn:focus{
+      outline: 0;}
+    .fa-sort-down{
+      font-size: 18px;}
+  #main-page{
+    color: white;
+    font-size: large;
+    font-family: 'Merriweather', serif;}
+
+
+#main-page-profile{
+  font-family: 'Noto Sans', sans-serif;
+  text-align: center;}
+  #main-page-profile img {
+    width: 25px;
+    border-radius: 50%;}
+  #main-page-profile button{
+    border: none;
+    vertical-align: middle;
+    background-color: transparent;
+    font-size: small;
+    font-weight: 600;
+    border-radius: 10px;
+    color: rgba(255,255,255,1);
+    transition: all 0.2s ease-out;}
+    #main-page-profile button:hover{
+      color: aliceblue;
+      background-color: rgba(72, 72, 72, 0.05);}
+    #main-page-profile button:focus{
+      outline: transparent;}

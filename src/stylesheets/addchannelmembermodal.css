@@ -1,0 +1,84 @@
+.addTeamMemberHeader {
+  display: flex;
+  height: 10%;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.addTeamMemberHeader button {
+  background-color: transparent;
+  border: transparent;
+  color: rgb(26, 115, 232);
+}
+.addTeamMemberHeader button:hover {
+  border-radius: 5%;
+  background-color: rgba(158, 155, 155, 0.2);
+  outline: none;
+}
+.addTeamMemberHeader button:focus {
+  background-color: transparent;
+  outline: none;
+}
+#closeButton {
+  margin-left: 0.4em;
+  margin-right: auto;
+}
+
+#addMemberButton {
+  margin-right: 0.4em;
+  margin-left: auto;
+}
+.addMemberSearchContainer {
+  width: 100%;
+}
+.memberInput {
+  border: 0.5px solid rgb(158, 155, 155, 0.2) !important;
+  border-radius: 0% !important;
+}
+.addMemberTitle {
+  font-weight: 400;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.memberResultsContainer {
+  overflow: auto;
+}
+
+.memberResultsContainer label {
+  margin-left: 1em;
+  font-size: small;
+  color: rgba(72, 72, 72, 0.6);
+  font-weight: 600;
+}
+
+.userSearchResult button {
+  background-color: transparent;
+  border-color: transparent;
+  font-size: small;
+  width: 100%;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.userSearchResult button:hover {
+  background-color: rgba(72, 72, 72, 0.05);
+}
+
+.userSearchResult button span {
+  float: right;
+  margin-right: 1em;
+  margin-top: 0.2em;
+  color: rgba(72, 72, 72, 0.6);
+  font-size: 12px;
+}
+
+.userSearchResult img {
+  width: 25px;
+  border-radius: 50%;
+}
+
+.added-check {
+  font-size: large;
+  color: rgb(26, 115, 232);
+  margin-right: 0.5em;
+}

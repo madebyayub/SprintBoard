@@ -1,0 +1,67 @@
+html, body{
+  height: 100%;
+}
+
+/* ABOVE IS FOR THE SIDEBAR THAT IS TOGGLED */
+
+#sidebar-short{
+  max-height: 100%;
+  height: 100%;
+  width: 80px;
+  top:50px;
+  left: 0px;
+  z-index: 1;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, fontello, montserrat;
+  color: black;
+  position: fixed;
+  border-right: 1.1px solid rgba(0,0,0,.12);
+  background-color: #fafafa;
+  height: 100%;
+  transition: all 0.4s ease-in-out;
+}
+#actions{
+  margin-top: 60px;
+}
+#sidebar-short .nav-button{
+  font-size: x-large;
+}
+.nav-button {
+  text-align: center;
+  display: inline-block;
+  font-size: medium;
+  color: rgba(118, 130, 143, 0.9);
+  width:100%;
+  transition: all 0.2s ease-out;
+}
+.nav-label{
+  font-size: xx-small;
+  font-weight: 400;
+}
+.nav-button.active {
+  background-color: rgba(161,194,250,.16);
+  color: #3b78e7;}
+  .nav-button.active:hover{
+    color: #3b78e7;}
+
+.nav-button:hover{
+  text-decoration: none;
+  cursor: pointer;
+  background-color:rgba(118, 130, 143, 0.1);
+  color: rgba(118, 130, 143, 0.9);
+}
+.show-sidebar{
+  float: none;
+  width: 100%;
+  font-size: x-large;
+  border-radius: 5px;
+  margin-left: 7px;  
+  color: aliceblue;
+  background-color: transparent;
+  border: none;
+  border-radius: 3px;
+  transition: all 0.2 ease-in-out;
+}
+
+.show-sidebar:focus {
+  outline: 0;
+}
