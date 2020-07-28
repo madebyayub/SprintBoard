@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { DragDropContext } from "react-beautiful-dnd";
-import SprintModal from "./SprintModal";
 import StatusGroup from "./StatusGroup";
 import { getStories, getSprints, editUserStory } from "../../../actions";
 
