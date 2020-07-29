@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import Modal from "react-modal";
+import ServerAPI from "../../../api/ServerAPI";
 
 export default class CreateChannelModal extends Component {
-  state = { createChannelInput: "", private: false };
+  state = {
+    createChannelInput: "",
+    error: false,
+    errorMsg: "",
+    private: false,
+  };
   handleCreateChange = (e) => {
     this.setState({ createChannelInput: e.target.value });
   };
@@ -11,10 +17,32 @@ export default class CreateChannelModal extends Component {
       private: !this.state.private,
     });
   };
-  handleCreateChannel = () => {
-    this.props.createChannel(this.state.createChannelInput, this.state.private);
-    this.props.closeModal();
-    this.setState({ createChannelInput: "", private: false });
+  handleCreateChannel = async () => {
+    const response = await ServerAPI.get(
+      `/channel/${this.state.createChannelInput}`
+    );
+    if (response.status === 200) {
+      if (!response.data.channel) {
+        this.props.createChannel(
+          this.state.createChannelInput,
+          this.state.private
+        );
+        this.props.closeModal();
+        this.setState({
+          createChannelInput: "",
+          error: false,
+          errorMsg: "",
+          private: false,
+        });
+      } else {
+        this.setState({ error: true, errorMsg: "Channel name already taken" });
+      }
+    } else {
+      this.setState({
+        error: true,
+        errorMsg: "Internal error - refresh your page",
+      });
+    }
   };
   render() {
     return (
@@ -62,6 +90,11 @@ export default class CreateChannelModal extends Component {
               value={this.state.createChannelInput}
               onChange={(e) => this.handleCreateChange(e)}
             />
+            {this.state.error ? (
+              <label id="status-label">{this.state.errorMsg}</label>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="createChannelDetail">
             <label>Make Private</label>
