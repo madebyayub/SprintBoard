@@ -22,19 +22,21 @@ export default class CreateChannelModal extends Component {
       `/channel/${this.state.createChannelInput}`
     );
     if (response.status === 200) {
-      this.setState({ error: true, errorMsg: "Channel name already taken" });
-    } else if (response.status === 404) {
-      this.props.createChannel(
-        this.state.createChannelInput,
-        this.state.private
-      );
-      this.props.closeModal();
-      this.setState({
-        createChannelInput: "",
-        error: false,
-        errorMsg: "",
-        private: false,
-      });
+      if (!response.data.channel) {
+        this.props.createChannel(
+          this.state.createChannelInput,
+          this.state.private
+        );
+        this.props.closeModal();
+        this.setState({
+          createChannelInput: "",
+          error: false,
+          errorMsg: "",
+          private: false,
+        });
+      } else {
+        this.setState({ error: true, errorMsg: "Channel name already taken" });
+      }
     } else {
       this.setState({
         error: true,
